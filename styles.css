@@ -13,16 +13,15 @@ body {
   position: absolute;
   height: 100%;
   background-color: white;
-  z-index: 2;
 }
 
-#top-drawing-board {
+/* #top-drawing-board {
   position: absolute;
   height: 100%;
   background-color: white;
   z-index: 1;
   opacity: 0.5;
-}
+} */
 
 #toolbar {
   display: flex;

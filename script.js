@@ -12,19 +12,20 @@ const canvasOffsetY = canvas.offsetTop;
 canvas.width = window.innerWidth - canvasOffsetX;
 canvas.height = window.innerHeight - canvasOffsetY;
 
-const topCanvas = document.getElementById("top-drawing-board");
-const topCtx = topCanvas.getContext("2d");
+// const topCanvas = document.getElementById("top-drawing-board");
+// const topCtx = topCanvas.getContext("2d");
 
-const topCanvasOffsetX = topCanvas.offsetLeft;
-const topCanvasOffsetY = topCanvas.offsetTop;
+// const topCanvasOffsetX = topCanvas.offsetLeft;
+// const topCanvasOffsetY = topCanvas.offsetTop;
 
-topCanvas.width = window.innerWidth - topCanvasOffsetX;
-topCanvas.height = window.innerHeight - topCanvasOffsetY;
+// topCanvas.width = window.innerWidth - topCanvasOffsetX;
+// topCanvas.height = window.innerHeight - topCanvasOffsetY;
 
 let isPainting = false;
 let isEraser = false;
 let paintBtn = false;
 let eraserBtn = false;
+let textBtn = false;
 let lineWidth = 5;
 let startX;
 let startY;
@@ -52,6 +53,11 @@ canvas.onmousedown = (event) => {
       isEraser = true;
       startX = event.x;
       startY = event.y;
+      break;
+    case "Text":
+      if(textBtn){
+        addInput(event.x - canvasOffsetX, event.y - canvasOffsetY);
+      }
       break;
     default:
       break;
@@ -104,13 +110,53 @@ function pencil() {
   tool = paintBtn ? "Pencil" : undefined;
   if (paintBtn) {
     eraserBtn = false;
+    textBtn = false;
   }
 }
+
 function eraser() {
   eraserBtn = !eraserBtn;
   tool = eraserBtn ? "Eraser" : undefined;
 
   if (eraserBtn) {
     paintBtn = false;
+    textBtn = false;
+  }
+}
+
+function text() {
+  textBtn = !textBtn;
+  tool = textBtn ? "Text" : undefined;
+
+  if (textBtn) {
+    eraserBtn = false;
+    paintBtn = false;
+  }
+}
+
+function addInput(x, y) {
+  let textarea = document.createElement("textarea");
+
+  textarea.style.position = "fixed";
+  textarea.style.left = x - 4 + "px";
+  textarea.style.top = y - 4 + "px";
+  textarea.onkeydown = handleEnter;
+  document.body.appendChild(textarea);
+  textBtn = false;
+}
+
+function handleEnter(event) {
+  let keyCode = event.keyCode;
+  if (keyCode == 13) {
+    ctx.textBaseline = "top";
+    ctx.textAlign = "left";
+    ctx.font = "14px sans-serif";
+    ctx.fillText(
+      this.value,
+      parseInt(this.style.left, 10) - 4,
+      parseInt(this.style.top, 10) - 4
+    );
+    textBtn = true;
+    document.body.removeChild(this);
   }
 }
