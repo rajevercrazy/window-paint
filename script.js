@@ -22,6 +22,7 @@ topCanvas.width = window.innerWidth - topCanvasOffsetX;
 topCanvas.height = window.innerHeight - topCanvasOffsetY;
 
 let isPainting = false;
+let isEraser = false;
 let paintBtn = false;
 let eraserBtn = false;
 let lineWidth = 5;
@@ -48,6 +49,9 @@ canvas.onmousedown = (event) => {
       startY = event.y;
       break;
     case "Eraser":
+      isEraser = true;
+      startX = event.x;
+      startY = event.y;
       break;
     default:
       break;
@@ -62,6 +66,9 @@ canvas.addEventListener("mouseup", (event) => {
       ctx.beginPath();
       break;
     case "Eraser":
+      isEraser = false;
+      ctx.stroke();
+      ctx.beginPath();
       break;
     default:
       break;
@@ -79,14 +86,13 @@ canvas.addEventListener("mousemove", (event) => {
       }
       break;
     case "Eraser":
-      ctx.fillStyle = "white";
-      ctx.lineWidth = 2;
-      ctx.beginPath();
-      let eraserX = event.x - canvasOffsetX;
-      let eraserY = event.y - canvasOffsetY;
-      ctx.rect(eraserX, eraserY, 10, 10);
-      ctx.fill();
-
+      if (isEraser && eraserBtn) {
+        ctx.strokeStyle = "white";
+        ctx.lineWidth = lineWidth;
+        ctx.lineCap = "square";
+        ctx.lineTo(event.x - canvasOffsetX, event.y);
+        ctx.stroke();
+      }
       break;
     default:
       break;
@@ -96,8 +102,15 @@ canvas.addEventListener("mousemove", (event) => {
 function pencil() {
   paintBtn = !paintBtn;
   tool = paintBtn ? "Pencil" : undefined;
+  if (paintBtn) {
+    eraserBtn = false;
+  }
 }
 function eraser() {
   eraserBtn = !eraserBtn;
   tool = eraserBtn ? "Eraser" : undefined;
+
+  if (eraserBtn) {
+    paintBtn = false;
+  }
 }

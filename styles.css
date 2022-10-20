@@ -1,44 +1,45 @@
- body {
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
 }
 
 .container {
-    height: 100rem;
-    display: flex;
+  height: 100rem;
+  display: flex;
 }
 
 #drawing-board {
-    position: absolute;
-    height: 100%;
-    background-color: white;
-    z-index: 2;
+  position: absolute;
+  height: 100%;
+  background-color: white;
+  z-index: 2;
 }
 
 #top-drawing-board {
-    position: absolute;
-    height: 100%;
-    background-color: white;
-    z-index: 1;
+  position: absolute;
+  height: 100%;
+  background-color: white;
+  z-index: 1;
+  opacity: 0.5;
 }
 
 #toolbar {
-    display: flex;
-    flex-direction: column;
-    padding:3rem;
-    width: 4rem;
-    background-color: #202020;
+  display: flex;
+  flex-direction: column;
+  padding: 3rem;
+  width: 4rem;
+  background-color: #202020;
 }
 
 #toolbar * {
-    margin-bottom: 1rem;
+  margin-bottom: 1rem;
 }
 
 #toolbar label {
-    font-size: 0.8rem;
+  font-size: 0.8rem;
 }
 
 #toolbar input {
-    width: 100%;
+  width: 100%;
 }
