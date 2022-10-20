@@ -1,9 +1,9 @@
 /**
  * @type HTMLCanvasElement
  */
+const toolbar = document.getElementById("toolbar");
 
 const canvas = document.getElementById("drawing-board");
-const toolbar = document.getElementById("toolbar");
 const ctx = canvas.getContext("2d");
 
 const canvasOffsetX = canvas.offsetLeft;
@@ -11,6 +11,15 @@ const canvasOffsetY = canvas.offsetTop;
 
 canvas.width = window.innerWidth - canvasOffsetX;
 canvas.height = window.innerHeight - canvasOffsetY;
+
+const topCanvas = document.getElementById("top-drawing-board");
+const topCtx = topCanvas.getContext("2d");
+
+const topCanvasOffsetX = topCanvas.offsetLeft;
+const topCanvasOffsetY = topCanvas.offsetTop;
+
+topCanvas.width = window.innerWidth - topCanvasOffsetX;
+topCanvas.height = window.innerHeight - topCanvasOffsetY;
 
 let isPainting = false;
 let paintBtn = false;
