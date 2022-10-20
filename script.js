@@ -26,6 +26,7 @@ let isEraser = false;
 let paintBtn = false;
 let eraserBtn = false;
 let textBtn = false;
+let lineBtn = false;
 let lineWidth = 5;
 let startX;
 let startY;
@@ -55,8 +56,14 @@ canvas.onmousedown = (event) => {
       startY = event.y;
       break;
     case "Text":
-      if(textBtn){
+      if (textBtn) {
         addInput(event.x - canvasOffsetX, event.y - canvasOffsetY);
+      }
+      break;
+    case "Line":
+      if (lineBtn) {
+        ctx.beginPath();
+        ctx.moveTo(event.x - canvasOffsetX, event.y - canvasOffsetY);
       }
       break;
     default:
@@ -75,6 +82,13 @@ canvas.addEventListener("mouseup", (event) => {
       isEraser = false;
       ctx.stroke();
       ctx.beginPath();
+      break;
+    case "Line":
+      if (lineBtn) {
+        ctx.lineTo(event.x - canvasOffsetX, event.y - canvasOffsetY);
+        ctx.strokeStyle = 'black';
+        ctx.stroke();
+      }
       break;
     default:
       break;
@@ -111,6 +125,7 @@ function pencil() {
   if (paintBtn) {
     eraserBtn = false;
     textBtn = false;
+    lineBtn = false;
   }
 }
 
@@ -121,6 +136,7 @@ function eraser() {
   if (eraserBtn) {
     paintBtn = false;
     textBtn = false;
+    lineBtn = false;
   }
 }
 
@@ -131,12 +147,23 @@ function text() {
   if (textBtn) {
     eraserBtn = false;
     paintBtn = false;
+    lineBtn = false;
+  }
+}
+
+function drawLine() {
+  lineBtn = !lineBtn;
+  tool = lineBtn ? "Line" : undefined;
+
+  if (lineBtn) {
+    eraserBtn = false;
+    paintBtn = false;
+    textBtn = false;
   }
 }
 
 function addInput(x, y) {
   let textarea = document.createElement("textarea");
-
   textarea.style.position = "fixed";
   textarea.style.left = x - 4 + "px";
   textarea.style.top = y - 4 + "px";
