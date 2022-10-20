@@ -1,25 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Window Paint</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-     <div class="container">
-       <div id="toolbar">
-            <label>Stroke</label>
-            <input id="stroke" name="stroke" type="color">
-            <label>Line Width</label>
-            <input id="lineWidth" name="lineWidth" type="number" value="5">
-            <button onclick="paintBtn = !paintBtn"> Pencil</button>
-        </div>
-         <div>
-            <canvas id="drawing-board"></canvas>
-        </div>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div id="toolbar">
+        <label>Stroke</label>
+        <input id="stroke" name="stroke" type="color" />
+        <label>Line Width</label>
+        <input id="lineWidth" name="lineWidth" type="number" value="5" />
+        <button onclick="pencil()">Pencil</button>
+        <button onclick="eraser()">Eraser</button>
+      </div>
+      <div>
+        <canvas id="drawing-board"></canvas>
+      </div>
     </div>
-    <script src="script.js"></script> 
-</body>
+    <script src="script.js"></script>
+  </body>
 </html>
