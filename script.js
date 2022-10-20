@@ -15,8 +15,17 @@ canvas.height = window.innerHeight - canvasOffsetY;
 
 let isPainting = false;
 let paintBtn = false;
+let lineWidth = 5;
 let startX;
 let startY;
+
+toolbar.addEventListener("change", (event) => {
+  switch (event.target.id) {
+    case "lineWidth":
+      lineWidth = event.target.value;
+      break;
+  }
+});
 
 canvas.addEventListener("mousedown", (event) => {
   isPainting = true;
