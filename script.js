@@ -21,6 +21,9 @@ let startY;
 
 toolbar.addEventListener("change", (event) => {
   switch (event.target.id) {
+    case "stroke":
+      ctx.strokeStyle = event.target.value;
+      break;
     case "lineWidth":
       lineWidth = event.target.value;
       break;
