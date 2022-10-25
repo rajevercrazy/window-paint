@@ -6,11 +6,11 @@ const toolbar = document.getElementById("toolbar");
 const canvas = document.getElementById("drawing-board");
 const ctx = canvas.getContext("2d");
 
-const canvasOffsetX = canvas.offsetLeft;
-const canvasOffsetY = canvas.offsetTop;
+const canvasOffsetX = 0;
+const canvasOffsetY = canvas.offsetHeight;
 
-canvas.width = window.innerWidth - canvasOffsetX;
-canvas.height = window.innerHeight - canvasOffsetY;
+canvas.width = 1152;
+canvas.height = 648;
 
 // const topCanvas = document.getElementById("top-drawing-board");
 // const topCtx = topCanvas.getContext("2d");
@@ -27,7 +27,8 @@ let paintBtn = false;
 let eraserBtn = false;
 let textBtn = false;
 let lineBtn = false;
-let lineWidth = 5;
+let curveLineBtn = false;
+let lineWidth = 1;
 let startX;
 let startY;
 let tool;
@@ -159,6 +160,16 @@ function drawLine() {
     eraserBtn = false;
     paintBtn = false;
     textBtn = false;
+  }
+}
+
+function curveLine() {
+  curveLineBtn =  !curveLine;
+  if (curveLineBtn) {
+    eraserBtn = false;
+    paintBtn = false;
+    textBtn = false;
+    lineBtn = false;
   }
 }
 

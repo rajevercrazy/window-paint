@@ -6,18 +6,214 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Window Paint</title>
     <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
   </head>
   <body>
     <div class="container">
       <div id="toolbar">
-        <label>Stroke</label>
-        <input id="stroke" name="stroke" type="color" />
-        <label>Line Width</label>
-        <input id="lineWidth" name="lineWidth" type="number" value="5" />
-        <button onclick="pencil()">Pencil</button>
-        <button onclick="eraser()">Eraser</button>
-        <button onclick="text()">Text</button>
-        <button onclick="drawLine()">Line</button>
+        <div class="inner-container">
+          <div class="imageTool">
+            <div
+              style="
+                align-items: center;
+                border: solid black thin;
+                padding: 0.3rem;
+              "
+            >
+              <div
+                style="
+                  border: dashed black thin;
+                  padding: 15px 4px;
+                  margin-bottom: 0.5rem;
+                "
+              ></div>
+              <span>Select</span>
+            </div>
+            <div style="padding-left: 1rem">
+              <div class="dropdown">
+                <div>
+                  <i class="fa fa-rotate-right" style="font-size: 24px"></i>
+                </div>
+                <div class="dropdown-content">
+                  <p style="padding-left: 1rem">Rotate right 90</p>
+                  <p style="padding-left: 1rem">Rotate left 90</p>
+                  <p style="padding-left: 1rem">Rotate 180</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style="text-align: center; padding-top: 1rem">
+            <label for="image">Image</label>
+          </div>
+        </div>
+        <hr class="tool-divided" />
+        <div class="inner-container">
+          <div class="tools">
+            <div class="tool">
+              <i id="pencil" class="fa fa-pencil" onclick="pencil()"></i>
+            </div>
+            <div class="tool">
+              <i id="eraser" class="fa fa-eraser" onclick="eraser()"></i>
+            </div>
+            <div class="tool">
+              <i id="text" class="fa fa-font" onclick="text()"></i>
+            </div>
+          </div>
+          <div style="text-align: center">
+            <label for="tools">Tools</label>
+          </div>
+        </div>
+        <hr class="tool-divided" />
+        <div class="inner-container">
+          <div>
+            <iframe width="120" height="75" src="shape/shapes.html"></iframe>
+          </div>
+          <div>
+            <label for="shapes">Shapes</label>
+          </div>
+        </div>
+        <hr class="tool-divided" />
+        <div class="inner-container">
+          <div class="line-width">
+            <div class="dropdown">
+              <div class="dropdown-icon">
+                <hr
+                  style="
+                    width: 2rem;
+                    height: 1px;
+                    background-color: #000000;
+                    margin: 1px;
+                  "
+                />
+                <hr
+                  style="
+                    width: 2rem;
+                    height: 2px;
+                    background-color: #000000;
+                    margin: 1.5px;
+                  "
+                />
+                <hr
+                  style="
+                    width: 2rem;
+                    height: 3px;
+                    background-color: #000000;
+                    margin: 1.5px;
+                  "
+                />
+                <hr
+                  style="
+                    width: 2rem;
+                    height: 4px;
+                    background-color: #000000;
+                    margin: 1.5px;
+                  "
+                />
+              </div>
+              <div class="dropdown-content">
+                <hr
+                  style="width: 5rem; height: 1px; background-color: #000000"
+                />
+                <hr
+                  style="width: 5rem; height: 2px; background-color: #000000"
+                />
+                <hr
+                  style="width: 5rem; height: 3px; background-color: #000000"
+                />
+                <hr
+                  style="width: 5rem; height: 4px; background-color: #000000"
+                />
+              </div>
+            </div>
+            <div style="text-align: center">
+              <label for="size">Size</label>
+            </div>
+          </div>
+        </div>
+        <hr class="tool-divided" />
+        <div class="inner-container">
+          <div class="colors-selector">
+            <div
+              style="display: flex; flex-direction: column; align-items: center"
+            >
+              <div
+                style="
+                  border: solid black thin;
+                  background-color: #ffffff;
+                  width: 3rem;
+                  height: 3rem;
+                  margin-right: 0.3rem;
+                  margin-bottom: 0.3rem;
+                  margin-top: 1rem;
+                "
+              ></div>
+              <label>Color 1</label>
+            </div>
+            <div
+              style="display: flex; flex-direction: column; align-items: center"
+            >
+              <div
+                style="
+                  border: solid black thin;
+                  background-color: #ffffff;
+                  width: 3rem;
+                  height: 3rem;
+                  margin-right: 0.3rem;
+                  margin-bottom: 0.3rem;
+                  margin-top: 1rem;
+                "
+              ></div>
+              <label>Color 2</label>
+            </div>
+
+            <div id="current">
+              <div class="color" style="background-color: #000000"></div>
+              <div class="color" style="background-color: #8b8275"></div>
+              <div class="color" style="background-color: #8c040a"></div>
+              <div class="color" style="background-color: #8b8218"></div>
+              <div class="color" style="background-color: #108213"></div>
+              <div class="color" style="background-color: #118275"></div>
+              <div class="color" style="background-color: #020a75"></div>
+              <div class="color" style="background-color: #8c0d75"></div>
+              <div class="color" style="background-color: #8b8235"></div>
+              <div class="color" style="background-color: #044236"></div>
+              <div class="color" style="background-color: #1682fc"></div>
+              <div class="color" style="background-color: #064276"></div>
+              <div class="color" style="background-color: #8c25fc"></div>
+              <div class="color" style="background-color: #8b420e"></div>
+              <div class="color" style="background-color: #ffffff"></div>
+              <div class="color" style="background-color: #c8c2ba"></div>
+              <div class="color" style="background-color: #fd0d1b"></div>
+              <div class="color" style="background-color: #fffe38"></div>
+              <div class="color" style="background-color: #29fe2f"></div>
+              <div class="color" style="background-color: #2dffff"></div>
+              <div class="color" style="background-color: #0b24fc"></div>
+              <div class="color" style="background-color: #fd29fd"></div>
+              <div class="color" style="background-color: #fffe75"></div>
+              <div class="color" style="background-color: #2afe76"></div>
+              <div class="color" style="background-color: #8bffff"></div>
+              <div class="color" style="background-color: #8c83fd"></div>
+              <div class="color" style="background-color: #fd1476"></div>
+              <div class="color" style="background-color: #fe8235"></div>
+              <div class="color" style="background-color: #ffffff"></div>
+              <div class="color" style="background-color: #ffffff"></div>
+            </div>
+            <div class="stroke">
+              <input id="stroke" type="color" style="height: 2rem" />
+              <label
+                for="stroke"
+                style="word-wrap: break-word; text-align: center"
+                >Edit colors</label
+              >
+            </div>
+          </div>
+          <div style="text-align: center">
+            <label for="color">Colors</label>
+          </div>
+        </div>
       </div>
       <div>
         <canvas id="drawing-board"></canvas>
