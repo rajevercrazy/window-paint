@@ -47,32 +47,15 @@ toolbar.addEventListener("change", (event) => {
 canvas.onmousedown = (event) => {
   switch (tool) {
     case "Pencil":
-      console.log('mousedown');
-      obj = {
-        'event.x': event.x,
-        'event.y': event.y,
-        'canvasOffsetX':canvasOffsetX,
-        'canvasOffsetY':canvasOffsetY,
-        'event.clientX':event.clientX,
-        'event.clientY':event.clientY,
-        'canvasOffsetX - event.x': canvasOffsetX - event.x,
-        'canvasOffsetY - event.y': canvasOffsetY - event.y,
 
-      }
-
-      console.table(obj);
       isPainting = true;
-      // startX = event.x;
-      // startY = event.y;
       break;
     case "Eraser":
       isEraser = true;
-      startX = event.x;
-      startY = event.y;
       break;
     case "Text":
       if (textBtn) {
-        addInput(event.x - canvasOffsetX, event.y - canvasOffsetY);
+        addInput(event.x, event.y);
       }
       break;
     case "Line":
@@ -153,6 +136,15 @@ function eraser() {
     paintBtn = false;
     textBtn = false;
     lineBtn = false;
+    // <div id="eraseCursor" class="erase-square"></div>
+    // cursor = document.createElement("div");
+    // cursor.setAttribute(class,"erase-square");
+    // console.log(cursor);
+    canvas.style.cursor = 'crosshair';
+  }
+
+  if(!eraserBtn){
+    canvas.style.removeProperty("cursor");
   }
 }
 
