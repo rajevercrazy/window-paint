@@ -19,6 +19,20 @@ body {
   justify-content: space-between;
 }
 
+.tool-container {
+  padding: 1rem;
+  margin-right: 1rem;
+  margin-left: 1rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  background-color: white;
+  border: 2px solid;
+  border-style: inset; 
+  gap: 10px;
+}
+
 label {
   font-family: "Gill Sans", "Gill Sans MT", "Calibri", "Trebuchet MS",
     sans-serif;
@@ -142,11 +156,3 @@ i:hover {
   display: flex;
   flex-direction: row;
 }
-
-/* .pencilSize {
-  width: 5rem;
-  height: 1px;
-  background-color: #000000;
-}
-
-.pencilSize:hover */
