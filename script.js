@@ -6,11 +6,11 @@ const toolbar = document.getElementById("toolbar");
 const canvas = document.getElementById("drawing-board");
 const ctx = canvas.getContext("2d");
 
-const canvasOffsetX = 0;
-const canvasOffsetY = canvas.offsetHeight;
+// canvas.width = 1152;
+// canvas.height = 648;
 
-canvas.width = 1152;
-canvas.height = 648;
+const canvasOffsetX =  canvas.offsetLeft;
+const canvasOffsetY =  canvas.offsetTop;
 
 // const topCanvas = document.getElementById("top-drawing-board");
 // const topCtx = topCanvas.getContext("2d");
@@ -38,18 +38,32 @@ toolbar.addEventListener("change", (event) => {
     case "stroke":
       ctx.strokeStyle = event.target.value;
       break;
-    case "lineWidth":
-      lineWidth = event.target.value;
-      break;
+    // case "lineWidth":
+    //   lineWidth = event.target.value;
+    //   break;
   }
 });
 
 canvas.onmousedown = (event) => {
   switch (tool) {
     case "Pencil":
+      console.log('mousedown');
+      obj = {
+        'event.x': event.x,
+        'event.y': event.y,
+        'canvasOffsetX':canvasOffsetX,
+        'canvasOffsetY':canvasOffsetY,
+        'event.clientX':event.clientX,
+        'event.clientY':event.clientY,
+        'canvasOffsetX - event.x': canvasOffsetX - event.x,
+        'canvasOffsetY - event.y': canvasOffsetY - event.y,
+
+      }
+
+      console.table(obj);
       isPainting = true;
-      startX = event.x;
-      startY = event.y;
+      // startX = event.x;
+      // startY = event.y;
       break;
     case "Eraser":
       isEraser = true;
@@ -99,10 +113,11 @@ canvas.addEventListener("mouseup", (event) => {
 canvas.addEventListener("mousemove", (event) => {
   switch (tool) {
     case "Pencil":
+      
       if (isPainting && paintBtn) {
         ctx.lineWidth = lineWidth;
         ctx.lineCap = "round";
-        ctx.lineTo(event.x - canvasOffsetX, event.y);
+        ctx.lineTo(event.clientX - canvasOffsetX,event.clientY - canvasOffsetY);
         ctx.stroke();
       }
       break;

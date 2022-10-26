@@ -77,47 +77,60 @@
         </div>
         <hr class="tool-divided" />
         <div class="inner-container">
-          <div class="line-width">
-            <div class="dropdown">
-              <div class="dropdown-icon">
-                <hr
-                  style="
-                    width: 2rem;
-                    height: 1px;
-                    background-color: #000000;
-                    margin: 1px;
-                  "
-                />
-                <hr
-                  style="
-                    width: 2rem;
-                    height: 2px;
-                    background-color: #000000;
-                    margin: 1.5px;
-                  "
-                />
-                <hr
-                  style="
-                    width: 2rem;
-                    height: 3px;
-                    background-color: #000000;
-                    margin: 1.5px;
-                  "
-                />
-                <hr
-                  style="
-                    width: 2rem;
-                    height: 4px;
-                    background-color: #000000;
-                    margin: 1.5px;
-                  "
-                />
-              </div>
-              <div class="dropdown-content">
-                <hr
+          <div class="dropdown">
+            <div class="dropdown-icon">
+              <hr
+                style="
+                  width: 2rem;
+                  height: 1px;
+                  background-color: #000000;
+                  margin: 1px;
+                "
+              />
+              <hr
+                style="
+                  width: 2rem;
+                  height: 2px;
+                  background-color: #000000;
+                  margin: 1.5px;
+                "
+              />
+              <hr
+                style="
+                  width: 2rem;
+                  height: 3px;
+                  background-color: #000000;
+                  margin: 1.5px;
+                "
+              />
+              <hr
+                style="
+                  width: 2rem;
+                  height: 4px;
+                  background-color: #000000;
+                  margin: 1.5px;
+                "
+              />
+            </div>
+            <div class="dropdown-content">
+              <a href="#" onclick="lineWidth = 1"
+                ><hr
                   style="width: 5rem; height: 1px; background-color: #000000"
-                />
-                <hr
+              /></a>
+              <a href="#" onclick="lineWidth = 2"
+                ><hr
+                  style="width: 5rem; height: 2px; background-color: #000000"
+              /></a>
+              <a href="#" onclick="lineWidth = 3"
+                ><hr
+                  style="width: 5rem; height: 3px; background-color: #000000"
+              /></a>
+              <a href="#" onclick="lineWidth = 4"
+                ><hr
+                  style="width: 5rem; height: 4px; background-color: #000000"
+              /></a>
+
+              <!-- <hr
                   style="width: 5rem; height: 2px; background-color: #000000"
                 />
                 <hr
@@ -125,12 +138,11 @@
                 />
                 <hr
                   style="width: 5rem; height: 4px; background-color: #000000"
-                />
-              </div>
+                /> -->
             </div>
-            <div style="text-align: center">
-              <label for="size">Size</label>
-            </div>
+          </div>
+          <div style="text-align: center">
+            <label for="size">Size</label>
           </div>
         </div>
         <hr class="tool-divided" />
@@ -216,7 +228,7 @@
         </div>
       </div>
       <div>
-        <canvas id="drawing-board"></canvas>
+        <canvas id="drawing-board" height="648" width="1152"></canvas>
         <!-- <canvas id="top-drawing-board"></canvas> -->
       </div>
     </div>
