@@ -3,8 +3,10 @@
  */
 
  class Shapes {
-  x;
-  y;
+  x1;
+  y1;
+  x2;
+  y2;
   ctx;
 
   constructor(ctx) {
@@ -13,26 +15,35 @@
 
   rectangle() {
     this.ctx.beginPath();
-    this.ctx.rect(this.x, this.y, 10, 25);
+    this.ctx.rect(this.x1, this.y1, (this.x2 - this.x1), (this.y2 - this.y1));
     this.ctx.stroke();
     this.ctx.closePath();
   }
 
   circle() {
     this.ctx.beginPath()
-    this.ctx.arc(this.x, this.y, 10, 0, Math.PI * 2, false);
+    this.ctx.arc(this.x1, this.y1, 10, 0, Math.PI * 2, false);
     this.ctx.stroke();
     this.ctx.closePath();
   }
 
   triangle() {
     this.ctx.beginPath()
-    this.ctx.moveTo(this.x, this.y);
-    this.ctx.lineTo(this.x - 20, this.y + 20);
-    this.ctx.lineTo(this.x + 20 ,this.y + 20);
-    this.ctx.lineTo(this.x, this.y);
+    let xAxisCenter = this.x1 + (this.x2 - this.x1)/2
+    this.ctx.moveTo(xAxisCenter, this.y1);
+    this.ctx.lineTo(this.x1, this.y2);
+    this.ctx.lineTo(this.x2,this.y2);
+    this.ctx.lineTo(xAxisCenter, this.y1);
     this.ctx.stroke();
     this.ctx.closePath();
+  }
+
+  line() {
+    ctx.beginPath();
+    ctx.moveTo(this.x1,this.y1);
+    ctx.lineTo(this.x2,this.y2);
+    ctx.stroke();
+    ctx.closePath();
   }
 
   draw(shape){
@@ -45,6 +56,9 @@
       break;
       case 'triangle': 
       this.triangle();
+      break;
+      case 'line': 
+      this.line();
       break;
       default:
       break;
@@ -106,7 +120,8 @@
         }
         break;
       case "Shape":
-        drawShape( event.clientX - canvasOffsetX,event.clientY - canvasOffsetY);
+        shapes.x1 = event.clientX - canvasOffsetX;
+        shapes.y1 = event.clientY - canvasOffsetY;
         break;
       default:
         break;
@@ -125,12 +140,8 @@
         ctx.stroke();
         ctx.beginPath();
         break;
-      case "Line":
-        if (lineBtn) {
-          ctx.lineTo(event.x - canvasOffsetX, event.y - canvasOffsetY);
-          ctx.strokeStyle = "black";
-          ctx.stroke();
-        }
+      case "Shape":
+        drawShape(event.x - canvasOffsetX, event.y - canvasOffsetY);
         break;
       default:
         break;
@@ -210,8 +221,8 @@
       paintBtn = false;
       textBtn = false;
 
-      shapes.x = x;
-      shapes.y = y;
+      shapes.x2 = x;
+      shapes.y2 = y;
       shapes.draw(shape)
   }
 
