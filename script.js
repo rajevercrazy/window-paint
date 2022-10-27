@@ -22,7 +22,11 @@
 
   circle() {
     this.ctx.beginPath()
-    this.ctx.arc(this.x1, this.y1, 10, 0, Math.PI * 2, false);
+    // this.ctx.arc(this.x1, this.y1, 10, 0, Math.PI * 2, false);
+    let yAxisCenter = this.y1 + (this.y2 - this.y1)/2;
+    ctx.moveTo(this.x2,yAxisCenter);
+    ctx.bezierCurveTo(this.x2,this.y1,this.x1,this.y1,this.x1,yAxisCenter);
+    ctx.bezierCurveTo(this.x1,this.y2,this.x2,this.y2,this.x2,yAxisCenter);
     this.ctx.stroke();
     this.ctx.closePath();
   }
@@ -164,10 +168,13 @@
       case "Eraser":
         if (isEraser && eraserBtn) {
           ctx.strokeStyle = "white";
-          ctx.lineWidth = lineWidth;
+          ctx.lineWidth = lineWidth +10;
           ctx.lineCap = "square";
-          ctx.lineTo(event.x - canvasOffsetX, event.y);
+          ctx.beginPath();
+          ctx.lineTo(event.clientX - canvasOffsetX,
+            event.clientY - canvasOffsetY);
           ctx.stroke();
+          ctx.closePath();
         }
         break;
       default:
