@@ -16,34 +16,42 @@
       <div id="toolbar">
         <div class="inner-container">
           <div class="imageTool">
-             <a href="#" onclick="select()"> <div
-              style="
-                align-items: center;
-                border: solid black thin;
-                padding: 0.3rem;
-              "
-            >
+            <a href="#" onclick="select()">
               <div
                 style="
-                  border: dashed black thin;
-                  padding: 15px 4px;
-                  margin-bottom: 0.5rem;
+                  align-items: center;
+                  border: solid black thin;
+                  padding: 0.3rem;
                 "
-              ></div>
-              <span>Select</span>
-            </div> </a>
-            <!-- <div style="padding-left: 1rem">
+              >
+                <div
+                  style="
+                    border: dashed black thin;
+                    padding: 15px 4px;
+                    margin-bottom: 0.5rem;
+                  "
+                ></div>
+                <span>Select</span>
+              </div>
+            </a>
+            <div style="padding-left: 1rem">
               <div class="dropdown">
                 <div>
                   <i class="fa fa-rotate-right" style="font-size: 24px"></i>
                 </div>
                 <div class="dropdown-content">
-                  <a href="#" onclick="rotate(90)"><p style="padding-left: 1rem">Rotate right 90</p></a>
-                  <a href="#" onclick="rotate(270)"><p style="padding-left: 1rem">Rotate left 90</p></a>
-                  <a href="#" onclick="rotate(180)"><p style="padding-left: 1rem">Rotate 180</p></a>
+                  <a href="#" onclick="rotate(90)"
+                    ><p style="padding-left: 1rem">Rotate right 90</p></a
+                  >
+                  <a href="#" onclick="rotate(270)"
+                    ><p style="padding-left: 1rem">Rotate left 90</p></a
+                  >
+                  <a href="#" onclick="rotate(180)"
+                    ><p style="padding-left: 1rem">Rotate 180</p></a
+                  >
                 </div>
               </div>
-            </div> -->
+            </div>
           </div>
           <div style="text-align: center; padding-top: 1rem">
             <label for="image">Image</label>
@@ -69,17 +77,41 @@
         <hr class="tool-divided" />
         <div class="inner-container">
           <div class="tool-container">
-              <!-- <button onclick="drawLine()">Line</button>
+            <!-- <button onclick="drawLine()">Line</button>
               <button onclick="curveLine()">Curve Line</button> -->
-              <a href="#" onclick="setShape('line')"><img src="./assets/diagonal-line.png" width="15" height="15" style="border: solid black 1px; padding:1px;"></a>
-              <!-- <a href="#"><img src="./assets/img.png" width="15" height="15" style="border: solid black 1px; padding:1px;"></a> -->
-              <a href="#" onclick="setShape('circle')"><img src="./assets/ellipse-outline-shape-variant.png" width="15" height="15" style="border: solid black 1px; padding:1px;"></a>
-              <a href="#" onclick="setShape('rectangle')"><img src="./assets/rectangular-shape-outline.png" width="15" height="15" style="border: solid black 1px; padding:1px;"></a>
-              <!-- <a href="#"><img src="./assets/rounded-rectangle.png" width="15" height="15" style="border: solid black 1px; padding:1px;"></a> -->
-              <!-- <a href="#"><img src="./assets/icons8-polygon-30.png" width="15" height="15" style="border: solid black 1px; padding:1px;"></a> -->
-              <a href="#" onclick="setShape('triangle')"><img src="./assets/triangle.png" width="15" height="15" style="border: solid black 1px; padding:1px;"></a>
+            <a href="#" onclick="setShape('line')"
+              ><img
+                src="./assets/diagonal-line.png"
+                width="15"
+                height="15"
+                style="border: solid black 1px; padding: 1px"
+            /></a>
+            <!-- <a href="#"><img src="./assets/img.png" width="15" height="15" style="border: solid black 1px; padding:1px;"></a> -->
+            <a href="#" onclick="setShape('circle')"
+              ><img
+                src="./assets/ellipse-outline-shape-variant.png"
+                width="15"
+                height="15"
+                style="border: solid black 1px; padding: 1px"
+            /></a>
+            <a href="#" onclick="setShape('rectangle')"
+              ><img
+                src="./assets/rectangular-shape-outline.png"
+                width="15"
+                height="15"
+                style="border: solid black 1px; padding: 1px"
+            /></a>
+            <!-- <a href="#"><img src="./assets/rounded-rectangle.png" width="15" height="15" style="border: solid black 1px; padding:1px;"></a> -->
+            <!-- <a href="#"><img src="./assets/icons8-polygon-30.png" width="15" height="15" style="border: solid black 1px; padding:1px;"></a> -->
+            <a href="#" onclick="setShape('triangle')"
+              ><img
+                src="./assets/triangle.png"
+                width="15"
+                height="15"
+                style="border: solid black 1px; padding: 1px"
+            /></a>
           </div>
-          <div style="text-align: center"> 
+          <div style="text-align: center">
             <label for="shapes">Shapes</label>
           </div>
         </div>
@@ -159,69 +191,133 @@
             <div
               style="display: flex; flex-direction: column; align-items: center"
             >
-              <a href="#" onclick="colorId='color1'"><div 
-                id="color1"
-                style="
-                  border: solid black thin;
-                  background-color: #ffffff;
-                  width: 3rem;
-                  height: 3rem;
-                  margin-right: 0.3rem;
-                  margin-bottom: 0.3rem;
-                  margin-top: 1rem;
-                "
-              ></div></a>
+              <a href="#" onclick="colorId='color1'"
+                ><div
+                  id="color1"
+                  style="
+                    border: solid black thin;
+                    background-color: #ffffff;
+                    width: 3rem;
+                    height: 3rem;
+                    margin-right: 0.3rem;
+                    margin-bottom: 0.3rem;
+                    margin-top: 1rem;
+                  "
+                ></div
+              ></a>
               <label>Color 1</label>
             </div>
             <div
               style="display: flex; flex-direction: column; align-items: center"
             >
-            <a href="#" onclick="colorId='color2'"><div
-              id="color2"
-                style="
-                  border: solid black thin;
-                  background-color: #ffffff;
-                  width: 3rem;
-                  height: 3rem;
-                  margin-right: 0.3rem;
-                  margin-bottom: 0.3rem;
-                  margin-top: 1rem;
-                "
-              ></div></a>
+              <a href="#" onclick="colorId='color2'"
+                ><div
+                  id="color2"
+                  style="
+                    border: solid black thin;
+                    background-color: #ffffff;
+                    width: 3rem;
+                    height: 3rem;
+                    margin-right: 0.3rem;
+                    margin-bottom: 0.3rem;
+                    margin-top: 1rem;
+                  "
+                ></div
+              ></a>
               <label>Color 2</label>
             </div>
 
             <div id="current">
-              <a href="#" onclick="setColor('#000000')"><div class="color" style="background-color: #000000"></div></a>
-              <a href="#" onclick="setColor('#8b8275')"><div class="color" style="background-color: #8b8275"></div></a>
-              <a href="#" onclick="setColor('#8c040a')"><div class="color" style="background-color: #8c040a"></div></a>
-              <a href="#" onclick="setColor('#8b8218')"><div class="color" style="background-color: #8b8218"></div></a>
-              <a href="#" onclick="setColor('#108213')"><div class="color" style="background-color: #108213"></div></a>
-              <a href="#" onclick="setColor('#118275')"><div class="color" style="background-color: #118275"></div></a>
-              <a href="#" onclick="setColor('#020a75')"><div class="color" style="background-color: #020a75"></div></a>
-              <a href="#" onclick="setColor('#8c0d75')"><div class="color" style="background-color: #8c0d75"></div></a>
-              <a href="#" onclick="setColor('#8b8235')"><div class="color" style="background-color: #8b8235"></div></a>
-              <a href="#" onclick="setColor('#044236')"><div class="color" style="background-color: #044236"></div></a>
-              <a href="#" onclick="setColor('#1682fc')"><div class="color" style="background-color: #1682fc"></div></a>
-              <a href="#" onclick="setColor('#064276')"><div class="color" style="background-color: #064276"></div></a>
-              <a href="#" onclick="setColor('#8c25fc')"><div class="color" style="background-color: #8c25fc"></div></a>
-              <a href="#" onclick="setColor('#8b420e')"><div class="color" style="background-color: #8b420e"></div></a>
-              <a href="#" onclick="setColor('#ffffff')"><div class="color" style="background-color: #ffffff"></div></a>
-              <a href="#" onclick="setColor('#c8c2ba')"><div class="color" style="background-color: #c8c2ba"></div></a>
-              <a href="#" onclick="setColor('#fd0d1b')"><div class="color" style="background-color: #fd0d1b"></div></a>
-              <a href="#" onclick="setColor('#fffe38')"><div class="color" style="background-color: #fffe38"></div></a>
-              <a href="#" onclick="setColor('#29fe2f')"><div class="color" style="background-color: #29fe2f"></div></a>
-              <a href="#" onclick="setColor('#2dffff')"><div class="color" style="background-color: #2dffff"></div></a>
-              <a href="#" onclick="setColor('#0b24fc')"><div class="color" style="background-color: #0b24fc"></div></a>
-              <a href="#" onclick="setColor('#fd29fd')"><div class="color" style="background-color: #fd29fd"></div></a>
-              <a href="#" onclick="setColor('#fffe75')"><div class="color" style="background-color: #fffe75"></div></a>
-              <a href="#" onclick="setColor('#2afe76')"><div class="color" style="background-color: #2afe76"></div></a>
-              <a href="#" onclick="setColor('#8bffff')"><div class="color" style="background-color: #8bffff"></div></a>
-              <a href="#" onclick="setColor('#8c83fd')"><div class="color" style="background-color: #8c83fd"></div></a>
-              <a href="#" onclick="setColor('#fd1476')"><div class="color" style="background-color: #fd1476"></div></a>
-              <a href="#" onclick="setColor('#fe8235')"><div class="color" style="background-color: #fe8235"></div></a>
-              <a href="#" onclick="setColor('#ffffff')"><div class="color" style="background-color: #ffffff"></div></a>
-              <a href="#" onclick="setColor('#ffffff')"><div class="color" style="background-color: #ffffff"></div></a>
+              <a href="#" onclick="setColor('#000000')"
+                ><div class="color" style="background-color: #000000"></div
+              ></a>
+              <a href="#" onclick="setColor('#8b8275')"
+                ><div class="color" style="background-color: #8b8275"></div
+              ></a>
+              <a href="#" onclick="setColor('#8c040a')"
+                ><div class="color" style="background-color: #8c040a"></div
+              ></a>
+              <a href="#" onclick="setColor('#8b8218')"
+                ><div class="color" style="background-color: #8b8218"></div
+              ></a>
+              <a href="#" onclick="setColor('#108213')"
+                ><div class="color" style="background-color: #108213"></div
+              ></a>
+              <a href="#" onclick="setColor('#118275')"
+                ><div class="color" style="background-color: #118275"></div
+              ></a>
+              <a href="#" onclick="setColor('#020a75')"
+                ><div class="color" style="background-color: #020a75"></div
+              ></a>
+              <a href="#" onclick="setColor('#8c0d75')"
+                ><div class="color" style="background-color: #8c0d75"></div
+              ></a>
+              <a href="#" onclick="setColor('#8b8235')"
+                ><div class="color" style="background-color: #8b8235"></div
+              ></a>
+              <a href="#" onclick="setColor('#044236')"
+                ><div class="color" style="background-color: #044236"></div
+              ></a>
+              <a href="#" onclick="setColor('#1682fc')"
+                ><div class="color" style="background-color: #1682fc"></div
+              ></a>
+              <a href="#" onclick="setColor('#064276')"
+                ><div class="color" style="background-color: #064276"></div
+              ></a>
+              <a href="#" onclick="setColor('#8c25fc')"
+                ><div class="color" style="background-color: #8c25fc"></div
+              ></a>
+              <a href="#" onclick="setColor('#8b420e')"
+                ><div class="color" style="background-color: #8b420e"></div
+              ></a>
+              <a href="#" onclick="setColor('#ffffff')"
+                ><div class="color" style="background-color: #ffffff"></div
+              ></a>
+              <a href="#" onclick="setColor('#c8c2ba')"
+                ><div class="color" style="background-color: #c8c2ba"></div
+              ></a>
+              <a href="#" onclick="setColor('#fd0d1b')"
+                ><div class="color" style="background-color: #fd0d1b"></div
+              ></a>
+              <a href="#" onclick="setColor('#fffe38')"
+                ><div class="color" style="background-color: #fffe38"></div
+              ></a>
+              <a href="#" onclick="setColor('#29fe2f')"
+                ><div class="color" style="background-color: #29fe2f"></div
+              ></a>
+              <a href="#" onclick="setColor('#2dffff')"
+                ><div class="color" style="background-color: #2dffff"></div
+              ></a>
+              <a href="#" onclick="setColor('#0b24fc')"
+                ><div class="color" style="background-color: #0b24fc"></div
+              ></a>
+              <a href="#" onclick="setColor('#fd29fd')"
+                ><div class="color" style="background-color: #fd29fd"></div
+              ></a>
+              <a href="#" onclick="setColor('#fffe75')"
+                ><div class="color" style="background-color: #fffe75"></div
+              ></a>
+              <a href="#" onclick="setColor('#2afe76')"
+                ><div class="color" style="background-color: #2afe76"></div
+              ></a>
+              <a href="#" onclick="setColor('#8bffff')"
+                ><div class="color" style="background-color: #8bffff"></div
+              ></a>
+              <a href="#" onclick="setColor('#8c83fd')"
+                ><div class="color" style="background-color: #8c83fd"></div
+              ></a>
+              <a href="#" onclick="setColor('#fd1476')"
+                ><div class="color" style="background-color: #fd1476"></div
+              ></a>
+              <a href="#" onclick="setColor('#fe8235')"
+                ><div class="color" style="background-color: #fe8235"></div
+              ></a>
+              <a href="#" onclick="setColor('#ffffff')"
+                ><div class="color" style="background-color: #ffffff"></div
+              ></a>
+              <a href="#" onclick="setColor('#ffffff')"
+                ><div class="color" style="background-color: #ffffff"></div
+              ></a>
             </div>
             <div class="stroke">
               <input id="stroke" type="color" style="height: 2rem" />

@@ -125,6 +125,23 @@ class Eraser {
   }
 }
 
+class Text {
+  x;
+  y;
+  value;
+  obj = "Text";
+  width = 400;
+  draw() {
+    ctx.textBaseline = "top";
+    ctx.textAlign = "left";
+    ctx.font = "14px sans-serif";
+    ctx.fillText(
+      this.value,
+      parseInt(this.x, 10) - 4,
+      parseInt(this.y, 10) - 4
+    );
+  }
+}
 const toolbar = document.getElementById("toolbar");
 const canvas = document.getElementById("drawing-board");
 const ctx = canvas.getContext("2d");
@@ -161,6 +178,7 @@ let startX;
 let startY;
 let pencilObj;
 let eraserObj;
+let textObj;
 
 toolbar.addEventListener("change", (event) => {
   switch (event.target.id) {
@@ -204,7 +222,11 @@ canvas.onmousedown = (event) => {
       startY = event.clientY - canvasOffsetY;
       let index = 0;
       for (let shape of shapeLis) {
-        if (isMouseInShape(startX, startY, shape)) {
+        if (
+          isMouseInShape(startX, startY, shape) ||
+          isMouseInText(startX, startY, shape)
+        ) {
+          console.log("yes");
           currentShapeIndex = index;
           isDragging = true;
         }
@@ -284,10 +306,16 @@ canvas.addEventListener("mousemove", (event) => {
         let dy = mouseY - startY;
 
         let currentShape = shapeLis[currentShapeIndex];
-        currentShape.x1 += dx;
-        currentShape.y1 += dy;
-        currentShape.x2 += dx;
-        currentShape.y2 += dy;
+
+        if (currentShape.obj == "Text") {
+          currentShape.x += dx;
+          currentShape.y += dy;
+        } else {
+          currentShape.x1 += dx;
+          currentShape.y1 += dy;
+          currentShape.x2 += dx;
+          currentShape.y2 += dy;
+        }
 
         draw();
 
@@ -361,11 +389,15 @@ function curveLine() {
   }
 }
 
+let textX;
+let textY;
 function addInput(x, y) {
+  textX = x - canvasOffsetX;
+  textY = y - canvasOffsetY;
   let textarea = document.createElement("textarea");
   textarea.style.position = "fixed";
-  textarea.style.left = x - 4 + "px";
-  textarea.style.top = y - 4 + "px";
+  textarea.style.left = x + "px";
+  textarea.style.top = y + "px";
   textarea.onkeydown = handleEnter;
   document.body.appendChild(textarea);
   textBtn = false;
@@ -377,12 +409,13 @@ function handleEnter(event) {
     ctx.textBaseline = "top";
     ctx.textAlign = "left";
     ctx.font = "14px sans-serif";
-    ctx.fillText(
-      this.value,
-      parseInt(this.style.left, 10) - 4,
-      parseInt(this.style.top, 10) - 4
-    );
+    ctx.fillText(this.value, textX, textY);
     textBtn = true;
+    textObj = new Text();
+    textObj.x = textX;
+    textObj.y = textY;
+    textObj.value = this.value;
+    shapeLis.push(textObj);
     document.body.removeChild(this);
   }
 }
@@ -394,10 +427,10 @@ function setShape(s) {
 
 function rotate(degree) {
   ctx.save();
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  ctx.translate(canvas.width/2, canvas.height/2);
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.translate(canvas.width / 2, canvas.height / 2);
   ctx.rotate((degree * Math.PI) / 2);
-  ctx.fillStyle = 'red';
+  ctx.fillStyle = "red";
   ctx.fillRect(-100, -50, 200, 100);
   ctx.restore();
 }
@@ -417,6 +450,14 @@ function isMouseInShape(x, y, shape) {
   return false;
 }
 
+function isMouseInText(x, y, shape) {
+  if (x > shape.x && x < shape.x + 400 && y > shape.y && y < shape.y + 14) {
+    return true;
+  }
+
+  return false;
+}
+
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   let i = 0;
@@ -426,16 +467,15 @@ function draw() {
     if (shape.obj == "Pencil") {
       ctx.moveTo(shape.points[0][0], shape.points[0][1]);
       ctx.lineWidth = shape.lineWidth;
-        ctx.strokeStyle = shape.strokeStyle;
-        ctx.lineCap = shape.lineCap;
+      ctx.strokeStyle = shape.strokeStyle;
+      ctx.lineCap = shape.lineCap;
       for (let j = 1; j < shape.points.length; j++) {
         ctx.lineTo(shape.points[j][0], shape.points[j][1]);
         ctx.stroke();
       }
       ctx.beginPath();
-    } 
-    else if(shape.obj == "Eraser"){
-
+    } else if (shape.obj == "Text") {
+      shape.draw();
     } else {
       let s = new Shapes(ctx);
       s.x1 = shape.x1;
@@ -443,7 +483,6 @@ function draw() {
       s.x2 = shape.x2;
       s.y2 = shape.y2;
       shapeLis[i] = s.draw(shape.obj);
-      
     }
     i++;
   }
