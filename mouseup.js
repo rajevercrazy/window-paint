@@ -13,7 +13,9 @@
         canvasObj.ctx.beginPath();
         break;
       case "Shape":
-        drawShape(event.x - canvasOffsetX, event.y - canvasOffsetY);
+        app.shapes.x2 = event.x - canvasObj.canvasOffsetX;
+        app.shapes.y2 = event.y - canvasObj.canvasOffsetY;
+        app.shapeLis.push(app.shapes.draw(app.shape));
         break;
       default:
         break;

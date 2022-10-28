@@ -62,7 +62,7 @@ app.addInput = (x, y) => {
 }
 
 app.setShape = (shape) => {
-  tool = "Shape";
+  app.tool = "Shape";
   app.shape = shape;
 }
 

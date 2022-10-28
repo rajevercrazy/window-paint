@@ -43,8 +43,8 @@
           app.addInput(event.x, event.y);
         break;
       case "Shape":
-        shapes.x1 = event.clientX - canvasObj.canvasOffsetX;
-        shapes.y1 = event.clientY - canvasObj.canvasOffsetY;
+        app.shapes.x1 = event.clientX - canvasObj.canvasOffsetX;
+        app.shapes.y1 = event.clientY - canvasObj.canvasOffsetY;
         break;
       default:
         break;
