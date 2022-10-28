@@ -40,9 +40,7 @@
         );
         break;
       case "Text":
-        if (textBtn) {
-          addInput(event.x, event.y);
-        }
+          app.addInput(event.x, event.y);
         break;
       case "Shape":
         shapes.x1 = event.clientX - canvasObj.canvasOffsetX;

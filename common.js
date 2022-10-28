@@ -31,32 +31,33 @@
 
 let textX;
 let textY;
+let textarea;
 app.addInput = (x, y) => {
-  textX = x - app.canvasOffsetX;
-  textY = y - app.canvasOffsetY;
-  let textarea = document.createElement("textarea");
+  textX = x - canvasObj.canvasOffsetX;
+  textY = y - canvasObj.canvasOffsetY;
+  textarea = document.createElement("textarea");
   textarea.style.position = "fixed";
   textarea.style.left = x + "px";
   textarea.style.top = y + "px";
-  textarea.onkeydown = handleEnter;
+  textarea.onkeydown = app.handleEnter;
   document.body.appendChild(textarea);
 //   textBtn = false;
 }
 
-  handleEnter = (event) => {
+  app.handleEnter = (event) => {
   let keyCode = event.keyCode;
   if (keyCode == 13) {
+      textObj = new Text();
+      textObj.x = textX;
+      textObj.y = textY;
+      textObj.value = textarea.value;
     canvasObj.ctx.textBaseline = "top";
     canvasObj.ctx.textAlign = "left";
     canvasObj.ctx.font = "14px sans-serif";
-    canvasObj.ctx.fillText(this.value, textX, textY);
+    canvasObj.ctx.fillText(textObj.value, textX, textY);
     textBtn = true;
-    textObj = new Text();
-    textObj.x = textX;
-    textObj.y = textY;
-    textObj.value = this.value;
     app.shapeLis.push(textObj);
-    document.body.removeChild(this);
+    document.body.removeChild(textarea);
   }
 }
 
