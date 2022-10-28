@@ -32,7 +32,7 @@
           app.eraser.addPointer(
             event.clientX - canvasObj.canvasOffsetX,
             event.clientY - canvasObj.canvasOffsetY,
-            app.eraser.size,
+            app.eraser.size
           );
           canvasObj.ctx.lineTo(
             event.clientX - canvasObj.canvasOffsetX,
@@ -40,6 +40,31 @@
           );
           canvasObj.ctx.stroke();
           canvasObj.ctx.closePath();
+        }
+        break;
+      case "Select":
+        if (app.isDragging) {
+          let mouseX = event.clientX - canvasObj.canvasOffsetX;
+          let mouseY = event.clientY - canvasObj.canvasOffsetY;
+          let dx = mouseX - app.startX;
+          let dy = mouseY - app.startY;
+
+          let currentShape = app.shapeLis[app.currentShapeIndex];
+
+          if (currentShape.obj == "Text") {
+            currentShape.x += dx;
+            currentShape.y += dy;
+          } else {
+            currentShape.x1 += dx;
+            currentShape.y1 += dy;
+            currentShape.x2 += dx;
+            currentShape.y2 += dy;
+          }
+
+          app.draw();
+
+          app.startX = mouseX;
+          app.startY = mouseY;
         }
         break;
       default:

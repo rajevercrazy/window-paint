@@ -5,6 +5,7 @@ function Text(ctx) {
     this.obj = "Text";
     this.width = 400;
     this.ctx = ctx;
+    
     this.draw = () => {
       ctx.textBaseline = "top";
       ctx.textAlign = "left";

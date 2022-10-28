@@ -2,7 +2,7 @@
     let canvasObj = app.canvasSetting();
   app.draw = () => {
     
-    canvasObj.ctx.clearRect(0, 0, canvas.width, canvas.height);
+    canvasObj.ctx.clearRect(0, 0, canvasObj.canvas.width, canvasObj.canvas.height);
     let i = 0;
     for (let shape of app.shapeLis) {
       if (shape.obj == "Pencil") {
@@ -23,7 +23,7 @@
         s.y1 = shape.y1;
         s.x2 = shape.x2;
         s.y2 = shape.y2;
-        shapeLis[i] = s.draw(shape.obj);
+        app.shapeLis[i] = s.draw(shape.obj);
       }
       i++;
     }
@@ -47,7 +47,7 @@ app.addInput = (x, y) => {
   app.handleEnter = (event) => {
   let keyCode = event.keyCode;
   if (keyCode == 13) {
-      textObj = new Text();
+      textObj = new Text(canvasObj.ctx);
       textObj.x = textX;
       textObj.y = textY;
       textObj.value = textarea.value;
@@ -74,15 +74,15 @@ app.setColor = (color) => {
   if (app.tool == "Shape") app.shapes.color = color;
 }
 
-app.isMouseInShape = (x, y, shape) => {
-  if (x > shape.x1 && x < shape.x2 && y > shape.y1 && y < shape.y2) {
+app.isMouseInShape = (shape) => {
+  if (app.startX > shape.x1 && app.startX < shape.x2 && app.startY > shape.y1 && app.startY < shape.y2) {
     return true;
   }
   return false;
 }
 
-app.isMouseInText = (x, y, shape) => {
-  if (x > shape.x && x < shape.x + 400 && y > shape.y && y < shape.y + 14) {
+app.isMouseInText = (shape) => {
+  if (app.startX > shape.x && app.startX < shape.x + 400 && app.startY > shape.y && app.startY < shape.y + 14) {
     return true;
   }
 
