@@ -83,6 +83,48 @@ class Shapes {
   }
 }
 
+class Pencil {
+  arr = [];
+  lineWidth;
+  strokeStyle;
+  lineCap;
+
+  addPointer(x, y, lineWidth, strokeStyle, lineCap) {
+    this.lineWidth = lineWidth;
+    this.strokeStyle = strokeStyle;
+    this.lineCap = lineCap;
+    this.arr.push([x, y]);
+  }
+
+  getPencilObj() {
+    return {
+      points: this.arr,
+      obj: "Pencil",
+    };
+  }
+}
+
+class Eraser {
+  arr = [];
+  lineWidth;
+  strokeStyle;
+  lineCap;
+
+  addPointer(x, y, lineWidth, strokeStyle, lineCap) {
+    this.lineWidth = lineWidth;
+    this.strokeStyle = strokeStyle;
+    this.lineCap = lineCap;
+    this.arr.push([x, y]);
+  }
+
+  getEraserObj() {
+    return {
+      points: this.arr,
+      obj: "Eraser",
+    };
+  }
+}
+
 const toolbar = document.getElementById("toolbar");
 const canvas = document.getElementById("drawing-board");
 const ctx = canvas.getContext("2d");
@@ -117,6 +159,8 @@ let currentShapeIndex = null;
 let isDragging;
 let startX;
 let startY;
+let pencilObj;
+let eraserObj;
 
 toolbar.addEventListener("change", (event) => {
   switch (event.target.id) {
@@ -134,10 +178,16 @@ canvas.onmousedown = (event) => {
   switch (tool) {
     case "Pencil":
       isPainting = true;
+      pencilObj = new Pencil();
+      pencilObj.arr.push([
+        event.clientX - canvasOffsetX,
+        event.clientY - canvasOffsetY,
+      ]);
       ctx.moveTo(event.clientX - canvasOffsetX, event.clientY - canvasOffsetY);
       break;
     case "Eraser":
       isEraser = true;
+      eraserObj = new Eraser();
       ctx.moveTo(event.clientX - canvasOffsetX, event.clientY - canvasOffsetY);
       break;
     case "Text":
@@ -170,6 +220,7 @@ canvas.addEventListener("mouseup", (event) => {
   switch (tool) {
     case "Pencil":
       isPainting = false;
+      shapeLis.push(pencilObj.getPencilObj());
       ctx.stroke();
       ctx.beginPath();
       break;
@@ -190,13 +241,20 @@ canvas.addEventListener("mouseup", (event) => {
 });
 
 canvas.addEventListener("mousemove", (event) => {
-  event.preventDefault()
+  event.preventDefault();
   switch (tool) {
     case "Pencil":
       if (isPainting && paintBtn) {
         ctx.lineWidth = lineWidth;
         ctx.strokeStyle = pColor;
         ctx.lineCap = "round";
+        pencilObj.addPointer(
+          event.clientX - canvasOffsetX,
+          event.clientY - canvasOffsetY,
+          lineWidth,
+          pColor,
+          "round"
+        );
         ctx.lineTo(
           event.clientX - canvasOffsetX,
           event.clientY - canvasOffsetY
@@ -335,7 +393,13 @@ function setShape(s) {
 }
 
 function rotate(degree) {
+  ctx.save();
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.translate(canvas.width/2, canvas.height/2);
   ctx.rotate((degree * Math.PI) / 2);
+  ctx.fillStyle = 'red';
+  ctx.fillRect(-100, -50, 200, 100);
+  ctx.restore();
 }
 
 let colorId = "color1";
@@ -359,12 +423,28 @@ function draw() {
   // let shapeLisCopy = [...shapeLis];
   // shapeLis = [];
   for (let shape of shapeLis) {
-    let s = new Shapes(ctx);
-    s.x1 = shape.x1;
-    s.y1 = shape.y1;
-    s.x2 = shape.x2;
-    s.y2 = shape.y2;
-    shapeLis[i] = s.draw(shape.obj);
+    if (shape.obj == "Pencil") {
+      ctx.moveTo(shape.points[0][0], shape.points[0][1]);
+      ctx.lineWidth = shape.lineWidth;
+        ctx.strokeStyle = shape.strokeStyle;
+        ctx.lineCap = shape.lineCap;
+      for (let j = 1; j < shape.points.length; j++) {
+        ctx.lineTo(shape.points[j][0], shape.points[j][1]);
+        ctx.stroke();
+      }
+      ctx.beginPath();
+    } 
+    else if(shape.obj == "Eraser"){
+
+    } else {
+      let s = new Shapes(ctx);
+      s.x1 = shape.x1;
+      s.y1 = shape.y1;
+      s.x2 = shape.x2;
+      s.y2 = shape.y2;
+      shapeLis[i] = s.draw(shape.obj);
+      
+    }
     i++;
   }
 }
