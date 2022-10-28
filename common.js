@@ -6,6 +6,7 @@
     let i = 0;
     for (let shape of app.shapeLis) {
       if (shape.obj == "Pencil") {
+        canvasObj.ctx.beginPath();
         canvasObj.ctx.moveTo(shape.points[0][0], shape.points[0][1]);
         canvasObj.ctx.lineWidth = shape.lineWidth;
         canvasObj.ctx.strokeStyle = shape.strokeStyle;
@@ -15,7 +16,20 @@
           canvasObj.ctx.stroke();
         }
         canvasObj.ctx.beginPath();
-      } else if (shape.obj == "Text") {
+      } 
+      else if (shape.obj == "Eraser") {
+        canvasObj.ctx.beginPath();
+        canvasObj.ctx.moveTo(shape.points[0][0], shape.points[0][1]);
+        canvasObj.ctx.lineWidth = shape.lineWidth;
+        canvasObj.ctx.strokeStyle = shape.strokeStyle;
+        canvasObj.ctx.lineCap = shape.lineCap;
+        for (let j = 1; j < shape.points.length; j++) {
+          canvasObj.ctx.lineTo(shape.points[j][0], shape.points[j][1]);
+          canvasObj.ctx.stroke();
+        }
+        canvasObj.ctx.closePath();
+      }
+      else if (shape.obj == "Text") {
         shape.draw();
       } else {
         let s = new Shapes(canvasObj.ctx);
@@ -75,6 +89,8 @@ app.setColor = (color) => {
 }
 
 app.isMouseInShape = (shape) => {
+    console.table(app.startX,app.startY)
+    console.table(shape)
   if (app.startX > shape.x1 && app.startX < shape.x2 && app.startY > shape.y1 && app.startY < shape.y2) {
     return true;
   }

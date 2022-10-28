@@ -10,6 +10,7 @@
         break;
       case "Eraser":
         app.eraser.isEraser = false;
+        app.shapeLis.push(app.eraser.getEraserObj());
         canvasObj.ctx.stroke();
         canvasObj.ctx.beginPath();
         break;

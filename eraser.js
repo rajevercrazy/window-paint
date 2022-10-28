@@ -17,6 +17,9 @@ function Eraser(){
     return {
       points: this.arr,
       obj: "Eraser",
+      lineWidth: this.size,
+      strokeStyle: this.strokeStyle,
+      lineCap: this.lineCap
     };
   }
 }

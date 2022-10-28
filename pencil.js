@@ -20,6 +20,9 @@ function Pencil() {
     return {
       points: this.arr,
       obj: "Pencil",
+      lineWidth: this.size,
+      strokeStyle: this.strokeStyle,
+      lineCap: this.lineCap
     };
   }
 

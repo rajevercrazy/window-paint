@@ -5,7 +5,7 @@ function Shapes(ctx) {
     this.y2 = 0;
     this.ctx = ctx;
     this.size = 1;
-    color = "black";
+    this.color = "black";
 
     this.drawRectangle = () =>{
       this.ctx.beginPath();
@@ -52,6 +52,7 @@ function Shapes(ctx) {
     }
   
     this.draw =(shape) =>{
+      this.color = !this.color?'black':this.color;
       switch(shape){
         case 'circle': 
         this.drawCircle();
