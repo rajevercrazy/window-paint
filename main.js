@@ -1,7 +1,6 @@
 ((app) => {
   canvasObj = app.canvasSetting();
   app.shapes = new Shapes(canvasObj.ctx);
-  app.eraser = new Eraser();
   app.shapeLis = [];
   app.pencilSize = 1
   canvasObj.toolbar.addEventListener("change", (event) => {
@@ -29,7 +28,16 @@
         );
         break;
       case "Eraser":
+        app.eraser = new Eraser();
         app.eraser.isEraser = true;
+        app.eraser.arr.push([
+          event.clientX - canvasObj.canvasOffsetX,
+          event.clientY - canvasObj.canvasOffsetY,
+        ]);
+        canvasObj.ctx.moveTo(
+          event.clientX - canvasObj.canvasOffsetX,
+          event.clientY - canvasObj.canvasOffsetY
+        );
         break;
       case "Text":
         if (textBtn) {

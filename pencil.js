@@ -10,7 +10,7 @@ function Pencil() {
   };
 
   this.addPointer = (x, y, lineWidth, strokeStyle, lineCap) => {
-    this.lineWidth = lineWidth;
+    this.size = lineWidth;
     this.strokeStyle = strokeStyle;
     this.lineCap = lineCap;
     this.arr.push([x, y]);

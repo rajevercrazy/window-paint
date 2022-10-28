@@ -24,11 +24,16 @@
         }
         break;
       case "Eraser":
-        if (app.eraser.isEraser) {
-          canvasObj.ctx.strokeStyle = "white";
+        if (app.eraser?.isEraser) {
+          canvasObj.ctx.strokeStyle = app.eraser.strokeStyle;
           canvasObj.ctx.lineWidth = app.eraser.size;
-          canvasObj.ctx.lineCap = "square";
+          canvasObj.ctx.lineCap = app.eraser.lineCap;
           canvasObj.ctx.beginPath();
+          app.eraser.addPointer(
+            event.clientX - canvasObj.canvasOffsetX,
+            event.clientY - canvasObj.canvasOffsetY,
+            app.eraser.size,
+          );
           canvasObj.ctx.lineTo(
             event.clientX - canvasObj.canvasOffsetX,
             event.clientY - canvasObj.canvasOffsetY
