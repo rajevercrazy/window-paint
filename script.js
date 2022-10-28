@@ -226,7 +226,6 @@ canvas.onmousedown = (event) => {
           isMouseInShape(startX, startY, shape) ||
           isMouseInText(startX, startY, shape)
         ) {
-          console.log("yes");
           currentShapeIndex = index;
           isDragging = true;
         }
