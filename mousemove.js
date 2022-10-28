@@ -6,7 +6,7 @@
         if (app.pencil?.isDrawing) {
           canvasObj.ctx.lineWidth = app.pencil.size;
           canvasObj.ctx.lineCap = app.pencil.lineCap;
-          canvasObj.strokeStyle = app.color;
+          canvasObj.ctx.strokeStyle = app.pencil.strokeStyle;
 
           app.pencil.addPointer(
             event.clientX - canvasObj.canvasOffsetX,

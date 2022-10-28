@@ -66,12 +66,12 @@ app.setShape = (shape) => {
   app.shape = shape;
 }
 
-let colorId = "color1";
+app.colorId = "color1";
 app.setColor = (color) => {
-  let selectedColor = document.getElementById(colorId);
+  let selectedColor = document.getElementById(app.colorId);
   selectedColor.style.backgroundColor = color;
   app.color = color;
-  if (tool == "Shape") app.shapes.color = color;
+  if (app.tool == "Shape") app.shapes.color = color;
 }
 
 app.isMouseInShape = (x, y, shape) => {

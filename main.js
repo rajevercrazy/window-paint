@@ -7,7 +7,7 @@
     switch (event.target.id) {
       case "stroke":
         canvasObj.ctx.strokeStyle = event.target.value;
-        setColor(event.target.value);
+        app.setColor(event.target.value);
         break;
     }
   });
@@ -17,6 +17,7 @@
       case "Pencil":
         app.pencil = new Pencil();
         app.pencil.size = app.pencilSize;
+        app.pencil.strokeStyle = !app.color ? 'black': app.color;
         app.pencil.isDrawing = true;
         app.pencil.arr.push([
           event.clientX - canvasObj.canvasOffsetX,

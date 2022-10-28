@@ -5,17 +5,18 @@ function Shapes(ctx) {
     this.y2 = 0;
     this.ctx = ctx;
     color = "black";
-    
+
     this.drawRectangle = () =>{
       this.ctx.beginPath();
+      this.ctx.strokeStyle = this.color;
       this.ctx.rect(this.x1, this.y1, (this.x2 - this.x1), (this.y2 - this.y1));
       this.ctx.stroke();
       this.ctx.closePath();
     }
   
     this.drawCircle = ()=>{
-      this.ctx.beginPath()
-      // this.ctx.arc(this.x1, this.y1, 10, 0, Math.PI * 2, false);
+      this.ctx.beginPath();
+      this.ctx.strokeStyle = this.color;
       let yAxisCenter = this.y1 + (this.y2 - this.y1)/2;
       ctx.moveTo(this.x2,yAxisCenter);
       ctx.bezierCurveTo(this.x2,this.y1,this.x1,this.y1,this.x1,yAxisCenter);
@@ -25,7 +26,8 @@ function Shapes(ctx) {
     }
   
     this.drawTriangle = () => {
-      this.ctx.beginPath()
+      this.ctx.beginPath();
+      this.ctx.strokeStyle = this.color;
       let xAxisCenter = this.x1 + (this.x2 - this.x1)/2
       this.ctx.moveTo(xAxisCenter, this.y1);
       this.ctx.lineTo(this.x1, this.y2);
@@ -37,6 +39,7 @@ function Shapes(ctx) {
   
     this.drawLine = () => {
       ctx.beginPath();
+      this.ctx.strokeStyle = this.color;
       ctx.moveTo(this.x1,this.y1);
       ctx.lineTo(this.x2,this.y2);
       ctx.stroke();
