@@ -51,7 +51,7 @@
                   >
                 </div>
               </div>
-            </div>
+            </div> -->
           </div>
           <div style="text-align: center; padding-top: 1rem">
             <label for="image">Image</label>
@@ -61,13 +61,13 @@
         <div class="inner-container">
           <div class="tools">
             <div class="tool">
-              <i id="pencil" class="fa fa-pencil" onclick="pencil()"></i>
+              <i id="pencil" class="fa fa-pencil" onclick="app.tool = 'Pencil'"></i>
             </div>
             <div class="tool">
-              <i id="eraser" class="fa fa-eraser" onclick="eraser()"></i>
+              <i id="eraser" class="fa fa-eraser" onclick="app.tool = 'Eraser'"></i>
             </div>
             <div class="tool">
-              <i id="text" class="fa fa-font" onclick="text()"></i>
+              <i id="text" class="fa fa-font" onclick="app.tool = 'Text'"></i>
             </div>
           </div>
           <div style="text-align: center">
@@ -153,19 +153,19 @@
               />
             </div>
             <div class="dropdown-content">
-              <a href="#" onclick="lineWidth = 1"
+              <a href="#" onclick="app.pencil.size = 1"
                 ><hr
                   style="width: 5rem; height: 1px; background-color: #000000"
               /></a>
-              <a href="#" onclick="lineWidth = 2"
+              <a href="#" onclick="app.pencil.size = 2"
                 ><hr
                   style="width: 5rem; height: 2px; background-color: #000000"
               /></a>
-              <a href="#" onclick="lineWidth = 3"
+              <a href="#" onclick="app.pencil.size = 3"
                 ><hr
                   style="width: 5rem; height: 3px; background-color: #000000"
               /></a>
-              <a href="#" onclick="lineWidth = 4"
+              <a href="#" onclick="app.pencil.size = 4"
                 ><hr
                   style="width: 5rem; height: 4px; background-color: #000000"
               /></a>
@@ -338,6 +338,14 @@
         <!-- <canvas id="top-drawing-board"></canvas> -->
       </div>
     </div>
-    <script src="script.js"></script>
+    <script src="app.js"></script>
+    <script src="canvas-setting.js"></script>
+    <script src="shape.js"></script>
+    <script src="pencil.js"></script>
+    <script src="eraser.js"></script>
+    <script src="mousemove.js"></script>
+    <script src="mouseup.js"></script>
+    <script src="main.js"></script>
+    <!-- <script src="script.js"></script> -->
   </body>
 </html>
