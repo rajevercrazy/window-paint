@@ -6,7 +6,7 @@
     switch (app.tool) {
       case "Pencil":
         if (app.pencil?.isDrawing) {
-          ctx.lineWidth = app.pencil.size;
+          ctx.lineWidth = app.pencil.lineWidth;
           ctx.lineCap = app.pencil.lineCap;
           ctx.strokeStyle = app.pencil.strokeStyle;
 
@@ -27,13 +27,12 @@
       case "Eraser":
         if (app.eraser?.isEraser) {
           ctx.strokeStyle = app.eraser.strokeStyle;
-          ctx.lineWidth = app.eraser.size;
+          ctx.lineWidth = app.eraser.lineWidth;
           ctx.lineCap = app.eraser.lineCap;
           ctx.beginPath();
           app.eraser.addPointer(
             event.clientX - canvasObj.canvasOffsetX,
             event.clientY - canvasObj.canvasOffsetY,
-            app.eraser.size
           );
           ctx.lineTo(
             event.clientX - canvasObj.canvasOffsetX,
@@ -51,7 +50,6 @@
           let dy = mouseY - app.startY;
 
           let currentShape = app.shapeLis[app.currentShapeIndex];
-
           if (currentShape.obj == "Text") {
             currentShape.x += dx;
             currentShape.y += dy;

@@ -39,7 +39,8 @@
         app.shapes = new Shapes(
           canvasObj.ctx,
           event.clientX - canvasObj.canvasOffsetX,
-          event.clientY - canvasObj.canvasOffsetY
+          event.clientY - canvasObj.canvasOffsetY,
+          !app.color ? "black" : app.color
         );
         break;
       case "Select":

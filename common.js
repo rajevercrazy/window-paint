@@ -35,12 +35,11 @@
         shape.draw();
       } 
       else {
-        let s = new Shapes(ctx);
-        s.x1 = shape.x1;
-        s.y1 = shape.y1;
-        s.x2 = shape.x2;
-        s.y2 = shape.y2;
-        app.shapeLis[i] = s.draw(shape.obj);
+        app.shapeLis[i].x1 = shape.x1;
+        app.shapeLis[i].y1 = shape.y1;
+        app.shapeLis[i].x2 = shape.x2;
+        app.shapeLis[i].y2 = shape.y2;
+        app.shapeLis[i].draw(shape.obj)
       }
       i++;
     }
