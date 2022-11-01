@@ -1,6 +1,7 @@
-function Shapes(ctx) {
-    this.x1 = 0;
-    this.y1 = 0;
+function Shapes(ctx,x1,y1) {
+    this.obj = ""
+    this.x1 = x1;
+    this.y1 = y1;
     this.x2 = 0;
     this.y2 = 0;
     this.ctx = ctx;
@@ -70,12 +71,6 @@ function Shapes(ctx) {
         break;
       }
 
-      return {
-        x1: this.x1,
-        y1: this.y1,
-        x2: this.x2,
-        y2: this.y2,
-        obj: shape,
-      };
+      this.obj = shape;
     }
   }
