@@ -1,4 +1,4 @@
-const mouseUp = ((event) => {
+const mouseUp = (event) => {
   const canvasObj = canvasSetting;
   const app = commonModules;
   const ctx = canvasObj.ctx;
@@ -28,4 +28,4 @@ const mouseUp = ((event) => {
       default:
         break;
     }
-})();
+}
