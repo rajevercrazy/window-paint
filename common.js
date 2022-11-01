@@ -19,7 +19,7 @@ const commonModules = (() => {
       if (shape.obj == "Pencil") {
         ctx.beginPath();
         ctx.moveTo(shape.arr[0][0], shape.arr[0][1]);
-        ctx.lineWidth = shape.size;
+        ctx.lineWidth = shape.lineWidth;
         ctx.strokeStyle = shape.strokeStyle;
         ctx.lineCap = shape.lineCap;
         for (let j = 1; j < shape.arr.length; j++) {
@@ -31,7 +31,7 @@ const commonModules = (() => {
       else if (shape.obj == "Eraser") {
         ctx.beginPath();
         ctx.moveTo(shape.arr[0][0], shape.arr[0][1]);
-        ctx.lineWidth = shape.size;
+        ctx.lineWidth = shape.lineWidth;
         ctx.strokeStyle = shape.strokeStyle;
         ctx.lineCap = shape.lineCap;
         for (let j = 1; j < shape.arr.length; j++) {
@@ -48,7 +48,7 @@ const commonModules = (() => {
         shapeLis[i].y1 = shape.y1;
         shapeLis[i].x2 = shape.x2;
         shapeLis[i].y2 = shape.y2;
-        shapeLis[i].draw(shape.obj)
+        shapeLis[i].draw(shape.obj);
       }
       i++;
     }
@@ -82,24 +82,24 @@ const commonModules = (() => {
   };
 
   setShape = (shape) => {
-    tool = "Shape";
-    shape = shape;
+    commonModules.tool = "Shape";
+    commonModules.shape = shape;
   };
 
   colorId = "color1";
   setColor = (color) => {
-    let selectedColor = document.getElementById(colorId);
+    let selectedColor = document.getElementById(commonModules.colorId);
     selectedColor.style.backgroundColor = color;
-    color = color;
-    if (tool == "Shape") shapes.color = color;
+    commonModules.color = color;
+    if (tool == "Shape") commonModules.shapes.color = color;
   };
 
   isMouseInShape = (shape) => {
     if (
-      startX > shape.x1 &&
-      startX < shape.x2 &&
-      startY > shape.y1 &&
-      startY < shape.y2
+      commonModules.startX > shape.x1 &&
+      commonModules.startX < shape.x2 &&
+      commonModules.startY > shape.y1 &&
+      commonModules.startY < shape.y2
     ) {
       return true;
     }
@@ -108,10 +108,10 @@ const commonModules = (() => {
 
   isMouseInText = (shape) => {
     if (
-      startX > shape.x &&
-      startX < shape.x + 400 &&
-      startY > shape.y &&
-      startY < shape.y + 14
+      commonModules.startX > shape.x &&
+      commonModules.startX < shape.x + 400 &&
+      commonModules.startY > shape.y &&
+      commonModules.startY < shape.y + 14
     ) {
       return true;
     }
@@ -122,9 +122,7 @@ const commonModules = (() => {
   rotated = (angle) => {
     // ctx.save();
     ctx.clearRect(0, 0, canvasObj.canvas.width, canvasObj.canvas.height);
-    let index = currentShapeIndex
-      ? currentShapeIndex
-      : shapeLis.length - 1;
+    let index = currentShapeIndex ? currentShapeIndex : shapeLis.length - 1;
 
     let currentShape = shapeLis[index];
 
@@ -146,13 +144,13 @@ const commonModules = (() => {
   };
 
   return {
-  shapeLis,
-  pencilSize,
-  isDragging,
-  currentShapeIndex,
-  startX,
-  startY,
-  tool,
+    shapeLis,
+    pencilSize,
+    isDragging,
+    currentShapeIndex,
+    startX,
+    startY,
+    tool,
     draw,
     addInput,
     setShape,
@@ -160,6 +158,6 @@ const commonModules = (() => {
     setColor,
     isMouseInShape,
     isMouseInText,
-    rotated
-  }
+    rotated,
+  };
 })();
