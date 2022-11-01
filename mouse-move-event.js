@@ -13,8 +13,6 @@ const mouseMove = (event) => {
           app.pencil.addPointer(
             event.clientX - canvasObj.canvasOffsetX,
             event.clientY - canvasObj.canvasOffsetY,
-            app.pencil.size,
-            app.color
           );
 
           ctx.lineTo(
