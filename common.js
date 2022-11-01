@@ -1,40 +1,41 @@
 (() => {
   let canvasObj = app.canvasSetting();
+  const ctx = canvasObj.ctx;
   app.draw = () => {
-    canvasObj.ctx.clearRect(
-      0,
-      0,
-      canvasObj.canvas.width,
-      canvasObj.canvas.height
-    );
+    ctx.clearRect(0,0,canvasObj.canvas.width,canvasObj.canvas.height);
+
     let i = 0;
+
     for (let shape of app.shapeLis) {
       if (shape.obj == "Pencil") {
-        canvasObj.ctx.beginPath();
-        canvasObj.ctx.moveTo(shape.points[0][0], shape.points[0][1]);
-        canvasObj.ctx.lineWidth = shape.lineWidth;
-        canvasObj.ctx.strokeStyle = shape.strokeStyle;
-        canvasObj.ctx.lineCap = shape.lineCap;
+        ctx.beginPath();
+        ctx.moveTo(shape.points[0][0], shape.points[0][1]);
+        ctx.lineWidth = shape.lineWidth;
+        ctx.strokeStyle = shape.strokeStyle;
+        ctx.lineCap = shape.lineCap;
         for (let j = 1; j < shape.points.length; j++) {
-          canvasObj.ctx.lineTo(shape.points[j][0], shape.points[j][1]);
-          canvasObj.ctx.stroke();
+          ctx.lineTo(shape.points[j][0], shape.points[j][1]);
+          ctx.stroke();
         }
-        canvasObj.ctx.beginPath();
-      } else if (shape.obj == "Eraser") {
-        canvasObj.ctx.beginPath();
-        canvasObj.ctx.moveTo(shape.points[0][0], shape.points[0][1]);
-        canvasObj.ctx.lineWidth = shape.lineWidth;
-        canvasObj.ctx.strokeStyle = shape.strokeStyle;
-        canvasObj.ctx.lineCap = shape.lineCap;
+        ctx.beginPath();
+      } 
+      else if (shape.obj == "Eraser") {
+        ctx.beginPath();
+        ctx.moveTo(shape.points[0][0], shape.points[0][1]);
+        ctx.lineWidth = shape.lineWidth;
+        ctx.strokeStyle = shape.strokeStyle;
+        ctx.lineCap = shape.lineCap;
         for (let j = 1; j < shape.points.length; j++) {
-          canvasObj.ctx.lineTo(shape.points[j][0], shape.points[j][1]);
-          canvasObj.ctx.stroke();
+          ctx.lineTo(shape.points[j][0], shape.points[j][1]);
+          ctx.stroke();
         }
-        canvasObj.ctx.closePath();
-      } else if (shape.obj == "Text") {
+        ctx.closePath();
+      } 
+      else if (shape.obj == "Text") {
         shape.draw();
-      } else {
-        let s = new Shapes(canvasObj.ctx);
+      } 
+      else {
+        let s = new Shapes(ctx);
         s.x1 = shape.x1;
         s.y1 = shape.y1;
         s.x2 = shape.x2;
@@ -57,20 +58,19 @@
     textarea.style.top = y + "px";
     textarea.onkeydown = app.handleEnter;
     document.body.appendChild(textarea);
-    //   textBtn = false;
   };
 
   app.handleEnter = (event) => {
     let keyCode = event.keyCode;
     if (keyCode == 13) {
-      textObj = new Text(canvasObj.ctx);
+      textObj = new Text(ctx);
       textObj.x = textX;
       textObj.y = textY;
       textObj.value = textarea.value;
-      canvasObj.ctx.textBaseline = "top";
-      canvasObj.ctx.textAlign = "left";
-      canvasObj.ctx.font = "14px sans-serif";
-      canvasObj.ctx.fillText(textObj.value, textX, textY);
+      ctx.textBaseline = "top";
+      ctx.textAlign = "left";
+      ctx.font = "14px sans-serif";
+      ctx.fillText(textObj.value, textX, textY);
       textBtn = true;
       app.shapeLis.push(textObj);
       document.body.removeChild(textarea);
@@ -118,8 +118,8 @@
   };
 
   app.rotated = (angle) => {
-    // canvasObj.ctx.save();
-    canvasObj.ctx.clearRect(
+    // ctx.save();
+    ctx.clearRect(
       0,
       0,
       canvasObj.canvas.width,
@@ -134,11 +134,11 @@
     let xAxisCenter = currentShape.x1 + ((currentShape.x2 - currentShape.x1)/2);
     let yAxisCenter = currentShape.y1 + ((currentShape.y2 - currentShape.y1)/2);
 
-    canvasObj.ctx.translate(xAxisCenter, yAxisCenter);
-    canvasObj.ctx.rotate((angle * Math.PI) / 180);
-    canvasObj.ctx.translate(- xAxisCenter, - yAxisCenter)
+    ctx.translate(xAxisCenter, yAxisCenter);
+    ctx.rotate((angle * Math.PI) / 180);
+    ctx.translate(- xAxisCenter, - yAxisCenter)
     
-    let shape = new Shapes(canvasObj.ctx);
+    let shape = new Shapes(ctx);
     shape.x1 = currentShape.x1; 
     shape.y1 = currentShape.y1;
     shape.x2 = currentShape.x2;   

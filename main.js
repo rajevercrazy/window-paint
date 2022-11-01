@@ -9,7 +9,7 @@
   app.startX = null;
   app.startY = null;
 
-  canvasObj.toolbar.addEventListener("change", app.change);
+  // canvasObj.toolbar.addEventListener("change", app.change);
   canvasObj.canvas.addEventListener("mousedown", app.mouseDown);
   canvasObj.canvas.addEventListener("mousemove", app.mouseMove);
   canvasObj.canvas.addEventListener("mouseup", app.mouseUp);
