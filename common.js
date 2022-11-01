@@ -130,11 +130,13 @@
       : app.shapeLis.length - 1;
 
     let currentShape = app.shapeLis[index];
+    
+    let xAxisCenter = currentShape.x1 + ((currentShape.x2 - currentShape.x1)/2);
+    let yAxisCenter = currentShape.y1 + ((currentShape.y2 - currentShape.y1)/2);
 
-    canvasObj.ctx.translate(currentShape.x1 + ((currentShape.x2 - currentShape.x1)/2), currentShape.y1 + ((currentShape.y2 - currentShape.y1)/2));
-    // canvasObj.ctx.translate(currentShape.x1, currentShape.y1);
+    canvasObj.ctx.translate(xAxisCenter, yAxisCenter);
     canvasObj.ctx.rotate((angle * Math.PI) / 180);
-    canvasObj.ctx.translate(- (currentShape.x1 + ((currentShape.x2 - currentShape.x1)/2)), - (currentShape.y1 + ((currentShape.y2 - currentShape.y1)/2)))
+    canvasObj.ctx.translate(- xAxisCenter, - yAxisCenter)
     
     let shape = new Shapes(canvasObj.ctx);
     shape.x1 = currentShape.x1; 
@@ -142,6 +144,7 @@
     shape.x2 = currentShape.x2;   
     shape.y2 = currentShape.y2;   
     shape.draw(currentShape.obj);
+
     app.draw();
   };
 })();
