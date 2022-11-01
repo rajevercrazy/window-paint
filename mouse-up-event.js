@@ -1,6 +1,8 @@
-((event) => {
-  app.mouseUp = (event) => {
-    canvasObj = app.canvasSetting();
+const mouseUp = ((event) => {
+  const canvasObj = canvasSetting;
+  const app = commonModules;
+  const ctx = canvasObj.ctx;
+
     switch (app.tool) {
       case "Pencil":
         app.pencil.isDrawing = false;
@@ -26,5 +28,4 @@
       default:
         break;
     }
-  };
 })();

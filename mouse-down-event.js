@@ -1,6 +1,6 @@
-((event) => {
-  canvasObj = app.canvasSetting();
-  app.mouseDown = (event) => {
+const mouseDown = (event) => {
+  const canvasObj = canvasSetting;
+  const app = commonModules;
     switch (app.tool) {
       case "Pencil":
         app.pencil = new Pencil(
@@ -58,5 +58,4 @@
       default:
         break;
     }
-  };
-})();
+};

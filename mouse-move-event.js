@@ -1,7 +1,7 @@
-((event) => {
-  canvasObj = app.canvasSetting();
+const mouseMove = ((event) => {
+  const canvasObj = canvasSetting;
+  const app = commonModules;
   const ctx = canvasObj.ctx;
-  app.mouseMove = (event) => {
     
     switch (app.tool) {
       case "Pencil":
@@ -69,5 +69,4 @@
       default:
         break;
     }
-  };
 })();

@@ -1,5 +1,4 @@
-(() => {
-  app.canvasSetting = () => {
+const canvasSetting = (() => {
     const toolbar = document.getElementById("toolbar");
     const canvas = document.getElementById("drawing-board");
     const ctx = canvas.getContext("2d");
@@ -12,5 +11,4 @@
         'canvasOffsetX':canvasOffsetX,
         'canvasOffsetY':canvasOffsetY
     }
-  };
 })();
