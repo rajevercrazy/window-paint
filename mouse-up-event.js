@@ -4,13 +4,13 @@
     switch (app.tool) {
       case "Pencil":
         app.pencil.isDrawing = false;
-        app.shapeLis.push(app.pencil.getPencilObj());
+        app.shapeLis.push(app.pencil);
         canvasObj.ctx.stroke();
         canvasObj.ctx.beginPath();
         break;
       case "Eraser":
         app.eraser.isEraser = false;
-        app.shapeLis.push(app.eraser.getEraserObj());
+        app.shapeLis.push(app.eraser);
         canvasObj.ctx.stroke();
         canvasObj.ctx.beginPath();
         break;

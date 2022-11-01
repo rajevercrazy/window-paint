@@ -4,14 +4,17 @@
             switch (app.tool) {
               case "Pencil":
                 app.pencil = new Pencil(app.pencilSize,!app.color ? "black" : app.color,true);
+                
                 app.pencil.arr.push([
                   event.clientX - canvasObj.canvasOffsetX,
                   event.clientY - canvasObj.canvasOffsetY,
                 ]);
+
                 canvasObj.ctx.moveTo(
                   event.clientX - canvasObj.canvasOffsetX,
                   event.clientY - canvasObj.canvasOffsetY
                 );
+                
                 break;
               case "Eraser":
                 app.eraser = new Eraser();

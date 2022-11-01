@@ -1,4 +1,5 @@
 function Pencil(size,strokeStyle,isDrawing) {
+  this.obj= "Pencil"
   this.isDrawing = isDrawing;
   this.size = size;
   this.arr = [];
@@ -9,16 +10,6 @@ function Pencil(size,strokeStyle,isDrawing) {
     this.size = lineWidth;
     this.strokeStyle = strokeStyle;
     this.arr.push([x, y]);
-  }
-
-  this.getPencilObj = () => {
-    return {
-      points: this.arr,
-      obj: "Pencil",
-      lineWidth: this.size,
-      strokeStyle: this.strokeStyle,
-      lineCap: this.lineCap
-    };
   }
 
 }

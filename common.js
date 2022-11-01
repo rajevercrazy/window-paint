@@ -9,24 +9,24 @@
     for (let shape of app.shapeLis) {
       if (shape.obj == "Pencil") {
         ctx.beginPath();
-        ctx.moveTo(shape.points[0][0], shape.points[0][1]);
-        ctx.lineWidth = shape.lineWidth;
+        ctx.moveTo(shape.arr[0][0], shape.arr[0][1]);
+        ctx.lineWidth = shape.size;
         ctx.strokeStyle = shape.strokeStyle;
         ctx.lineCap = shape.lineCap;
-        for (let j = 1; j < shape.points.length; j++) {
-          ctx.lineTo(shape.points[j][0], shape.points[j][1]);
+        for (let j = 1; j < shape.arr.length; j++) {
+          ctx.lineTo(shape.arr[j][0], shape.arr[j][1]);
           ctx.stroke();
         }
         ctx.beginPath();
       } 
       else if (shape.obj == "Eraser") {
         ctx.beginPath();
-        ctx.moveTo(shape.points[0][0], shape.points[0][1]);
-        ctx.lineWidth = shape.lineWidth;
+        ctx.moveTo(shape.arr[0][0], shape.arr[0][1]);
+        ctx.lineWidth = shape.size;
         ctx.strokeStyle = shape.strokeStyle;
         ctx.lineCap = shape.lineCap;
-        for (let j = 1; j < shape.points.length; j++) {
-          ctx.lineTo(shape.points[j][0], shape.points[j][1]);
+        for (let j = 1; j < shape.arr.length; j++) {
+          ctx.lineTo(shape.arr[j][0], shape.arr[j][1]);
           ctx.stroke();
         }
         ctx.closePath();
