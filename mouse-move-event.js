@@ -1,45 +1,46 @@
 ((event) => {
+  canvasObj = app.canvasSetting();
+  const ctx = canvasObj.ctx;
   app.mouseMove = (event) => {
-    canvasObj = app.canvasSetting();
+    
     switch (app.tool) {
       case "Pencil":
         if (app.pencil?.isDrawing) {
-          canvasObj.ctx.lineWidth = app.pencil.size;
-          canvasObj.ctx.lineCap = app.pencil.lineCap;
-          canvasObj.ctx.strokeStyle = app.pencil.strokeStyle;
+          ctx.lineWidth = app.pencil.size;
+          ctx.lineCap = app.pencil.lineCap;
+          ctx.strokeStyle = app.pencil.strokeStyle;
 
           app.pencil.addPointer(
             event.clientX - canvasObj.canvasOffsetX,
             event.clientY - canvasObj.canvasOffsetY,
             app.pencil.size,
-            app.color,
-            app.pencil.lineCap
+            app.color
           );
 
-          canvasObj.ctx.lineTo(
+          ctx.lineTo(
             event.clientX - canvasObj.canvasOffsetX,
             event.clientY - canvasObj.canvasOffsetY
           );
-          canvasObj.ctx.stroke();
+          ctx.stroke();
         }
         break;
       case "Eraser":
         if (app.eraser?.isEraser) {
-          canvasObj.ctx.strokeStyle = app.eraser.strokeStyle;
-          canvasObj.ctx.lineWidth = app.eraser.size;
-          canvasObj.ctx.lineCap = app.eraser.lineCap;
-          canvasObj.ctx.beginPath();
+          ctx.strokeStyle = app.eraser.strokeStyle;
+          ctx.lineWidth = app.eraser.size;
+          ctx.lineCap = app.eraser.lineCap;
+          ctx.beginPath();
           app.eraser.addPointer(
             event.clientX - canvasObj.canvasOffsetX,
             event.clientY - canvasObj.canvasOffsetY,
             app.eraser.size
           );
-          canvasObj.ctx.lineTo(
+          ctx.lineTo(
             event.clientX - canvasObj.canvasOffsetX,
             event.clientY - canvasObj.canvasOffsetY
           );
-          canvasObj.ctx.stroke();
-          canvasObj.ctx.closePath();
+          ctx.stroke();
+          ctx.closePath();
         }
         break;
       case "Select":

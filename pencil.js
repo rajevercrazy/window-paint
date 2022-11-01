@@ -1,18 +1,13 @@
-function Pencil() {
-  this.isDrawing = false;
-  this.size = 1;
+function Pencil(size,strokeStyle,isDrawing) {
+  this.isDrawing = isDrawing;
+  this.size = size;
   this.arr = [];
-  this.strokeStyle = 'black';
+  this.strokeStyle = strokeStyle;
   this.lineCap = 'round';
 
-  this.usingPencil = (flag) => {
-    this.isDrawing = flag;
-  };
-
-  this.addPointer = (x, y, lineWidth, strokeStyle, lineCap) => {
+  this.addPointer = (x, y, lineWidth, strokeStyle) => {
     this.size = lineWidth;
     this.strokeStyle = strokeStyle;
-    this.lineCap = lineCap;
     this.arr.push([x, y]);
   }
 
