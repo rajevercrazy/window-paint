@@ -1,7 +1,6 @@
 ((app) => {
   canvasObj = app.canvasSetting();
 
-  app.shapes = new Shapes(canvasObj.ctx);
   app.shapeLis = [];
   app.pencilSize = 1;
   app.isDragging = false;
