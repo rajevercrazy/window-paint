@@ -1,8 +1,8 @@
 function Text(ctx) {
+    this.obj = "Text";
     this.x;
     this.y;
     this.value;
-    this.obj = "Text";
     this.width = 400;
     this.ctx = ctx;
     

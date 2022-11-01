@@ -46,41 +46,37 @@
     }
   };
 
-  let textX;
-  let textY;
-  let textarea;
   app.addInput = (x, y) => {
-    textX = x - canvasObj.canvasOffsetX;
-    textY = y - canvasObj.canvasOffsetY;
-    textarea = document.createElement("textarea");
+    let textX = x - canvasObj.canvasOffsetX;
+    let textY = y - canvasObj.canvasOffsetY;
+
+    let textarea = document.createElement("textarea");
     textarea.style.position = "fixed";
     textarea.style.left = x + "px";
     textarea.style.top = y + "px";
-    textarea.onkeydown = app.handleEnter;
-    document.body.appendChild(textarea);
-  };
 
-  app.handleEnter = (event) => {
-    let keyCode = event.keyCode;
-    if (keyCode == 13) {
-      textObj = new Text(ctx);
-      textObj.x = textX;
-      textObj.y = textY;
-      textObj.value = textarea.value;
-      ctx.textBaseline = "top";
-      ctx.textAlign = "left";
-      ctx.font = "14px sans-serif";
-      ctx.fillText(textObj.value, textX, textY);
-      textBtn = true;
-      app.shapeLis.push(textObj);
-      document.body.removeChild(textarea);
-    }
+    textarea.onkeydown = (event) => {
+      if (event.key === "Enter") {
+        textObj = new Text(ctx);
+        textObj.x = textX;
+        textObj.y = textY;
+        textObj.value = textarea.value;
+        ctx.textBaseline = "top";
+        ctx.textAlign = "left";
+        ctx.font = "14px sans-serif";
+        ctx.fillText(textObj.value, textX, textY);
+        app.shapeLis.push(textObj);
+        document.body.removeChild(textarea);
+      }
+    };
+
+    document.body.appendChild(textarea);
   };
 
   app.setShape = (shape) => {
     app.tool = "Shape";
-  app.shape = shape;
-}
+    app.shape = shape;
+  };
 
   app.colorId = "color1";
   app.setColor = (color) => {
@@ -91,8 +87,6 @@
   };
 
   app.isMouseInShape = (shape) => {
-    console.table(app.startX, app.startY);
-    console.table(shape);
     if (
       app.startX > shape.x1 &&
       app.startX < shape.x2 &&
@@ -119,30 +113,25 @@
 
   app.rotated = (angle) => {
     // ctx.save();
-    ctx.clearRect(
-      0,
-      0,
-      canvasObj.canvas.width,
-      canvasObj.canvas.height
-    );
+    ctx.clearRect(0, 0, canvasObj.canvas.width, canvasObj.canvas.height);
     let index = app.currentShapeIndex
       ? app.currentShapeIndex
       : app.shapeLis.length - 1;
 
     let currentShape = app.shapeLis[index];
-    
-    let xAxisCenter = currentShape.x1 + ((currentShape.x2 - currentShape.x1)/2);
-    let yAxisCenter = currentShape.y1 + ((currentShape.y2 - currentShape.y1)/2);
+
+    let xAxisCenter = currentShape.x1 + (currentShape.x2 - currentShape.x1) / 2;
+    let yAxisCenter = currentShape.y1 + (currentShape.y2 - currentShape.y1) / 2;
 
     ctx.translate(xAxisCenter, yAxisCenter);
     ctx.rotate((angle * Math.PI) / 180);
-    ctx.translate(- xAxisCenter, - yAxisCenter)
-    
+    ctx.translate(-xAxisCenter, -yAxisCenter);
+
     let shape = new Shapes(ctx);
-    shape.x1 = currentShape.x1; 
+    shape.x1 = currentShape.x1;
     shape.y1 = currentShape.y1;
-    shape.x2 = currentShape.x2;   
-    shape.y2 = currentShape.y2;   
+    shape.x2 = currentShape.x2;
+    shape.y2 = currentShape.y2;
     shape.draw(currentShape.obj);
 
     app.draw();
