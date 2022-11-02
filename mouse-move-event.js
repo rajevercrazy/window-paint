@@ -1,7 +1,7 @@
-((event) => {
-  canvasObj = app.canvasSetting();
+const mouseMove = (event) => {
+  const canvasObj = canvasSetting;
+  const app = commonModules;
   const ctx = canvasObj.ctx;
-  app.mouseMove = (event) => {
     
     switch (app.tool) {
       case "Pencil":
@@ -13,8 +13,6 @@
           app.pencil.addPointer(
             event.clientX - canvasObj.canvasOffsetX,
             event.clientY - canvasObj.canvasOffsetY,
-            app.pencil.size,
-            app.color
           );
 
           ctx.lineTo(
@@ -69,5 +67,4 @@
       default:
         break;
     }
-  };
-})();
+}
