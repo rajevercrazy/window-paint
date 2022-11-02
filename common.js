@@ -96,10 +96,10 @@ const commonModules = (() => {
 
   isMouseInShape = (shape) => {
     if (
-      commonModules.startX > shape.x1 &&
-      commonModules.startX < shape.x2 &&
-      commonModules.startY > shape.y1 &&
-      commonModules.startY < shape.y2
+      commonModules.startX > shape.startPoint.xCoordinate &&
+      commonModules.startX < shape.endPoint.xCoordinate &&
+      commonModules.startY > shape.startPoint.yCoordinate &&
+      commonModules.startY < shape.endPoint.yCoordinate
     ) {
       return true;
     }

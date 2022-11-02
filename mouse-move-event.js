@@ -52,10 +52,10 @@ const mouseMove = (event) => {
             currentShape.x += dx;
             currentShape.y += dy;
           } else {
-            currentShape.x1 += dx;
-            currentShape.y1 += dy;
-            currentShape.x2 += dx;
-            currentShape.y2 += dy;
+            currentShape.startPoint.xCoordinate += dx;
+            currentShape.startPoint.yCoordinate += dy;
+            currentShape.endPoint.xCoordinate += dx;
+            currentShape.endPoint.yCoordinate += dy;
           }
 
           app.draw();
