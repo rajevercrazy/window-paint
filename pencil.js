@@ -1,6 +1,6 @@
 function Pencil(lineWidth,strokeStyle,isDrawing) {
   
-  this.obj= "Pencil";
+  this.name= "Pencil";
   this.isDrawing = isDrawing;
   this.lineWidth = lineWidth;
   this.arr = [];

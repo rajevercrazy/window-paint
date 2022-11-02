@@ -1,4 +1,5 @@
 function Shape(shapeName,ctx) {
+    this.name = 'Shape';
     this.shapeName = shapeName;
     this.startPoint = {}; 
     this.endPoint = {}; 

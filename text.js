@@ -1,5 +1,5 @@
 function Text(ctx) {
-    this.obj = "Text";
+    this.nmae = "Text";
     this.x;
     this.y;
     this.value;

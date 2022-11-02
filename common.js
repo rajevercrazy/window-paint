@@ -15,7 +15,7 @@ const commonModules = (() => {
     let i = 0;
 
     for (let shape of shapeLis) {
-      if (shape.obj == "Pencil") {
+      if (shape.name == "Pencil") {
         ctx.beginPath();
         ctx.moveTo(shape.arr[0][0], shape.arr[0][1]);
         ctx.lineWidth = shape.lineWidth;
@@ -27,7 +27,7 @@ const commonModules = (() => {
         }
         ctx.beginPath();
       } 
-      else if (shape.obj == "Eraser") {
+      else if (shape.name == "Eraser") {
         ctx.beginPath();
         ctx.moveTo(shape.arr[0][0], shape.arr[0][1]);
         ctx.lineWidth = shape.lineWidth;
@@ -39,7 +39,7 @@ const commonModules = (() => {
         }
         ctx.closePath();
       } 
-      else if (shape.obj == "Text") {
+      else if (shape.name == "Text") {
         shape.draw();
       } 
       else {
@@ -47,7 +47,7 @@ const commonModules = (() => {
         shapeLis[i].y1 = shape.y1;
         shapeLis[i].x2 = shape.x2;
         shapeLis[i].y2 = shape.y2;
-        shapeLis[i].draw(shape.obj);
+        shapeLis[i].draw(shape.name);
       }
       i++;
     }

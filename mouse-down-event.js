@@ -51,7 +51,7 @@ const mouseDown = (event) => {
       app.startY = event.clientY - canvasObj.canvasOffsetY;
       let index = 0;
       for (let shape of app.shapeLis) {
-        if (app.isMouseInShape(shape) || app.isMouseInText(shape)) {
+        if ((shape.name == 'Shape' && app.isMouseInShape(shape)) || (shape.name == 'Text' && app.isMouseInText(shape))) {
           app.currentShapeIndex = index;
           app.isDragging = true;
         }
