@@ -24,9 +24,9 @@ function Shapes(ctx,x1,y1,color) {
     this.ctx.lineWidth = this.size;
     this.ctx.strokeStyle = this.color;
     let yAxisCenter = this.y1 + (this.y2 - this.y1)/2;
-    ctx.moveTo(this.x2,yAxisCenter);
-    ctx.bezierCurveTo(this.x2,this.y1,this.x1,this.y1,this.x1,yAxisCenter);
-    ctx.bezierCurveTo(this.x1,this.y2,this.x2,this.y2,this.x2,yAxisCenter);
+    this.ctx.moveTo(this.x2,yAxisCenter);
+    this.ctx.bezierCurveTo(this.x2,this.y1,this.x1,this.y1,this.x1,yAxisCenter);
+    this.ctx.bezierCurveTo(this.x1,this.y2,this.x2,this.y2,this.x2,yAxisCenter);
     this.ctx.stroke();
     this.ctx.closePath();
   }
@@ -45,13 +45,13 @@ function Shapes(ctx,x1,y1,color) {
   }
 
   Shapes.prototype.drawLine = function() {
-    ctx.beginPath();
+    this.ctx.beginPath();
     this.ctx.lineWidth = this.size;
     this.ctx.strokeStyle = this.color;
-    ctx.moveTo(this.x1,this.y1);
-    ctx.lineTo(this.x2,this.y2);
-    ctx.stroke();
-    ctx.closePath();
+    this.ctx.moveTo(this.x1,this.y1);
+    this.ctx.lineTo(this.x2,this.y2);
+    this.ctx.stroke();
+    this.ctx.closePath();
   }
 
   Shapes.prototype.draw = function(shape){
