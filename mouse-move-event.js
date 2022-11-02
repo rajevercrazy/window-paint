@@ -6,9 +6,6 @@ const mouseMove = (event) => {
     switch (app.tool) {
       case "Pencil":
         if (app.pencil?.isDrawing) {
-          ctx.lineWidth = app.pencil.lineWidth;
-          ctx.lineCap = app.pencil.lineCap;
-          ctx.strokeStyle = app.pencil.strokeStyle;
 
           app.pencil.addPointer(
             event.clientX - canvasObj.canvasOffsetX,
