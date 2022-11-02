@@ -1,5 +1,5 @@
 function Rectangle(startPoint, endPoint, lineWidth, strokeStyle, ctx) {
-  this.obj = "rectangle";
+  this.name = "rectangle";
 
   Line.call(this, startPoint, endPoint, lineWidth, strokeStyle, ctx);
 
@@ -67,4 +67,20 @@ Rectangle.prototype.draw = function () {
   );
   this.ctx.stroke();
   this.ctx.closePath();
+};
+
+Rectangle.prototype.drawDashPatten = function() {
+  this.ctx.beginPath();
+  this.ctx.lineWidth = 0.5;
+  this.ctx.strokeStyle = '#1682fc';
+  this.ctx.setLineDash([6])
+  this.ctx.rect(
+    this.startPoint.xCoordinate,
+    this.startPoint.yCoordinate,
+    this.width,
+    this.breath
+  );
+  this.ctx.stroke();
+  this.ctx.closePath();
+  this.ctx.setLineDash([])
 };

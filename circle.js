@@ -1,5 +1,5 @@
 function Circle(startPoint,endPoint,lineWidth,strokeStyle,ctx) {
-  obj = "circle";
+  this.name = "circle";
 
   Rectangle.call(this,startPoint,endPoint,lineWidth,strokeStyle,ctx);
 }

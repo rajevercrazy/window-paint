@@ -57,4 +57,5 @@ const mouseDown = (event) => {
       default:
         break;
     }
+    canvasObj.ctx.setLineDash([])
 };

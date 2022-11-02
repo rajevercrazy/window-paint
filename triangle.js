@@ -1,5 +1,5 @@
 function Triangle(startPoint,endPoint,lineWidth,strokeStyle,ctx) {
-    obj = "triangle";
+    this.name = "triangle";
     Rectangle.call(this,startPoint,endPoint,lineWidth,strokeStyle,ctx);
   }
   

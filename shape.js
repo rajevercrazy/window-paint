@@ -5,28 +5,38 @@ function Shape(shapeName,ctx) {
     this.lineWidth = 2; 
     this.strokeStyle = 'black';
     this.ctx = ctx; 
+    this.isDrawing = false;
   }
 
 
   Shape.prototype.draw = function() {
     
-    let shape;
+    let shape = this.createGivenNameObj();
+    shape.draw();
+  }
 
+  Shape.prototype.drawDashRect = function() {
+    let shape = this.createGivenNameObj();
+    if(shape?.name != 'Line'){
+      shape.drawDashPatten();
+    }
+    
+  }
+
+  Shape.prototype.createGivenNameObj = function() {
     switch(this.shapeName){
       case 'circle': 
-      shape = new Circle(this.startPoint,this.endPoint,this.lineWidth,this.strokeStyle,this.ctx);
-      break;
+      return new Circle(this.startPoint,this.endPoint,this.lineWidth,this.strokeStyle,this.ctx);
+
       case 'rectangle': 
-      shape = new Rectangle(this.startPoint,this.endPoint,this.lineWidth,this.strokeStyle,this.ctx);
-      break;
+      return new Rectangle(this.startPoint,this.endPoint,this.lineWidth,this.strokeStyle,this.ctx);
+
       case 'triangle': 
-      shape = new Triangle(this.startPoint,this.endPoint,this.lineWidth,this.strokeStyle,this.ctx);
-      break;
+      return new Triangle(this.startPoint,this.endPoint,this.lineWidth,this.strokeStyle,this.ctx);
+
       case 'line': 
-      shape = new Line(this.startPoint,this.endPoint,this.lineWidth,this.strokeStyle,this.ctx);
-      break;
+      return new Line(this.startPoint,this.endPoint,this.lineWidth,this.strokeStyle,this.ctx);
+
       default:
-      break;
     }
-    shape.draw();
   }
