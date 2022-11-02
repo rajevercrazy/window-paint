@@ -40,6 +40,14 @@ const mouseMove = (event) => {
           ctx.closePath();
         }
         break;
+      case "Shape":
+        if(app.shape?.isDrawing){
+          ctx.clearRect(0,0,canvasObj.canvas.width,canvasObj.canvas.height);
+          app.shape.endPoint = new Point(event.x - canvasObj.canvasOffsetX, event.y - canvasObj.canvasOffsetY)
+          app.shape.draw()
+          app.draw();
+        }
+        break;
       case "Select":
         if (app.isDragging) {
           let mouseX = event.clientX - canvasObj.canvasOffsetX;
@@ -57,7 +65,7 @@ const mouseMove = (event) => {
             currentShape.endPoint.xCoordinate += dx;
             currentShape.endPoint.yCoordinate += dy;
           }
-
+          ctx.clearRect(0,0,canvasObj.canvas.width,canvasObj.canvas.height);
           app.draw();
 
           app.startX = mouseX;

@@ -17,7 +17,7 @@ const mouseUp = (event) => {
         canvasObj.ctx.beginPath();
         break;
       case "Shape":
-        app.shape.endPoint = new Point(event.x - canvasObj.canvasOffsetX, event.y - canvasObj.canvasOffsetY)
+        app.shape.isDrawing = false;
         app.shapeLis.push(app.shape);
         app.shape.draw()
         break;

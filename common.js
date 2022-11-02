@@ -11,7 +11,6 @@ const commonModules = (() => {
   let tool = "";
 
   draw = () => {
-    ctx.clearRect(0,0,canvasObj.canvas.width,canvasObj.canvas.height);
 
     let i = 0;
 
@@ -154,6 +153,5 @@ const commonModules = (() => {
     isMouseInShape,
     isMouseInText,
     rotated,
-    draw
   };
 })();

@@ -37,6 +37,7 @@ const mouseDown = (event) => {
         break;
       case "Shape":
         app.shape = Object.assign( new Shape('',canvasObj.ctx)  ,app.shape) ;
+        app.shape.isDrawing = true;
         app.shape.startPoint = new Point(event.clientX - canvasObj.canvasOffsetX, event.clientY - canvasObj.canvasOffsetY)
         app.shape.strokeStyle = !app.color ? "black" : app.color
 
