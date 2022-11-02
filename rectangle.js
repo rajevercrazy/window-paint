@@ -25,7 +25,7 @@ Rectangle.prototype.calcAllCorner = function () {
 };
 
 Rectangle.prototype.getCenter = function () {
-    let centers = {
+    return {
         TOP: new Point(
           this.startPoint.xCoordinate + (this.width/ 2),
           this.startPoint.yCoordinate
@@ -43,7 +43,6 @@ Rectangle.prototype.getCenter = function () {
             this.startPoint.yCoordinate + (this.breath / 2)
           ),
       };
-  return centers
 };
 
 
