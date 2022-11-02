@@ -36,12 +36,9 @@ const mouseDown = (event) => {
         app.addInput(event.x, event.y);
         break;
       case "Shape":
-        app.shapes = new Shapes(
-          canvasObj.ctx,
-          event.clientX - canvasObj.canvasOffsetX,
-          event.clientY - canvasObj.canvasOffsetY,
-          !app.color ? "black" : app.color
-        );
+        app.shape.startPoint = new Point(event.clientX - canvasObj.canvasOffsetX, event.clientY - canvasObj.canvasOffsetY)
+        app.shape.strokeStyle = !app.color ? "black" : app.color
+        
         break;
       case "Select":
         app.startX = event.clientX - canvasObj.canvasOffsetX;

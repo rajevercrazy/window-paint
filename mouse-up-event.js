@@ -17,10 +17,9 @@ const mouseUp = (event) => {
         canvasObj.ctx.beginPath();
         break;
       case "Shape":
-        app.shapes.x2 = event.x - canvasObj.canvasOffsetX;
-        app.shapes.y2 = event.y - canvasObj.canvasOffsetY;
+        app.shape.endPoint = new Point(event.x - canvasObj.canvasOffsetX, event.y - canvasObj.canvasOffsetY)
         app.shapeLis.push(app.shapes);
-        app.shapes.draw(app.shape)
+        app.shape.draw()
         break;
       case "Select":
         app.isDragging = false;

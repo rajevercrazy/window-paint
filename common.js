@@ -81,9 +81,9 @@ const commonModules = (() => {
     document.body.appendChild(textarea);
   };
 
-  setShape = (shape) => {
+  setShape = (shapeName) => {
     commonModules.tool = "Shape";
-    commonModules.shape = shape;
+    commonModules.shape = new Shape(shapeName,ctx);
   };
 
   colorId = "color1";
@@ -91,7 +91,7 @@ const commonModules = (() => {
     let selectedColor = document.getElementById(commonModules.colorId);
     selectedColor.style.backgroundColor = color;
     commonModules.color = color;
-    if (tool == "Shape") commonModules.shapes.color = color;
+    if (tool == "Shape") commonModules.shape.strokeStyle = color;
   };
 
   isMouseInShape = (shape) => {
@@ -159,5 +159,6 @@ const commonModules = (() => {
     isMouseInShape,
     isMouseInText,
     rotated,
+    draw
   };
 })();
