@@ -126,19 +126,14 @@ const commonModules = (() => {
 
     let currentShape = shapeLis[index];
 
-    let xAxisCenter = currentShape.x1 + (currentShape.x2 - currentShape.x1) / 2;
-    let yAxisCenter = currentShape.y1 + (currentShape.y2 - currentShape.y1) / 2;
+    let xAxisCenter = currentShape.startPoint.xCoordinate + (currentShape.endPoint.xCoordinate - currentShape.startPoint.xCoordinate) / 2;
+    let yAxisCenter = currentShape.startPoint.yCoordinate + (currentShape.endPoint.yCoordinate - currentShape.startPoint.yCoordinate)  / 2;
 
     ctx.translate(xAxisCenter, yAxisCenter);
     ctx.rotate((angle * Math.PI) / 180);
     ctx.translate(-xAxisCenter, -yAxisCenter);
 
-    let shape = new Shapes(ctx);
-    shape.x1 = currentShape.x1;
-    shape.y1 = currentShape.y1;
-    shape.x2 = currentShape.x2;
-    shape.y2 = currentShape.y2;
-    shape.draw(currentShape.obj);
+    currentShape.draw(currentShape.obj);
 
     draw();
   };
