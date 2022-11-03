@@ -1,5 +1,5 @@
 function Eraser() {
-  this.obj = "Eraser";
+  this.name = "Eraser";
   this.isEraser = false;
   this.lineWidth = 10;
   this.arr = [];
