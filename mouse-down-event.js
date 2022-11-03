@@ -27,10 +27,10 @@ const mouseDown = (event) => {
     case "Eraser":
       app.eraser = new Eraser();
       app.eraser.isEraser = true;
-      app.eraser.arr.push([
+      app.eraser.addPointer(new Point(
         event.clientX - canvasObj.canvasOffsetX,
         event.clientY - canvasObj.canvasOffsetY,
-      ]);
+      ));
       canvasObj.ctx.moveTo(
         event.clientX - canvasObj.canvasOffsetX,
         event.clientY - canvasObj.canvasOffsetY
