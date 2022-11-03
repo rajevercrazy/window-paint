@@ -10,5 +10,5 @@ function Pencil(lineWidth,strokeStyle,isDrawing) {
 }
 
 Pencil.prototype.addPointer = function(x, y) {
-  this.arr.push([x, y]);
+  this.arr.push(new Point(x,y));
 }

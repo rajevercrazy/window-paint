@@ -29,12 +29,17 @@ body {
   justify-content: space-between;
   background-color: white;
   border: 2px solid;
-  border-style: inset; 
+  border-style: inset;
   gap: 10px;
 }
 
 .tool-container a :hover {
-opacity: 0.3;
+  opacity: 0.3;
+}
+
+.shape_image {
+  border: solid black 1px;
+  padding: 1px;
 }
 
 label {
@@ -86,6 +91,12 @@ i:hover {
   display: flex;
   flex-direction: row;
 }
+
+.colors-selector div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 #current {
   /* position: relative; */
   margin-top: 1rem;
@@ -105,6 +116,10 @@ i:hover {
   /* float: left; */
   cursor: pointer;
   border: solid black thin;
+}
+
+.select {
+  padding-left: 1rem;
 }
 
 .dropdown {
@@ -142,7 +157,7 @@ i:hover {
 }
 
 .dropdown-content a:hover {
-  background-color: #f1f1f1
+  background-color: #f1f1f1;
 }
 
 .dropdown:hover .dropdown-content {

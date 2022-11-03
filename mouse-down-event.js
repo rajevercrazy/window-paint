@@ -9,10 +9,10 @@ const mouseDown = (event) => {
         true
       );
 
-      app.pencil.arr.push([
+      app.pencil.addPointer(new Point(
         event.clientX - canvasObj.canvasOffsetX,
         event.clientY - canvasObj.canvasOffsetY,
-      ]);
+      ));
 
       canvasObj.ctx.beginPath();
       canvasObj.ctx.lineWidth = app.pencil.lineWidth;

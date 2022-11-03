@@ -22,20 +22,20 @@
                 <span>Select</span>
               </div>
             </a>
-            <div style="padding-left: 1rem">
+            <div class="select">
               <div class="dropdown">
                 <div>
                   <i class="fa fa-rotate-right" style="font-size: 24px"></i>
                 </div>
                 <div class="dropdown-content">
                   <a href="#" onclick="commonModules.rotated(90)"
-                    ><p style="padding-left: 1rem">Rotate right 90</p></a
+                    ><p class="select">Rotate right 90</p></a
                   >
                   <a href="#" onclick="commonModules.rotated(270)"
-                    ><p style="padding-left: 1rem">Rotate left 90</p></a
+                    ><p class="select">Rotate left 90</p></a
                   >
                   <a href="#" onclick="commonModules.rotated(180)"
-                    ><p style="padding-left: 1rem">Rotate 180</p></a
+                    ><p class="select">Rotate 180</p></a
                   >
                 </div>
               </div>
@@ -70,28 +70,28 @@
                 src="./assets/diagonal-line.png"
                 width="15"
                 height="15"
-                style="border: solid black 1px; padding: 1px"
+                class="shape_image"
             /></a>
             <a href="#" onclick="commonModules.setShape('circle')"
               ><img
                 src="./assets/ellipse-outline-shape-variant.png"
                 width="15"
                 height="15"
-                style="border: solid black 1px; padding: 1px"
+                class="shape_image"
             /></a>
             <a href="#" onclick="commonModules.setShape('rectangle')"
               ><img
                 src="./assets/rectangular-shape-outline.png"
                 width="15"
                 height="15"
-                style="border: solid black 1px; padding: 1px"
+                class="shape_image"
             /></a>
             <a href="#" onclick="commonModules.setShape('triangle')"
               ><img
                 src="./assets/triangle.png"
                 width="15"
                 height="15"
-                style="border: solid black 1px; padding: 1px"
+                class="shape_image"
             /></a>
           </div>
           <div style="text-align: center">
@@ -164,28 +164,26 @@
         <div class="inner-container">
           <div class="colors-selector">
             <div
-              style="display: flex; flex-direction: column; align-items: center"
             >
-              <a href="#" onclick="commonModules.colorId='color1'"
+              <a href="#" onclick="setColorPallet('color1')"
                 ><div
                   id="color1"
                   style="
                     border: solid black thin;
-                    background-color: #ffffff;
                     width: 3rem;
                     height: 3rem;
                     margin-right: 0.3rem;
                     margin-bottom: 0.3rem;
                     margin-top: 1rem;
+                    background-color: black;
                   "
                 ></div
               ></a>
               <label>Color 1</label>
             </div>
             <div
-              style="display: flex; flex-direction: column; align-items: center"
             >
-              <a href="#" onclick="commonModules.colorId='color2'"
+              <a href="#" onclick="setColorPallet('color2')"
                 ><div
                   id="color2"
                   style="

@@ -17,12 +17,12 @@ const commonModules = (() => {
     for (let shape of shapeLis) {
       if (shape.name == "Pencil") {
         ctx.beginPath();
-        ctx.moveTo(shape.arr[0][0], shape.arr[0][1]);
+        ctx.moveTo(shape.arr[0].xCoordinate, shape.arr[0].yCoordinate);
         ctx.lineWidth = shape.lineWidth;
         ctx.strokeStyle = shape.strokeStyle;
         ctx.lineCap = shape.lineCap;
         for (let j = 1; j < shape.arr.length; j++) {
-          ctx.lineTo(shape.arr[j][0], shape.arr[j][1]);
+          ctx.lineTo(shape.arr[j].xCoordinate, shape.arr[j].yCoordinate);
           ctx.stroke();
         }
         ctx.beginPath();
@@ -86,6 +86,12 @@ const commonModules = (() => {
   };
 
   colorId = "color1";
+  setColorPallet = (colorId) => {
+    let selectedColor = document.getElementById(colorId);
+    commonModules.colorId = colorId;
+    commonModules.color = selectedColor.style.backgroundColor;
+    if (tool == "Shape") commonModules.shape.strokeStyle = selectedColor.style.backgroundColor;
+  }
   setColor = (color) => {
     let selectedColor = document.getElementById(commonModules.colorId);
     selectedColor.style.backgroundColor = color;
