@@ -64,15 +64,11 @@ const commonModules = (() => {
 
     textarea.onkeydown = (event) => {
       if (event.key === "Enter") {
-        textObj = new Text(ctx);
-        textObj.x = textX;
-        textObj.y = textY;
-        textObj.value = textarea.value;
         ctx.textBaseline = "top";
         ctx.textAlign = "left";
         ctx.font = "14px sans-serif";
-        ctx.fillText(textObj.value, textX, textY);
-        shapeLis.push(textObj);
+        ctx.fillText(textarea.value, textX, textY);
+        shapeLis.push(new Text(ctx, new Point(textX,textY), textarea.value));
         document.body.removeChild(textarea);
       }
     };
