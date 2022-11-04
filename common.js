@@ -93,7 +93,10 @@ const commonModules = (() => {
   };
 
   isMouseInShape = (shape) => {
-    if (
+    if(shape.shapeName == 'line' && shape.createGivenNameObj().isPointOnLine(commonModules.startX,commonModules.startY)){
+      return true;
+    }
+    else if (
       commonModules.startX > shape.startPoint.xCoordinate &&
       commonModules.startX < shape.endPoint.xCoordinate &&
       commonModules.startY > shape.startPoint.yCoordinate &&

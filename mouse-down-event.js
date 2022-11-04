@@ -41,7 +41,7 @@ const mouseDown = (event) => {
       break;
     case "Shape":
         app.shape = Object.assign( new Shape('',canvasObj.ctx)  ,app.shape) ;
-      app.shape.isDrawing = true;
+        app.shape.isDrawing = true;
         app.shape.startPoint = new Point(event.clientX - canvasObj.canvasOffsetX, event.clientY - canvasObj.canvasOffsetY)
         app.shape.strokeStyle = !app.color ? "black" : app.color
       
@@ -49,6 +49,7 @@ const mouseDown = (event) => {
     case "Select":
       app.startX = event.clientX - canvasObj.canvasOffsetX;
       app.startY = event.clientY - canvasObj.canvasOffsetY;
+      //console.log(app.startX,app.startY);
       let index = 0;
       for (let shape of app.shapeLis) {
         if ((shape.name == 'Shape' && app.isMouseInShape(shape)) || (shape.name == 'Text' && app.isMouseInText(shape))) {
