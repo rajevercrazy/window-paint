@@ -108,16 +108,12 @@ const commonModules = (() => {
   };
 
   isMouseInText = (shape) => {
-    if (
-      commonModules.startX > shape.x &&
-      commonModules.startX < shape.x + 400 &&
-      commonModules.startY > shape.y &&
-      commonModules.startY < shape.y + 14
-    ) {
-      return true;
-    }
-
-    return false;
+    return (
+      commonModules.startX > shape.location.xCoordinate &&
+      commonModules.startX < shape.location.xCoordinate + 400 &&
+      commonModules.startY > shape.location.yCoordinate &&
+      commonModules.startY < shape.location.yCoordinate + 14
+    )
   };
 
   rotated = (angle) => {

@@ -53,9 +53,9 @@ const mouseMove = (event) => {
           let dy = mouseY - app.startY;
 
           let currentShape = app.shapeLis[app.currentShapeIndex];
-          if (currentShape.obj == "Text") {
-            currentShape.x += dx;
-            currentShape.y += dy;
+          if (currentShape.name == "Text") {
+            currentShape.location.xCoordinate += dx;
+            currentShape.location.yCoordinate += dy;
           } else {
             currentShape.startPoint.xCoordinate += dx;
             currentShape.startPoint.yCoordinate += dy;
