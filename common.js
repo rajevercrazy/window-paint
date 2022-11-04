@@ -43,10 +43,6 @@ const commonModules = (() => {
         shape.draw();
       } 
       else {
-        shapeLis[i].x1 = shape.x1;
-        shapeLis[i].y1 = shape.y1;
-        shapeLis[i].x2 = shape.x2;
-        shapeLis[i].y2 = shape.y2;
         shapeLis[i].draw(shape.name);
       }
       i++;
@@ -133,7 +129,7 @@ const commonModules = (() => {
     ctx.translate(xAxisCenter, yAxisCenter);
     ctx.rotate((angle * Math.PI) / 180);
     ctx.translate(-xAxisCenter, -yAxisCenter);
-
+    []
     currentShape.draw(currentShape.obj);
 
     draw();
