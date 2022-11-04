@@ -1,5 +1,5 @@
 function Eraser() {
-  this.obj = "Eraser";
+  this.name = "Eraser";
   this.isEraser = false;
   this.lineWidth = 10;
   this.arr = [];
@@ -9,5 +9,5 @@ function Eraser() {
 }
 
 Eraser.prototype.addPointer = function(x, y) {
-  this.arr.push([x, y]);
+  this.arr.push(new Point(x,y));
 };

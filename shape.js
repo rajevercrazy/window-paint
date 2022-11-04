@@ -1,76 +1,42 @@
-function Shapes(ctx,x1,y1,color) {
-    this.obj = ""
-    this.x1 = x1;
-    this.y1 = y1;
-    this.x2 = 0;
-    this.y2 = 0;
-    this.ctx = ctx;
-    this.size = 1;
-    this.color = color;
+function Shape(shapeName,ctx) {
+    this.name = 'Shape';
+    this.shapeName = shapeName;
+    this.startPoint = {}; 
+    this.endPoint = {}; 
+    this.lineWidth = 2; 
+    this.strokeStyle = 'black';
+    this.ctx = ctx; 
+    this.isDrawing = false;
   }
 
 
-  Shapes.prototype.drawRectangle = function(){
-    this.ctx.beginPath();
-    this.ctx.lineWidth = this.size;
-    this.ctx.strokeStyle = this.color;
-    this.ctx.rect(this.x1, this.y1, (this.x2 - this.x1), (this.y2 - this.y1));
-    this.ctx.stroke();
-    this.ctx.closePath();
+  Shape.prototype.draw = function() {
+    
+    let shape = this.createGivenNameObj();
+    shape.draw();
   }
 
-  Shapes.prototype.drawCircle = function(){
-    this.ctx.beginPath();
-    this.ctx.lineWidth = this.size;
-    this.ctx.strokeStyle = this.color;
-    let yAxisCenter = this.y1 + (this.y2 - this.y1)/2;
-    this.ctx.moveTo(this.x2,yAxisCenter);
-    this.ctx.bezierCurveTo(this.x2,this.y1,this.x1,this.y1,this.x1,yAxisCenter);
-    this.ctx.bezierCurveTo(this.x1,this.y2,this.x2,this.y2,this.x2,yAxisCenter);
-    this.ctx.stroke();
-    this.ctx.closePath();
-  }
-
-  Shapes.prototype.drawTriangle = function() {
-    this.ctx.beginPath();
-    this.ctx.lineWidth = this.size;
-    this.ctx.strokeStyle = this.color;
-    let xAxisCenter = this.x1 + (this.x2 - this.x1)/2
-    this.ctx.moveTo(xAxisCenter, this.y1);
-    this.ctx.lineTo(this.x1, this.y2);
-    this.ctx.lineTo(this.x2,this.y2);
-    this.ctx.lineTo(xAxisCenter, this.y1);
-    this.ctx.stroke();
-    this.ctx.closePath();
-  }
-
-  Shapes.prototype.drawLine = function() {
-    this.ctx.beginPath();
-    this.ctx.lineWidth = this.size;
-    this.ctx.strokeStyle = this.color;
-    this.ctx.moveTo(this.x1,this.y1);
-    this.ctx.lineTo(this.x2,this.y2);
-    this.ctx.stroke();
-    this.ctx.closePath();
-  }
-
-  Shapes.prototype.draw = function(shape){
-    switch(shape){
-      case 'circle': 
-      this.drawCircle();
-      break;
-      case 'rectangle': 
-      this.drawRectangle();
-      break;
-      case 'triangle': 
-      this.drawTriangle();
-      break;
-      case 'line': 
-      this.drawLine();
-      break;
-      default:
-      break;
+  Shape.prototype.drawDashRect = function() {
+    let shape = this.createGivenNameObj();
+    if(shape?.name != 'Line'){
+      shape.drawDashPatten();
     }
+  }
 
-    this.obj = shape;
+  Shape.prototype.createGivenNameObj = function() {
+    switch(this.shapeName){
+      case 'circle': 
+      return new Circle(this.startPoint,this.endPoint,this.lineWidth,this.strokeStyle,this.ctx);
+
+      case 'rectangle': 
+      return new Rectangle(this.startPoint,this.endPoint,this.lineWidth,this.strokeStyle,this.ctx);
+
+      case 'triangle': 
+      return new Triangle(this.startPoint,this.endPoint,this.lineWidth,this.strokeStyle,this.ctx);
+
+      case 'line': 
+      return new Line(this.startPoint,this.endPoint,this.lineWidth,this.strokeStyle,this.ctx);
+
+      default:
+    }
   }

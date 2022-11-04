@@ -6,9 +6,6 @@ const mouseMove = (event) => {
     switch (app.tool) {
       case "Pencil":
         if (app.pencil?.isDrawing) {
-          ctx.lineWidth = app.pencil.lineWidth;
-          ctx.lineCap = app.pencil.lineCap;
-          ctx.strokeStyle = app.pencil.strokeStyle;
 
           app.pencil.addPointer(
             event.clientX - canvasObj.canvasOffsetX,
@@ -40,6 +37,14 @@ const mouseMove = (event) => {
           ctx.closePath();
         }
         break;
+      case "Shape":
+        if(app.shape?.isDrawing){
+          ctx.clearRect(0,0,canvasObj.canvas.width,canvasObj.canvas.height);
+          app.shape.endPoint = new Point(event.x - canvasObj.canvasOffsetX, event.y - canvasObj.canvasOffsetY)
+          app.shape.draw()
+          app.draw();
+        }
+        break;
       case "Select":
         if (app.isDragging) {
           let mouseX = event.clientX - canvasObj.canvasOffsetX;
@@ -52,12 +57,12 @@ const mouseMove = (event) => {
             currentShape.x += dx;
             currentShape.y += dy;
           } else {
-            currentShape.x1 += dx;
-            currentShape.y1 += dy;
-            currentShape.x2 += dx;
-            currentShape.y2 += dy;
+            currentShape.startPoint.xCoordinate += dx;
+            currentShape.startPoint.yCoordinate += dy;
+            currentShape.endPoint.xCoordinate += dx;
+            currentShape.endPoint.yCoordinate += dy;
           }
-
+          ctx.clearRect(0,0,canvasObj.canvas.width,canvasObj.canvas.height);
           app.draw();
 
           app.startX = mouseX;

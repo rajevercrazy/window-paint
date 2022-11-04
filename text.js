@@ -1,8 +1,7 @@
-function Text(ctx) {
-    this.obj = "Text";
-    this.x;
-    this.y;
-    this.value;
+function Text(ctx,location,value) {
+    this.name = "Text";
+    this.location = location;
+    this.value = value;
     this.width = 400;
     this.ctx = ctx;
     
@@ -13,7 +12,7 @@ function Text(ctx) {
     this.ctx.font = "14px sans-serif";
     this.ctx.fillText(
       this.value,
-      parseInt(this.x, 10) - 4,
-      parseInt(this.y, 10) - 4
+      parseInt(this.location.xCoordinate, 10) - 4,
+      parseInt(this.location.yCoordinate, 10) - 4
     );
   }
