@@ -43,6 +43,7 @@ const commonModules = (() => {
         shape.draw();
       } 
       else {
+
         shapeLis[i].draw(shape.name);
       }
       i++;
@@ -123,16 +124,16 @@ const commonModules = (() => {
 
     let currentShape = shapeLis[index];
 
+    if(currentShape){
     let xAxisCenter = currentShape.startPoint.xCoordinate + (currentShape.endPoint.xCoordinate - currentShape.startPoint.xCoordinate) / 2;
     let yAxisCenter = currentShape.startPoint.yCoordinate + (currentShape.endPoint.yCoordinate - currentShape.startPoint.yCoordinate)  / 2;
 
     ctx.translate(xAxisCenter, yAxisCenter);
     ctx.rotate((angle * Math.PI) / 180);
     ctx.translate(-xAxisCenter, -yAxisCenter);
-    []
     currentShape.draw(currentShape.obj);
-
     draw();
+  }
   };
 
   return {
