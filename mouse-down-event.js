@@ -49,7 +49,6 @@ const mouseDown = (event) => {
     case "Select":
       app.startX = event.clientX - canvasObj.canvasOffsetX;
       app.startY = event.clientY - canvasObj.canvasOffsetY;
-      //console.log(app.startX,app.startY);
       let index = 0;
       for (let shape of app.shapeLis) {
         if ((shape.name == 'Shape' && app.isMouseInShape(shape)) || (shape.name == 'Text' && app.isMouseInText(shape))) {
