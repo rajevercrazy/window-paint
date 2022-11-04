@@ -19,7 +19,6 @@ const mouseUp = (event) => {
       case "Shape":
         app.shape.isDrawing = false;
         app.shapeLis.push(app.shape);
-        app.shape.draw();
         app.shape.drawDashRect();
         break;
       case "Select":

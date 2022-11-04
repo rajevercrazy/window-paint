@@ -18,7 +18,7 @@ function Shape(shapeName,ctx) {
 
   Shape.prototype.drawDashRect = function() {
     let shape = this.createGivenNameObj();
-    if(shape?.name != 'line' && shape?.name != 'Pencil' && shape?.name != 'Text' && shape?.name != 'Eraser'){
+    if(this.shapeName != 'line' && this.shapeName != 'Pencil' && this.shapeName != 'Text' && this.shapeName != 'Eraser'){
       shape.drawDashPatten();
     }
   }
