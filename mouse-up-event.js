@@ -1,6 +1,8 @@
-((event) => {
-  app.mouseUp = (event) => {
-    canvasObj = app.canvasSetting();
+const mouseUp = (event) => {
+  const canvasObj = canvasSetting;
+  const app = commonModules;
+  const ctx = canvasObj.ctx;
+
     switch (app.tool) {
       case "Pencil":
         app.pencil.isDrawing = false;
@@ -15,10 +17,10 @@
         canvasObj.ctx.beginPath();
         break;
       case "Shape":
-        app.shapes.x2 = event.x - canvasObj.canvasOffsetX;
-        app.shapes.y2 = event.y - canvasObj.canvasOffsetY;
-        app.shapeLis.push(app.shapes);
-        app.shapes.draw(app.shape)
+        app.shape.isDrawing = false;
+        app.shapeLis.push(app.shape);
+        app.shape.draw();
+        app.shape.drawDashRect();
         break;
       case "Select":
         app.isDragging = false;
@@ -26,5 +28,4 @@
       default:
         break;
     }
-  };
-})();
+}

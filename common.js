@@ -1,51 +1,56 @@
-(() => {
-  let canvasObj = app.canvasSetting();
+const commonModules = (() => {
+  const canvasObj = canvasSetting;
   const ctx = canvasObj.ctx;
-  app.draw = () => {
-    ctx.clearRect(0,0,canvasObj.canvas.width,canvasObj.canvas.height);
+
+  let shapeLis = [];
+  let pencilSize = 1;
+  let isDragging = false;
+  let currentShapeIndex = null;
+  let startX = null;
+  let startY = null;
+  let tool = "";
+
+  draw = () => {
 
     let i = 0;
 
-    for (let shape of app.shapeLis) {
-      if (shape.obj == "Pencil") {
+    for (let shape of shapeLis) {
+      if (shape.name == "Pencil") {
         ctx.beginPath();
-        ctx.moveTo(shape.arr[0][0], shape.arr[0][1]);
-        ctx.lineWidth = shape.size;
+        ctx.moveTo(shape.arr[0].xCoordinate, shape.arr[0].yCoordinate);
+        ctx.lineWidth = shape.lineWidth;
         ctx.strokeStyle = shape.strokeStyle;
         ctx.lineCap = shape.lineCap;
         for (let j = 1; j < shape.arr.length; j++) {
-          ctx.lineTo(shape.arr[j][0], shape.arr[j][1]);
+          ctx.lineTo(shape.arr[j].xCoordinate, shape.arr[j].yCoordinate);
           ctx.stroke();
         }
         ctx.beginPath();
       } 
-      else if (shape.obj == "Eraser") {
+      else if (shape.name == "Eraser") {
         ctx.beginPath();
-        ctx.moveTo(shape.arr[0][0], shape.arr[0][1]);
-        ctx.lineWidth = shape.size;
+        ctx.moveTo(shape.arr[0].xCoordinate, shape.arr[0].yCoordinate);
+        ctx.lineWidth = shape.lineWidth;
         ctx.strokeStyle = shape.strokeStyle;
         ctx.lineCap = shape.lineCap;
         for (let j = 1; j < shape.arr.length; j++) {
-          ctx.lineTo(shape.arr[j][0], shape.arr[j][1]);
+          ctx.lineTo(shape.arr[j].xCoordinate, shape.arr[j].yCoordinate);
           ctx.stroke();
         }
         ctx.closePath();
       } 
-      else if (shape.obj == "Text") {
+      else if (shape.name == "Text") {
         shape.draw();
       } 
       else {
-        app.shapeLis[i].x1 = shape.x1;
-        app.shapeLis[i].y1 = shape.y1;
-        app.shapeLis[i].x2 = shape.x2;
-        app.shapeLis[i].y2 = shape.y2;
-        app.shapeLis[i].draw(shape.obj)
+
+        shapeLis[i].draw(shape.name);
       }
       i++;
     }
   };
 
-  app.addInput = (x, y) => {
+  addInput = (x, y) => {
     let textX = x - canvasObj.canvasOffsetX;
     let textY = y - canvasObj.canvasOffsetY;
 
@@ -56,15 +61,11 @@
 
     textarea.onkeydown = (event) => {
       if (event.key === "Enter") {
-        textObj = new Text(ctx);
-        textObj.x = textX;
-        textObj.y = textY;
-        textObj.value = textarea.value;
         ctx.textBaseline = "top";
         ctx.textAlign = "left";
         ctx.font = "14px sans-serif";
-        ctx.fillText(textObj.value, textX, textY);
-        app.shapeLis.push(textObj);
+        ctx.fillText(textarea.value, textX, textY);
+        shapeLis.push(new Text(ctx, new Point(textX,textY), textarea.value));
         document.body.removeChild(textarea);
       }
     };
@@ -72,37 +73,43 @@
     document.body.appendChild(textarea);
   };
 
-  app.setShape = (shape) => {
-    app.tool = "Shape";
-    app.shape = shape;
+  setShape = (shapeName) => {
+    commonModules.tool = "Shape";
+    commonModules.shape = new Shape(shapeName,ctx);
   };
 
-  app.colorId = "color1";
-  app.setColor = (color) => {
-    let selectedColor = document.getElementById(app.colorId);
+  colorId = "color1";
+  setColorPallet = (colorId) => {
+    let selectedColor = document.getElementById(colorId);
+    commonModules.colorId = colorId;
+    commonModules.color = selectedColor.style.backgroundColor;
+    if (tool == "Shape") commonModules.shape.strokeStyle = selectedColor.style.backgroundColor;
+  }
+  setColor = (color) => {
+    let selectedColor = document.getElementById(commonModules.colorId);
     selectedColor.style.backgroundColor = color;
-    app.color = color;
-    if (app.tool == "Shape") app.shapes.color = color;
+    commonModules.color = color;
+    if (tool == "Shape") commonModules.shape.strokeStyle = color;
   };
 
-  app.isMouseInShape = (shape) => {
+  isMouseInShape = (shape) => {
     if (
-      app.startX > shape.x1 &&
-      app.startX < shape.x2 &&
-      app.startY > shape.y1 &&
-      app.startY < shape.y2
+      commonModules.startX > shape.startPoint.xCoordinate &&
+      commonModules.startX < shape.endPoint.xCoordinate &&
+      commonModules.startY > shape.startPoint.yCoordinate &&
+      commonModules.startY < shape.endPoint.yCoordinate
     ) {
       return true;
     }
     return false;
   };
 
-  app.isMouseInText = (shape) => {
+  isMouseInText = (shape) => {
     if (
-      app.startX > shape.x &&
-      app.startX < shape.x + 400 &&
-      app.startY > shape.y &&
-      app.startY < shape.y + 14
+      commonModules.startX > shape.x &&
+      commonModules.startX < shape.x + 400 &&
+      commonModules.startY > shape.y &&
+      commonModules.startY < shape.y + 14
     ) {
       return true;
     }
@@ -110,29 +117,40 @@
     return false;
   };
 
-  app.rotated = (angle) => {
+  rotated = (angle) => {
     // ctx.save();
     ctx.clearRect(0, 0, canvasObj.canvas.width, canvasObj.canvas.height);
-    let index = app.currentShapeIndex
-      ? app.currentShapeIndex
-      : app.shapeLis.length - 1;
+    let index = currentShapeIndex ? currentShapeIndex : shapeLis.length - 1;
 
-    let currentShape = app.shapeLis[index];
+    let currentShape = shapeLis[index];
 
-    let xAxisCenter = currentShape.x1 + (currentShape.x2 - currentShape.x1) / 2;
-    let yAxisCenter = currentShape.y1 + (currentShape.y2 - currentShape.y1) / 2;
+    if(currentShape){
+    let xAxisCenter = currentShape.startPoint.xCoordinate + (currentShape.endPoint.xCoordinate - currentShape.startPoint.xCoordinate) / 2;
+    let yAxisCenter = currentShape.startPoint.yCoordinate + (currentShape.endPoint.yCoordinate - currentShape.startPoint.yCoordinate)  / 2;
 
     ctx.translate(xAxisCenter, yAxisCenter);
     ctx.rotate((angle * Math.PI) / 180);
     ctx.translate(-xAxisCenter, -yAxisCenter);
+    currentShape.draw(currentShape.obj);
+    draw();
+  }
+  };
 
-    let shape = new Shapes(ctx);
-    shape.x1 = currentShape.x1;
-    shape.y1 = currentShape.y1;
-    shape.x2 = currentShape.x2;
-    shape.y2 = currentShape.y2;
-    shape.draw(currentShape.obj);
-
-    app.draw();
+  return {
+    shapeLis,
+    pencilSize,
+    isDragging,
+    currentShapeIndex,
+    startX,
+    startY,
+    tool,
+    draw,
+    addInput,
+    setShape,
+    colorId,
+    setColor,
+    isMouseInShape,
+    isMouseInText,
+    rotated,
   };
 })();
