@@ -21,7 +21,6 @@ function Shape(shapeName,ctx) {
     if(shape?.name != 'Line'){
       shape.drawDashPatten();
     }
-    
   }
 
   Shape.prototype.createGivenNameObj = function() {
