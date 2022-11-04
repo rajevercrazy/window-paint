@@ -1,6 +1,6 @@
 function Line(startPoint,endPoint,lineWidth,strokeStyle,ctx) {
 
-    this.obj = "Line"
+    this.name = "line"
     this.startPoint = startPoint; 
     this.endPoint = endPoint; 
     this.lineWidth = lineWidth; 
