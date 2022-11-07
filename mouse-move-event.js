@@ -34,8 +34,7 @@ const mouseMove = (event) => {
             event.clientY - canvasObj.canvasOffsetY
           );
           ctx.stroke();
-          ctx.closePath();
-        }
+        } 
         break;
       case "Shape":
         if(app.shape?.isDrawing){
