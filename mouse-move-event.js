@@ -61,6 +61,8 @@ const mouseMove = (event) => {
             currentShape.startPoint.yCoordinate += dy;
             currentShape.endPoint.xCoordinate += dx;
             currentShape.endPoint.yCoordinate += dy;
+            currentShape.center.xCoordinate += dx;
+            currentShape.center.yCoordinate += dy;
           }
           ctx.clearRect(0,0,canvasObj.canvas.width,canvasObj.canvas.height);
           app.draw();

@@ -96,10 +96,10 @@ const commonModules = (() => {
       return true;
     }
     else if (
-      commonModules.startX > shape.startPoint.xCoordinate &&
-      commonModules.startX < shape.endPoint.xCoordinate &&
-      commonModules.startY > shape.startPoint.yCoordinate &&
-      commonModules.startY < shape.endPoint.yCoordinate
+      commonModules.startX > shape.center.xCoordinate - (shape.width/2) &&
+      commonModules.startX < shape.center.xCoordinate + (shape.width/2) &&
+      commonModules.startY > shape.center.yCoordinate - (shape.height/2) &&
+      commonModules.startY < shape.center.yCoordinate + (shape.height/2)
     ) {
       return true;
     }
@@ -118,7 +118,7 @@ const commonModules = (() => {
   rotated = (angle) => {
     // ctx.save();
     ctx.clearRect(0, 0, canvasObj.canvas.width, canvasObj.canvas.height);
-    let index = currentShapeIndex ? currentShapeIndex : shapeLis.length - 1;
+    let index = commonModules.currentShapeIndex >= 0 ? commonModules.currentShapeIndex : shapeLis.length - 1;
 
     let currentShape = shapeLis[index];
 
