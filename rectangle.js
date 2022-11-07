@@ -1,41 +1,57 @@
-function Rectangle(startPoint, endPoint, lineWidth, strokeStyle, ctx, height,width,center) {
+function Rectangle(startPoint, endPoint, lineWidth, strokeStyle, ctx) {
   this.name = "rectangle";
 
   Line.call(this, startPoint, endPoint, lineWidth, strokeStyle, ctx);
 
-  this.width = width;
-  this.height = height;
-
-  this.center = center;
+  this.width = this.widthCalc();
+  this.breath = this.breathCalc();
 }
 
 Object.setPrototypeOf(Rectangle.prototype, Line.prototype);
 
 Rectangle.prototype.calcAllCorner = function () {
   return {
-    TOP_LEFT: new Point(this.center.xCoordinate - (this.width/2),this.center.yCoordinate - (this.height/2)),
-    TOP_RIGHT: new Point(this.center.xCoordinate + (this.width/2),this.center.yCoordinate - (this.height/2)),
-    BOTTOM_LEFT: new Point(this.center.xCoordinate - (this.width/2),this.center.yCoordinate + (this.height/2)),
-    BOTTOM_RIGHT: new Point(this.center.xCoordinate + (this.width/2),this.center.yCoordinate + (this.height/2)),
+    TOP_LEFT: this.startPoint,
+    TOP_RIGHT: new Point(
+      this.endPoint.xCoordinate,
+      this.startPoint.yCoordinate
+    ),
+    BOTTOM_LEFT: new Point(
+        this.startPoint.xCoordinate,
+        this.endPoint.yCoordinate
+      ),
+    BOTTOM_RIGHT: this.endPoint,
   };
 };
 
-Rectangle.prototype.getCenterOfSide = function () {
+Rectangle.prototype.getCenter = function () {
     return {
-        TOP: new Point(this.center.xCoordinate, this.center.yCoordinate - (this.height/2)),
-        BOTTOM: new Point(this.center.xCoordinate, this.center.yCoordinate + (this.height/2)),
-        LEFT: new Point(this.center.xCoordinate - (this.width/2), this.center.yCoordinate),
-        RIGHT: new Point(this.center.xCoordinate + (this.width/2), this.center.yCoordinate),
+        TOP: new Point(
+          this.startPoint.xCoordinate + (this.width/ 2),
+          this.startPoint.yCoordinate
+        ),
+        BOTTOM: new Point(
+          this.startPoint.xCoordinate + (this.width / 2),
+          this.endPoint.yCoordinate
+        ),
+        LEFT: new Point(
+            this.startPoint.xCoordinate,
+            this.startPoint.yCoordinate + (this.breath / 2)
+          ),
+          RIGHT: new Point(
+            this.endPoint.xCoordinate,
+            this.startPoint.yCoordinate + (this.breath / 2)
+          ),
       };
 };
 
 
 Rectangle.prototype.widthCalc = function () {
-  return Math.abs(this.endPoint.xCoordinate - this.startPoint.xCoordinate);
+  return this.endPoint.xCoordinate - this.startPoint.xCoordinate;
 };
 
-Rectangle.prototype.heightCalc = function () {
-  return Math.abs(this.endPoint.yCoordinate - this.startPoint.yCoordinate);
+Rectangle.prototype.breathCalc = function () {
+  return this.endPoint.yCoordinate - this.startPoint.yCoordinate;
 };
 
 Rectangle.prototype.draw = function () {
@@ -47,7 +63,7 @@ Rectangle.prototype.draw = function () {
     this.startPoint.xCoordinate,
     this.startPoint.yCoordinate,
     this.width,
-    this.height
+    this.breath
   );
   this.ctx.stroke();
   this.ctx.closePath();
@@ -62,7 +78,7 @@ Rectangle.prototype.drawDashPatten = function() {
     this.startPoint.xCoordinate,
     this.startPoint.yCoordinate,
     this.width,
-    this.height
+    this.breath
   );
   this.ctx.stroke();
   this.ctx.closePath();

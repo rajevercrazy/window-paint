@@ -43,7 +43,8 @@ const commonModules = (() => {
         shape.draw();
       } 
       else {
-        shapeLis[i].draw();
+
+        shapeLis[i].draw(shape.name);
       }
       i++;
     }
@@ -123,29 +124,15 @@ const commonModules = (() => {
     let currentShape = shapeLis[index];
 
     if(currentShape){
-      
-    if (angle == 90 || angle == 270) {
-      [currentShape.width,currentShape.height] = [currentShape.height,currentShape.width];
-      currentShape.startPoint = new Point(currentShape.center.xCoordinate - (currentShape.width / 2), currentShape.center.yCoordinate - (currentShape.height / 2));
-      currentShape.endPoint = new Point(currentShape.center.xCoordinate + (currentShape.width / 2), currentShape.center.yCoordinate + (currentShape.height / 2));
-    }
+    let xAxisCenter = currentShape.startPoint.xCoordinate + (currentShape.endPoint.xCoordinate - currentShape.startPoint.xCoordinate) / 2;
+    let yAxisCenter = currentShape.startPoint.yCoordinate + (currentShape.endPoint.yCoordinate - currentShape.startPoint.yCoordinate)  / 2;
 
-    if (angle == 90) {
-      currentShape.currentRotation = (currentShape.currentRotation + 1) % 4;
-    }
-    if (angle == 270) {
-      currentShape.currentRotation = (currentShape.currentRotation - 1) % 4;
-    }
-    if (angle == 180) {
-      currentShape.currentRotation = (currentShape.currentRotation + 2) % 4;
-    }
-  
-    currentShape.currentRotation = currentShape.currentRotation < 0 ? 3 : currentShape.currentRotation;
-    currentShape.angle = (currentShape.angle + angle) % 360;
+    ctx.translate(xAxisCenter, yAxisCenter);
+    ctx.rotate((angle * Math.PI) / 180);
+    ctx.translate(-xAxisCenter, -yAxisCenter);
+    currentShape.draw(currentShape.obj);
     draw();
-    currentShape.drawDashRect()
   }
-
   };
 
   return {
