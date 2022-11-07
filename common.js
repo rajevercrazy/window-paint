@@ -5,7 +5,7 @@ const commonModules = (() => {
   let shapeLis = [];
   let pencilSize = 1;
   let isDragging = false;
-  let currentShapeIndex = null;
+  let currentShapeIndex = shapeLis.length - 1;
   let startX = null;
   let startY = null;
   let tool = "";
