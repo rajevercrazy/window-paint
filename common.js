@@ -5,7 +5,7 @@ const commonModules = (() => {
   let shapeLis = [];
   let pencilSize = 1;
   let isDragging = false;
-  let currentShapeIndex = null;
+  let currentShapeIndex = shapeLis.length - 1;
   let startX = null;
   let startY = null;
   let tool = "";
@@ -93,18 +93,11 @@ const commonModules = (() => {
   };
 
   isMouseInShape = (shape) => {
-    if(shape.shapeName == 'line' && shape.createGivenNameObj().isPointOnLine(commonModules.startX,commonModules.startY)){
-      return true;
-    }
-    else if (
-      commonModules.startX > shape.startPoint.xCoordinate &&
-      commonModules.startX < shape.endPoint.xCoordinate &&
-      commonModules.startY > shape.startPoint.yCoordinate &&
-      commonModules.startY < shape.endPoint.yCoordinate
-    ) {
-      return true;
-    }
-    return false;
+
+    return (
+      (shape.shapeName == 'line' && shape.createGivenNameObj().isPointOnLine(commonModules.startX,commonModules.startY)) ||
+      shape.isPointOnShape(commonModules.startX,commonModules.startY)
+    )
   };
 
   isMouseInText = (shape) => {
@@ -119,7 +112,7 @@ const commonModules = (() => {
   rotated = (angle) => {
     // ctx.save();
     ctx.clearRect(0, 0, canvasObj.canvas.width, canvasObj.canvas.height);
-    let index = currentShapeIndex ? currentShapeIndex : shapeLis.length - 1;
+    let index = commonModules.currentShapeIndex >= 0 ? commonModules.currentShapeIndex : shapeLis.length - 1;
 
     let currentShape = shapeLis[index];
 
@@ -134,6 +127,20 @@ const commonModules = (() => {
     draw();
   }
   };
+
+  rotation = (angle) => {
+    ctx.clearRect(0, 0, canvasObj.canvas.width, canvasObj.canvas.height);
+    let index = commonModules.currentShapeIndex >= 0 ? commonModules.currentShapeIndex : shapeLis.length - 1;
+
+    let currentShape = shapeLis[index];
+
+    for(let i = 0; i < currentShape.positionArr.length; i++){
+      currentShape.positionArr[i].rotate(currentShape.center,angle);
+    }
+
+    draw();
+    currentShape.drawDashRect()
+  }
 
   return {
     shapeLis,
@@ -151,5 +158,6 @@ const commonModules = (() => {
     isMouseInShape,
     isMouseInText,
     rotated,
+    rotation
   };
 })();

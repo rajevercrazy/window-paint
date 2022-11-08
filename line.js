@@ -1,8 +1,8 @@
-function Line(startPoint,endPoint,lineWidth,strokeStyle,ctx) {
+function Line(positionArr,lineWidth,strokeStyle,ctx) {
 
     this.name = "line"
-    this.startPoint = startPoint; 
-    this.endPoint = endPoint; 
+    this.startPoint = positionArr[0]; 
+    this.endPoint = positionArr[1]; 
     this.lineWidth = lineWidth; 
     this.strokeStyle = strokeStyle; 
     this.ctx = ctx;
@@ -29,4 +29,11 @@ function Line(startPoint,endPoint,lineWidth,strokeStyle,ctx) {
     }
 
     return false;
+  }
+
+  Line.prototype.getCenter = function() {
+    let cx = Math.min(this.startPoint.xCoordinate,this.endPoint.xCoordinate) + (Math.abs(this.startPoint.xCoordinate - this.endPoint.xCoordinate)/2)
+    let cy = Math.min(this.startPoint.yCoordinate,this.endPoint.yCoordinate) + (Math.abs(this.startPoint.yCoordinate - this.endPoint.yCoordinate)/2)
+
+    return new Point(cx,cy);
   }

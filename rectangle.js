@@ -1,57 +1,40 @@
-function Rectangle(startPoint, endPoint, lineWidth, strokeStyle, ctx) {
+function Rectangle(positionArr, lineWidth, strokeStyle, ctx, height,width,center) {
   this.name = "rectangle";
 
-  Line.call(this, startPoint, endPoint, lineWidth, strokeStyle, ctx);
+  this.diagonal1 = new Line([positionArr[0],positionArr[3]],lineWidth, strokeStyle, ctx);
+  this.diagonal2 = new Line([positionArr[1],positionArr[2]],lineWidth, strokeStyle, ctx);
 
-  this.width = this.widthCalc();
-  this.breath = this.breathCalc();
+  this.width = width;
+  this.height = height;
+  this.ctx = ctx;
+  this.lineWidth = lineWidth;
+  this.strokeStyle = strokeStyle;
+  this.center = center;
 }
 
-Object.setPrototypeOf(Rectangle.prototype, Line.prototype);
 
 Rectangle.prototype.calcAllCorner = function () {
   return {
-    TOP_LEFT: this.startPoint,
-    TOP_RIGHT: new Point(
-      this.endPoint.xCoordinate,
-      this.startPoint.yCoordinate
-    ),
-    BOTTOM_LEFT: new Point(
-        this.startPoint.xCoordinate,
-        this.endPoint.yCoordinate
-      ),
-    BOTTOM_RIGHT: this.endPoint,
+    TOP_LEFT: this.diagonal1.startPoint,
+    TOP_RIGHT: this.diagonal2.startPoint,
+    BOTTOM_LEFT: this.diagonal2.endPoint,
+    BOTTOM_RIGHT: this.diagonal1.endPoint
   };
 };
 
-Rectangle.prototype.getCenter = function () {
+Rectangle.prototype.getCenterOfSide = function () {
+  let corners = this.calcAllCorner();
+  let topSide = new Line([corners.TOP_LEFT,corners.TOP_RIGHT],this.lineWidth, this.strokeStyle, this.ctx)
+  let rightSide = new Line([corners.TOP_RIGHT,corners.BOTTOM_RIGHT],this.lineWidth, this.strokeStyle, this.ctx)
+  let bottomSide = new Line([corners.BOTTOM_RIGHT,corners.BOTTOM_LEFT],this.lineWidth, this.strokeStyle, this.ctx)
+  let leftSide = new Line([corners.BOTTOM_LEFT,corners.TOP_LEFT],this.lineWidth, this.strokeStyle, this.ctx)
+
     return {
-        TOP: new Point(
-          this.startPoint.xCoordinate + (this.width/ 2),
-          this.startPoint.yCoordinate
-        ),
-        BOTTOM: new Point(
-          this.startPoint.xCoordinate + (this.width / 2),
-          this.endPoint.yCoordinate
-        ),
-        LEFT: new Point(
-            this.startPoint.xCoordinate,
-            this.startPoint.yCoordinate + (this.breath / 2)
-          ),
-          RIGHT: new Point(
-            this.endPoint.xCoordinate,
-            this.startPoint.yCoordinate + (this.breath / 2)
-          ),
+        TOP: topSide.getCenter(),
+        BOTTOM: bottomSide.getCenter(),
+        LEFT: leftSide.getCenter(),
+        RIGHT: rightSide.getCenter()
       };
-};
-
-
-Rectangle.prototype.widthCalc = function () {
-  return this.endPoint.xCoordinate - this.startPoint.xCoordinate;
-};
-
-Rectangle.prototype.breathCalc = function () {
-  return this.endPoint.yCoordinate - this.startPoint.yCoordinate;
 };
 
 Rectangle.prototype.draw = function () {
@@ -59,14 +42,9 @@ Rectangle.prototype.draw = function () {
   this.ctx.beginPath();
   this.ctx.lineWidth = this.lineWidth;
   this.ctx.strokeStyle = this.strokeStyle;
-  this.ctx.rect(
-    this.startPoint.xCoordinate,
-    this.startPoint.yCoordinate,
-    this.width,
-    this.breath
-  );
-  this.ctx.stroke();
-  this.ctx.closePath();
+  this.ctx.strokeStyle = 'black';
+  this.ctx.setLineDash([])
+  this.createRectSide()
 };
 
 Rectangle.prototype.drawDashPatten = function() {
@@ -74,13 +52,16 @@ Rectangle.prototype.drawDashPatten = function() {
   this.ctx.lineWidth = 0.5;
   this.ctx.strokeStyle = '#1682fc';
   this.ctx.setLineDash([6])
-  this.ctx.rect(
-    this.startPoint.xCoordinate,
-    this.startPoint.yCoordinate,
-    this.width,
-    this.breath
-  );
-  this.ctx.stroke();
-  this.ctx.closePath();
+  this.createRectSide()
   this.ctx.setLineDash([])
 };
+
+Rectangle.prototype.createRectSide = function() {
+  this.ctx.moveTo(this.diagonal1.startPoint.xCoordinate,this.diagonal1.startPoint.yCoordinate)
+  this.ctx.lineTo(this.diagonal2.startPoint.xCoordinate,this.diagonal2.startPoint.yCoordinate)
+  this.ctx.lineTo(this.diagonal1.endPoint.xCoordinate,this.diagonal1.endPoint.yCoordinate)
+  this.ctx.lineTo(this.diagonal2.endPoint.xCoordinate,this.diagonal2.endPoint.yCoordinate)
+  this.ctx.lineTo(this.diagonal1.startPoint.xCoordinate,this.diagonal1.startPoint.yCoordinate)
+  this.ctx.stroke();
+  this.ctx.closePath();
+}

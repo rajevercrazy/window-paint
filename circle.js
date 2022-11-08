@@ -1,7 +1,6 @@
-function Circle(startPoint,endPoint,lineWidth,strokeStyle,ctx) {
+function Circle(positionArr, lineWidth, strokeStyle, ctx, height, width, center) {
   this.name = "circle";
-
-  Rectangle.call(this,startPoint,endPoint,lineWidth,strokeStyle,ctx);
+  Rectangle.call(this, positionArr, lineWidth, strokeStyle, ctx, height, width, center);
 }
 
 Object.setPrototypeOf(Circle.prototype, Rectangle.prototype);
@@ -10,12 +9,12 @@ Circle.prototype.draw = function () {
   this.ctx.beginPath();
   this.ctx.lineWidth = this.lineWidth;
   this.ctx.strokeStyle = this.strokeStyle;
+  let corner = this.calcAllCorner();
 
-  let rightSideCenter = this.getCenter().RIGHT;
-  let leftSideCenter = this.getCenter().LEFT;
+  let rightSideCenter = this.getCenterOfSide().RIGHT;
+  let leftSideCenter = this.getCenterOfSide().LEFT;
   this.ctx.moveTo(rightSideCenter.xCoordinate, rightSideCenter.yCoordinate);
 
-  let corner = this.calcAllCorner();
   this.ctx.bezierCurveTo(
     corner.TOP_RIGHT.xCoordinate,
     corner.TOP_RIGHT.yCoordinate,
