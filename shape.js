@@ -53,7 +53,7 @@ Shape.prototype.createTriangle = function () {
 
   let obj = ['TOP', 'RIGHT', 'BOTTOM', 'LEFT'];
 
-  return new Triangle(this.startPoint, this.endPoint, this.lineWidth, this.strokeStyle, this.ctx, obj[this.currentRotation], this.height, this.width, this.center);
+  return new Triangle(this.positionArr, this.lineWidth, this.strokeStyle, this.ctx, obj[this.currentRotation], this.height, this.width, this.center);
 
 }
 

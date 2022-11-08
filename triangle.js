@@ -1,6 +1,6 @@
-function Triangle(startPoint, endPoint, lineWidth, strokeStyle, ctx, startingPosition,height,width,center) {
+function Triangle(positionArr, lineWidth, strokeStyle, ctx, startingPosition,height,width,center) {
   this.name = "triangle";
-  Rectangle.call(this, startPoint, endPoint, lineWidth, strokeStyle, ctx,height,width,center);
+  Rectangle.call(this, positionArr, lineWidth, strokeStyle, ctx,height,width,center);
   this.startingPosition = startingPosition;
 }
 
@@ -11,32 +11,9 @@ Triangle.prototype.draw = function () {
   this.ctx.lineWidth = this.lineWidth;
   this.ctx.strokeStyle = this.strokeStyle;
   
-  let triangleStartPoint;
-  let p1;
-  let p2;
-
-  switch (this.startingPosition) {
-    case 'RIGHT':
-      triangleStartPoint = new Point(this.center.xCoordinate + (this.width/2), this.center.yCoordinate)
-      p1 = new Point(this.center.xCoordinate - (this.width/2), this.center.yCoordinate - (this.height/2));
-      p2 = new Point(this.center.xCoordinate - (this.width/2), this.center.yCoordinate + (this.height/2));
-      break;
-    case 'BOTTOM':
-      triangleStartPoint = new Point(this.center.xCoordinate, this.center.yCoordinate + (this.height/2))
-      p1 = new Point(this.center.xCoordinate + (this.width/2), this.center.yCoordinate - (this.height/2));
-      p2 = new Point(this.center.xCoordinate - (this.width/2), this.center.yCoordinate - (this.height/2));
-      break;
-    case 'LEFT':
-      triangleStartPoint = new Point(this.center.xCoordinate - (this.width/2), this.center.yCoordinate)
-      p1 = new Point(this.center.xCoordinate + (this.width/2), this.center.yCoordinate - (this.height/2));
-      p2 = new Point(this.center.xCoordinate + (this.width/2), this.center.yCoordinate + (this.height/2));
-      break;
-    default:
-      triangleStartPoint = new Point(this.center.xCoordinate, this.center.yCoordinate - (this.height/2))
-      p1 = new Point(this.center.xCoordinate - (this.width/2), this.center.yCoordinate + (this.height/2));
-      p2 = new Point(this.center.xCoordinate + (this.width/2), this.center.yCoordinate + (this.height/2));
-      break;
-  };
+  let triangleStartPoint = this.getCenterOfSide().TOP;
+  let p1 = this.calcAllCorner().BOTTOM_LEFT;
+  let p2 = this.calcAllCorner().BOTTOM_RIGHT;
 
   this.ctx.moveTo(triangleStartPoint.xCoordinate, triangleStartPoint.yCoordinate);
   this.ctx.lineTo(p1.xCoordinate, p1.yCoordinate);
