@@ -90,10 +90,10 @@ Shape.prototype.calcAllPoint = function() {
 }
 
 Shape.prototype.isPointOnShape = function(x,y) {
-  let maxX = Number.MAX_SAFE_INTEGER;
-  let maxY = Number.MAX_SAFE_INTEGER;
-  let minY = 0;
-  let minX = 0;
+  let minX = Number.MAX_SAFE_INTEGER;
+  let minY = Number.MAX_SAFE_INTEGER;
+  let maxY = 0;
+  let maxX = 0;
 
   this.positionArr.forEach(element => {
     maxX = Math.max(maxX,element.xCoordinate);
