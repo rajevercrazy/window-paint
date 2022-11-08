@@ -1,8 +1,8 @@
 function Rectangle(positionArr, lineWidth, strokeStyle, ctx, height,width,center) {
   this.name = "rectangle";
 
-  this.diagonal1 = new Line(positionArr[0],positionArr[3],lineWidth, strokeStyle, ctx);
-  this.diagonal2 = new Line(positionArr[1],positionArr[2],lineWidth, strokeStyle, ctx);
+  this.diagonal1 = new Line([positionArr[0],positionArr[3]],lineWidth, strokeStyle, ctx);
+  this.diagonal2 = new Line([positionArr[1],positionArr[2]],lineWidth, strokeStyle, ctx);
 
   this.width = width;
   this.height = height;
@@ -24,10 +24,10 @@ Rectangle.prototype.calcAllCorner = function () {
 
 Rectangle.prototype.getCenterOfSide = function () {
   let corners = this.calcAllCorner();
-  let topSide = new Line(corners.TOP_LEFT,corners.TOP_RIGHT,this.lineWidth, this.strokeStyle, this.ctx)
-  let rightSide = new Line(corners.TOP_RIGHT,corners.BOTTOM_RIGHT,this.lineWidth, this.strokeStyle, this.ctx)
-  let bottomSide = new Line(corners.BOTTOM_RIGHT,corners.BOTTOM_LEFT,this.lineWidth, this.strokeStyle, this.ctx)
-  let leftSide = new Line(corners.BOTTOM_LEFT,corners.TOP_LEFT,this.lineWidth, this.strokeStyle, this.ctx)
+  let topSide = new Line([corners.TOP_LEFT,corners.TOP_RIGHT],this.lineWidth, this.strokeStyle, this.ctx)
+  let rightSide = new Line([corners.TOP_RIGHT,corners.BOTTOM_RIGHT],this.lineWidth, this.strokeStyle, this.ctx)
+  let bottomSide = new Line([corners.BOTTOM_RIGHT,corners.BOTTOM_LEFT],this.lineWidth, this.strokeStyle, this.ctx)
+  let leftSide = new Line([corners.BOTTOM_LEFT,corners.TOP_LEFT],this.lineWidth, this.strokeStyle, this.ctx)
 
     return {
         TOP: topSide.getCenter(),
