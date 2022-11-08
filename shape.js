@@ -58,9 +58,11 @@ Shape.prototype.createTriangle = function () {
 }
 
 Shape.prototype.calc = function () {
-  this.center = this.getCenter();
   this.height = this.heightCalc();
   this.width = this.widthCalc();
+  this.center = this.getCenter();
+
+  this.positionArr = this.shapeName == 'line'? [this.startPoint,this.endPoint]: this.calcAllPoint();
 }
 
 Shape.prototype.widthCalc = function () {
@@ -76,4 +78,37 @@ Shape.prototype.getCenter = function () {
   let yAxisCenter = this.startPoint.yCoordinate + (this.height / 2);
 
   return new Point(xAxisCenter, yAxisCenter);
+}
+
+Shape.prototype.calcAllPoint = function() {
+  if(this.shapeName == 'line'){
+    return [this.startPoint,this.endPoint];
+  }
+  else{
+    return [
+      new Point(this.center.xCoordinate - (this.width/2),this.center.yCoordinate - (this.height/2)),
+      new Point(this.center.xCoordinate + (this.width/2),this.center.yCoordinate - (this.height/2)),
+      new Point(this.center.xCoordinate - (this.width/2),this.center.yCoordinate + (this.height/2)),
+      new Point(this.center.xCoordinate + (this.width/2),this.center.yCoordinate + (this.height/2))
+    ]
+  }
+}
+
+Shape.prototype.isPointOnShape = function(x,y) {
+  let minX = Number.MAX_SAFE_INTEGER;
+  let minY = Number.MAX_SAFE_INTEGER;
+  let maxY = 0;
+  let maxX = 0;
+
+  this.positionArr.forEach(element => {
+    maxX = Math.max(maxX,element.xCoordinate);
+    maxY = Math.max(maxX,element.yCoordinate);
+    minY = Math.min(minY,element.yCoordinate);
+    minX = Math.min(minX,element.xCoordinate);
+  });
+
+  return (x > minX &&
+  x < maxX &&
+  y > minY &&
+  y < maxY)
 }
