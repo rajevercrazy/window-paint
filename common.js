@@ -148,6 +148,10 @@ const commonModules = (() => {
 
   };
 
+  rotation = (event) => {
+    console.log(event)
+  }
+
   return {
     shapeLis,
     pencilSize,
@@ -164,5 +168,6 @@ const commonModules = (() => {
     isMouseInShape,
     isMouseInText,
     rotated,
+    rotation
   };
 })();
