@@ -32,7 +32,7 @@ Shape.prototype.drawDashRect = function () {
 Shape.prototype.createGivenNameObj = function () {
   switch (this.shapeName) {
     case 'circle':
-      return new Circle(this.startPoint, this.endPoint, this.lineWidth, this.strokeStyle, this.ctx, this.height, this.width, this.center,this.angle == 90 || this.angle == 270);
+      return new Circle(this.positionArr, this.lineWidth, this.strokeStyle, this.ctx, this.height, this.width, this.center);
 
     case 'rectangle':
       return new Rectangle(this.positionArr, this.lineWidth, this.strokeStyle, this.ctx, this.height, this.width, this.center);
@@ -58,9 +58,9 @@ Shape.prototype.createTriangle = function () {
 }
 
 Shape.prototype.calc = function () {
-  this.center = this.getCenter();
   this.height = this.heightCalc();
   this.width = this.widthCalc();
+  this.center = this.getCenter();
 
   this.positionArr = this.shapeName == 'line'? [this.startPoint,this.endPoint]: this.calcAllPoint();
 }
@@ -84,7 +84,7 @@ Shape.prototype.calcAllPoint = function() {
   return [
     new Point(this.center.xCoordinate - (this.width/2),this.center.yCoordinate - (this.height/2)),
     new Point(this.center.xCoordinate + (this.width/2),this.center.yCoordinate - (this.height/2)),
-    new Point(this.center.xCoordinate + (this.width/2),this.center.yCoordinate + (this.height/2)),
     new Point(this.center.xCoordinate - (this.width/2),this.center.yCoordinate + (this.height/2)),
+    new Point(this.center.xCoordinate + (this.width/2),this.center.yCoordinate + (this.height/2))
   ]
 }
