@@ -41,7 +41,7 @@ Shape.prototype.createGivenNameObj = function () {
       return this.createTriangle(this.angle)
 
     case 'line':
-      return new Line(this.startPoint, this.endPoint, this.lineWidth, this.strokeStyle, this.ctx);
+      return new Line(this.positionArr, this.lineWidth, this.strokeStyle, this.ctx);
 
     default:
   }
@@ -81,12 +81,17 @@ Shape.prototype.getCenter = function () {
 }
 
 Shape.prototype.calcAllPoint = function() {
-  return [
-    new Point(this.center.xCoordinate - (this.width/2),this.center.yCoordinate - (this.height/2)),
-    new Point(this.center.xCoordinate + (this.width/2),this.center.yCoordinate - (this.height/2)),
-    new Point(this.center.xCoordinate - (this.width/2),this.center.yCoordinate + (this.height/2)),
-    new Point(this.center.xCoordinate + (this.width/2),this.center.yCoordinate + (this.height/2))
-  ]
+  if(this.shapeName == 'line'){
+    return [this.startPoint,this.endPoint];
+  }
+  else{
+    return [
+      new Point(this.center.xCoordinate - (this.width/2),this.center.yCoordinate - (this.height/2)),
+      new Point(this.center.xCoordinate + (this.width/2),this.center.yCoordinate - (this.height/2)),
+      new Point(this.center.xCoordinate - (this.width/2),this.center.yCoordinate + (this.height/2)),
+      new Point(this.center.xCoordinate + (this.width/2),this.center.yCoordinate + (this.height/2))
+    ]
+  }
 }
 
 Shape.prototype.isPointOnShape = function(x,y) {
