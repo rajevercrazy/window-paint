@@ -57,10 +57,7 @@ const mouseMove = (event) => {
             currentShape.location.xCoordinate += dx;
             currentShape.location.yCoordinate += dy;
           } else {
-            currentShape.startPoint.xCoordinate += dx;
-            currentShape.startPoint.yCoordinate += dy;
-            currentShape.endPoint.xCoordinate += dx;
-            currentShape.endPoint.yCoordinate += dy;
+            currentShape.positionArr = currentShape.positionArr.map((element) => new Point(element.xCoordinate + dx, element.yCoordinate + dy));
             currentShape.center.xCoordinate += dx;
             currentShape.center.yCoordinate += dy;
           }
