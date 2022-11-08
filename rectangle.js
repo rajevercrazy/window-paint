@@ -1,41 +1,40 @@
-function Rectangle(startPoint, endPoint, lineWidth, strokeStyle, ctx, height,width,center) {
+function Rectangle(positionArr, lineWidth, strokeStyle, ctx, height,width,center) {
   this.name = "rectangle";
 
-  Line.call(this, startPoint, endPoint, lineWidth, strokeStyle, ctx);
+  this.diagonal1 = new Line(positionArr[0],positionArr[2],lineWidth, strokeStyle, ctx);
+  this.diagonal2 = new Line(positionArr[1],positionArr[3],lineWidth, strokeStyle, ctx);
 
   this.width = width;
   this.height = height;
-
+  this.ctx = ctx;
+  this.lineWidth = lineWidth;
+  this.strokeStyle = strokeStyle;
   this.center = center;
 }
 
-Object.setPrototypeOf(Rectangle.prototype, Line.prototype);
 
 Rectangle.prototype.calcAllCorner = function () {
   return {
-    TOP_LEFT: new Point(this.center.xCoordinate - (this.width/2),this.center.yCoordinate - (this.height/2)),
-    TOP_RIGHT: new Point(this.center.xCoordinate + (this.width/2),this.center.yCoordinate - (this.height/2)),
-    BOTTOM_LEFT: new Point(this.center.xCoordinate - (this.width/2),this.center.yCoordinate + (this.height/2)),
-    BOTTOM_RIGHT: new Point(this.center.xCoordinate + (this.width/2),this.center.yCoordinate + (this.height/2)),
+    TOP_LEFT: this.diagonal1.startPoint,
+    TOP_RIGHT: this.diagonal2.startPoint,
+    BOTTOM_LEFT: this.diagonal1.endPoint,
+    BOTTOM_RIGHT: this.diagonal2.endPoint
   };
 };
 
 Rectangle.prototype.getCenterOfSide = function () {
+
+  let topSide = new Line(positionArr[0],positionArr[1],lineWidth, strokeStyle, ctx)
+  let rightSide = new Line(positionArr[1],positionArr[2],lineWidth, strokeStyle, ctx)
+  let leftSide = new Line(positionArr[2],positionArr[3],lineWidth, strokeStyle, ctx)
+  let bottomSide = new Line(positionArr[3],positionArr[0],lineWidth, strokeStyle, ctx)
+
     return {
-        TOP: new Point(this.center.xCoordinate, this.center.yCoordinate - (this.height/2)),
-        BOTTOM: new Point(this.center.xCoordinate, this.center.yCoordinate + (this.height/2)),
-        LEFT: new Point(this.center.xCoordinate - (this.width/2), this.center.yCoordinate),
-        RIGHT: new Point(this.center.xCoordinate + (this.width/2), this.center.yCoordinate),
+        TOP: topSide.getCenter(),
+        BOTTOM: bottomSide.getCenter(),
+        LEFT: leftSide.getCenter(),
+        RIGHT: rightSide.getCenter()
       };
-};
-
-
-Rectangle.prototype.widthCalc = function () {
-  return Math.abs(this.endPoint.xCoordinate - this.startPoint.xCoordinate);
-};
-
-Rectangle.prototype.heightCalc = function () {
-  return Math.abs(this.endPoint.yCoordinate - this.startPoint.yCoordinate);
 };
 
 Rectangle.prototype.draw = function () {
@@ -43,14 +42,9 @@ Rectangle.prototype.draw = function () {
   this.ctx.beginPath();
   this.ctx.lineWidth = this.lineWidth;
   this.ctx.strokeStyle = this.strokeStyle;
-  this.ctx.rect(
-    this.startPoint.xCoordinate,
-    this.startPoint.yCoordinate,
-    this.width,
-    this.height
-  );
-  this.ctx.stroke();
-  this.ctx.closePath();
+  this.ctx.strokeStyle = 'black';
+  this.ctx.setLineDash([])
+  this.createRectSide()
 };
 
 Rectangle.prototype.drawDashPatten = function() {
@@ -58,13 +52,16 @@ Rectangle.prototype.drawDashPatten = function() {
   this.ctx.lineWidth = 0.5;
   this.ctx.strokeStyle = '#1682fc';
   this.ctx.setLineDash([6])
-  this.ctx.rect(
-    this.startPoint.xCoordinate,
-    this.startPoint.yCoordinate,
-    this.width,
-    this.height
-  );
-  this.ctx.stroke();
-  this.ctx.closePath();
+  this.createRectSide()
   this.ctx.setLineDash([])
 };
+
+Rectangle.prototype.createRectSide = function() {
+  this.ctx.moveTo(this.diagonal1.startPoint.xCoordinate,this.diagonal1.startPoint.yCoordinate)
+  this.ctx.lineTo(this.diagonal2.startPoint.xCoordinate,this.diagonal2.startPoint.yCoordinate)
+  this.ctx.lineTo(this.diagonal1.endPoint.xCoordinate,this.diagonal1.endPoint.yCoordinate)
+  this.ctx.lineTo(this.diagonal2.endPoint.xCoordinate,this.diagonal2.endPoint.yCoordinate)
+  this.ctx.lineTo(this.diagonal1.startPoint.xCoordinate,this.diagonal1.startPoint.yCoordinate)
+  this.ctx.stroke();
+  this.ctx.closePath();
+}

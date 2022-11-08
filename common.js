@@ -148,8 +148,18 @@ const commonModules = (() => {
 
   };
 
-  rotation = (event) => {
-    console.log(event)
+  rotation = (angle) => {
+    ctx.clearRect(0, 0, canvasObj.canvas.width, canvasObj.canvas.height);
+    let index = commonModules.currentShapeIndex >= 0 ? commonModules.currentShapeIndex : shapeLis.length - 1;
+
+    let currentShape = shapeLis[index];
+
+    for(let i = 0; i < currentShape.positionArr.length; i++){
+      currentShape.positionArr[i].rotate(currentShape.center,angle);
+    }
+
+    draw();
+    currentShape.drawDashRect()
   }
 
   return {
