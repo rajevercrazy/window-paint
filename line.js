@@ -30,3 +30,10 @@ function Line(startPoint,endPoint,lineWidth,strokeStyle,ctx) {
 
     return false;
   }
+
+  Line.prototype.getCenter = function() {
+    let cx = Math.min(this.startPoint.xCoordinate,this.endPoint.xCoordinate) + (Math.abs(this.startPoint.xCoordinate - this.endPoint.xCoordinate)/2)
+    let cy = Math.min(this.startPoint.yCoordinate,this.endPoint.yCoordinate) + (Math.abs(this.startPoint.yCoordinate - this.endPoint.yCoordinate)/2)
+
+    return new Point(cx,cy);
+  }
