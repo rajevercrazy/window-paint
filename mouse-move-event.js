@@ -40,6 +40,7 @@ const mouseMove = (event) => {
         if(app.shape?.isDrawing){
           ctx.clearRect(0,0,canvasObj.canvas.width,canvasObj.canvas.height);
           app.shape.endPoint = new Point(event.x - canvasObj.canvasOffsetX, event.y - canvasObj.canvasOffsetY)
+          app.shape.calc();
           app.shape.draw()
           app.draw();
         }
