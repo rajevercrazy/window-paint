@@ -88,3 +88,22 @@ Shape.prototype.calcAllPoint = function() {
     new Point(this.center.xCoordinate + (this.width/2),this.center.yCoordinate + (this.height/2))
   ]
 }
+
+Shape.prototype.isPointOnShape = function(x,y) {
+  let maxX = Number.MAX_SAFE_INTEGER;
+  let maxY = Number.MAX_SAFE_INTEGER;
+  let minY = 0;
+  let minX = 0;
+
+  this.positionArr.forEach(element => {
+    maxX = Math.max(maxX,element.xCoordinate);
+    maxY = Math.max(maxX,element.yCoordinate);
+    minY = Math.min(minY,element.yCoordinate);
+    minX = Math.min(minX,element.xCoordinate);
+  });
+
+  return (x > minX &&
+  x < maxX &&
+  y > minY &&
+  y < maxY)
+}

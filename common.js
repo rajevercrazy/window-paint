@@ -92,18 +92,11 @@ const commonModules = (() => {
   };
 
   isMouseInShape = (shape) => {
-    if(shape.shapeName == 'line' && shape.createGivenNameObj().isPointOnLine(commonModules.startX,commonModules.startY)){
-      return true;
-    }
-    else if (
-      commonModules.startX > shape.center.xCoordinate - (shape.width/2) &&
-      commonModules.startX < shape.center.xCoordinate + (shape.width/2) &&
-      commonModules.startY > shape.center.yCoordinate - (shape.height/2) &&
-      commonModules.startY < shape.center.yCoordinate + (shape.height/2)
-    ) {
-      return true;
-    }
-    return false;
+
+    return (
+      (shape.shapeName == 'line' && shape.createGivenNameObj().isPointOnLine(commonModules.startX,commonModules.startY)) ||
+      shape.isPointOnShape(commonModules.startX,commonModules.startY)
+    )
   };
 
   isMouseInText = (shape) => {
