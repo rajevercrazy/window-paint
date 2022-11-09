@@ -20,20 +20,22 @@ function Line(positionArr,lineWidth,strokeStyle,ctx) {
   }
 
   Line.prototype.isPointOnLine = function(x,y) {
-    let lengthOfLine = Math.sqrt(Math.pow((this.endPoint.xCoordinate - this.startPoint.xCoordinate), 2) + Math.pow((this.endPoint.yCoordinate - this.startPoint.yCoordinate), 2));
-    let firstHalfLineLengthgthOfLine = Math.sqrt(Math.pow((x - this.startPoint.xCoordinate), 2) + Math.pow((y - this.startPoint.yCoordinate), 2));
-    let secondHalfLineLength = Math.sqrt(Math.pow((this.endPoint.xCoordinate - x), 2) + Math.pow((this.endPoint.yCoordinate - y), 2));
+    let point = new Point(x,y);
+    let lengthOfLine = this.calDistance(this.startPoint,this.endPoint);
+    let firstHalfLineLengthgthOfLine = this.calDistance(point,this.startPoint);
+    let secondHalfLineLength = this.calDistance(point,this.endPoint);
 
-    if(Math.round(firstHalfLineLengthgthOfLine + secondHalfLineLength) == Math.round(lengthOfLine)){
-      return true;
-    }
-
-    return false;
-  }
+    return Math.round(firstHalfLineLengthgthOfLine + secondHalfLineLength) == Math.round(lengthOfLine)
+    
+   }
 
   Line.prototype.getCenter = function() {
     let cx = Math.min(this.startPoint.xCoordinate,this.endPoint.xCoordinate) + (Math.abs(this.startPoint.xCoordinate - this.endPoint.xCoordinate)/2)
     let cy = Math.min(this.startPoint.yCoordinate,this.endPoint.yCoordinate) + (Math.abs(this.startPoint.yCoordinate - this.endPoint.yCoordinate)/2)
 
     return new Point(cx,cy);
+  }
+
+  Line.prototype.calDistance = function(p1,p2) {
+    return Math.sqrt(Math.pow((p2.xCoordinate - p1.xCoordinate), 2) + Math.pow((p2.yCoordinate - p2.yCoordinate), 2))
   }
