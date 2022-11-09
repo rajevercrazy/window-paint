@@ -12,42 +12,31 @@ const commonModules = (() => {
 
   draw = () => {
 
-    let i = 0;
-
     for (let shape of shapeLis) {
-      if (shape.name == "Pencil") {
-        ctx.beginPath();
-        ctx.moveTo(shape.arr[0].xCoordinate, shape.arr[0].yCoordinate);
-        ctx.lineWidth = shape.lineWidth;
-        ctx.strokeStyle = shape.strokeStyle;
-        ctx.lineCap = shape.lineCap;
-        for (let j = 1; j < shape.arr.length; j++) {
-          ctx.lineTo(shape.arr[j].xCoordinate, shape.arr[j].yCoordinate);
-          ctx.stroke();
-        }
-        ctx.beginPath();
-      } 
-      else if (shape.name == "Eraser") {
-        ctx.beginPath();
-        ctx.moveTo(shape.arr[0].xCoordinate, shape.arr[0].yCoordinate);
-        ctx.lineWidth = shape.lineWidth;
-        ctx.strokeStyle = shape.strokeStyle;
-        ctx.lineCap = shape.lineCap;
-        for (let j = 1; j < shape.arr.length; j++) {
-          ctx.lineTo(shape.arr[j].xCoordinate, shape.arr[j].yCoordinate);
-          ctx.stroke();
-        }
-        ctx.closePath();
+      if (shape.name == "Pencil" || shape.name == "Eraser") {
+        drawLine(shape)
       } 
       else if (shape.name == "Text") {
         shape.draw();
       } 
       else {
-        shapeLis[i].draw();
+        shape.draw();
       }
-      i++;
     }
   };
+
+  drawLine = (shape) => {
+    ctx.beginPath();
+        ctx.moveTo(shape.arr[0].xCoordinate, shape.arr[0].yCoordinate);
+        ctx.lineWidth = shape.lineWidth;
+        ctx.strokeStyle = shape.strokeStyle;
+        ctx.lineCap = shape.lineCap;
+        shape.arr.forEach(element => {
+          ctx.lineTo(element.xCoordinate, element.yCoordinate);
+          ctx.stroke(); 
+        });
+        ctx.closePath();
+  }
 
   addInput = (x, y) => {
     let textX = x - canvasObj.canvasOffsetX;
@@ -108,39 +97,6 @@ const commonModules = (() => {
     )
   };
 
-  rotated = (angle) => {
-    // ctx.save();
-    ctx.clearRect(0, 0, canvasObj.canvas.width, canvasObj.canvas.height);
-    let index = commonModules.currentShapeIndex >= 0 ? commonModules.currentShapeIndex : shapeLis.length - 1;
-
-    let currentShape = shapeLis[index];
-
-    if(currentShape){
-      
-    if (angle == 90 || angle == 270) {
-      [currentShape.width,currentShape.height] = [currentShape.height,currentShape.width];
-      currentShape.startPoint = new Point(currentShape.center.xCoordinate - (currentShape.width / 2), currentShape.center.yCoordinate - (currentShape.height / 2));
-      currentShape.endPoint = new Point(currentShape.center.xCoordinate + (currentShape.width / 2), currentShape.center.yCoordinate + (currentShape.height / 2));
-    }
-
-    if (angle == 90) {
-      currentShape.currentRotation = (currentShape.currentRotation + 1) % 4;
-    }
-    if (angle == 270) {
-      currentShape.currentRotation = (currentShape.currentRotation - 1) % 4;
-    }
-    if (angle == 180) {
-      currentShape.currentRotation = (currentShape.currentRotation + 2) % 4;
-    }
-  
-    currentShape.currentRotation = currentShape.currentRotation < 0 ? 3 : currentShape.currentRotation;
-    currentShape.angle = (currentShape.angle + angle) % 360;
-    draw();
-    currentShape.drawDashRect()
-  }
-
-  };
-
   rotation = (angle) => {
     ctx.clearRect(0, 0, canvasObj.canvas.width, canvasObj.canvas.height);
     let index = commonModules.currentShapeIndex >= 0 ? commonModules.currentShapeIndex : shapeLis.length - 1;
@@ -170,7 +126,6 @@ const commonModules = (() => {
     setColor,
     isMouseInShape,
     isMouseInText,
-    rotated,
     rotation
   };
 })();
