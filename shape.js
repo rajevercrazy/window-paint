@@ -38,23 +38,13 @@ Shape.prototype.createGivenNameObj = function () {
       return new Rectangle(this.positionArr, this.lineWidth, this.strokeStyle, this.ctx, this.height, this.width, this.center);
 
     case 'triangle':
-      return this.createTriangle(this.angle)
+      return new Triangle(this.positionArr, this.lineWidth, this.strokeStyle, this.ctx, this.height, this.width, this.center);
 
     case 'line':
       return new Line(this.positionArr, this.lineWidth, this.strokeStyle, this.ctx);
 
     default:
   }
-}
-
-Shape.prototype.createTriangle = function () {
-
-  
-
-  let obj = ['TOP', 'RIGHT', 'BOTTOM', 'LEFT'];
-
-  return new Triangle(this.positionArr, this.lineWidth, this.strokeStyle, this.ctx, obj[this.currentRotation], this.height, this.width, this.center);
-
 }
 
 Shape.prototype.calc = function () {
