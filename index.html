@@ -1,179 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Window Paint</title>
-    <link rel="stylesheet" href="styles.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
-  </head>
-  <body>
-    <div class="container">
-      <div id="toolbar">
-        <div class="inner-container">
-          <div class="imageTool">
-            <a href="#" onclick="commonModules.tool = 'Select'">
-              <div class="select_btn">
-                <div class="dash_box"></div>
-                <span>Select</span>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Window Paint</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+</head>
+
+<body>
+  <div class="container">
+    <div id="toolbar">
+      <div class="inner-container">
+        <div class="imageTool">
+          <a href="#" onclick="commonModules.tool = 'Select'">
+            <div class="select_btn">
+              <div class="dash_box"></div>
+              <span>Select</span>
+            </div>
+          </a>
+          <div class="select">
+            <div class="dropdown">
+              <div>
+                <i class="fa fa-rotate-right" style="font-size: 24px"></i>
               </div>
-            </a>
-            <div class="select">
-              <div class="dropdown">
+              <div class="dropdown-content">
+                <a href="#" onclick="commonModules.rotation(90)">
+                  <p class="select">Rotate right 90</p>
+                </a>
+                <a href="#" onclick="commonModules.rotation(270)">
+                  <p class="select">Rotate left 90</p>
+                </a>
+                <a href="#" onclick="commonModules.rotation(180)">
+                  <p class="select">Rotate 180</p>
+                </a>
                 <div>
-                  <i class="fa fa-rotate-right" style="font-size: 24px"></i>
-                </div>
-                <div class="dropdown-content">
-                  <a href="#" onclick="commonModules.rotated(90)"
-                    ><p class="select">Rotate right 90</p></a
-                  >
-                  <a href="#" onclick="commonModules.rotated(270)"
-                    ><p class="select">Rotate left 90</p></a
-                  >
-                  <a href="#" onclick="commonModules.rotated(180)"
-                    ><p class="select">Rotate 180</p></a
-                  >
                   <label>Angle</label>
                   <input type="text" onchange="commonModules.rotation(value)">
                 </div>
               </div>
             </div>
           </div>
-          <div style="text-align: center; padding-top: 1rem">
-            <label for="image">Image</label>
+        </div>
+        <div style="text-align: center; padding-top: 1rem">
+          <label for="image">Image</label>
+        </div>
+      </div>
+      <hr class="tool-divided" />
+      <div class="inner-container">
+        <div class="tools">
+          <div class="tool">
+            <i id="pencil" class="fa fa-pencil" onclick="commonModules.tool = 'Pencil'"></i>
+          </div>
+          <div class="tool">
+            <i id="eraser" class="fa fa-eraser" onclick="commonModules.tool = 'Eraser'"></i>
+          </div>
+          <div class="tool">
+            <i id="text" class="fa fa-font" onclick="commonModules.tool = 'Text'"></i>
+          </div>
+          <div class="tool">
+            <!-- <i id="fill-drip" class="fa fa-paint-brush" onclick="commonModules.tool = 'Fill'"></i> -->
           </div>
         </div>
-        <hr class="tool-divided" />
-        <div class="inner-container">
-          <div class="tools">
-            <div class="tool">
-              <i id="pencil" class="fa fa-pencil" onclick="commonModules.tool = 'Pencil'"></i>
-            </div>
-            <div class="tool">
-              <i id="eraser" class="fa fa-eraser" onclick="commonModules.tool = 'Eraser'"></i>
-            </div>
-            <div class="tool">
-              <i id="text" class="fa fa-font" onclick="commonModules.tool = 'Text'"></i>
-            </div>
-            <div class="tool">
-              <!-- <i id="fill-drip" class="fa fa-paint-brush" onclick="commonModules.tool = 'Fill'"></i> -->
-            </div>
-          </div>
-          <div style="text-align: center">
-            <label for="tools">Tools</label>
-          </div>
+        <div style="text-align: center">
+          <label for="tools">Tools</label>
         </div>
-        <hr class="tool-divided" />
-        <div class="inner-container">
-          <div class="tool-container">
-            <a href="#" onclick="commonModules.setShape('line')"
-              ><img
-                src="./assets/diagonal-line.png"
-                width="15"
-                height="15"
-                class="shape_image"
-            /></a>
-            <a href="#" onclick="commonModules.setShape('circle')"
-              ><img
-                src="./assets/ellipse-outline-shape-variant.png"
-                width="15"
-                height="15"
-                class="shape_image"
-            /></a>
-            <a href="#" onclick="commonModules.setShape('rectangle')"
-              ><img
-                src="./assets/rectangular-shape-outline.png"
-                width="15"
-                height="15"
-                class="shape_image"
-            /></a>
-            <a href="#" onclick="commonModules.setShape('triangle')"
-              ><img
-                src="./assets/triangle.png"
-                width="15"
-                height="15"
-                class="shape_image"
-            /></a>
-          </div>
-          <div style="text-align: center">
-            <label for="shapes">Shapes</label>
-          </div>
+      </div>
+      <hr class="tool-divided" />
+      <div class="inner-container">
+        <div class="tool-container">
+          <a href="#" onclick="commonModules.setShape('line')"><img src="./assets/diagonal-line.png" width="15"
+              height="15" class="shape_image" /></a>
+          <a href="#" onclick="commonModules.setShape('circle')"><img src="./assets/ellipse-outline-shape-variant.png"
+              width="15" height="15" class="shape_image" /></a>
+          <a href="#" onclick="commonModules.setShape('rectangle')"><img src="./assets/rectangular-shape-outline.png"
+              width="15" height="15" class="shape_image" /></a>
+          <a href="#" onclick="commonModules.setShape('triangle')"><img src="./assets/triangle.png" width="15"
+              height="15" class="shape_image" /></a>
         </div>
-        <hr class="tool-divided" />
-        <div class="inner-container">
-          <div class="dropdown">
-            <div class="line_img">
+        <div style="text-align: center">
+          <label for="shapes">Shapes</label>
+        </div>
+      </div>
+      <hr class="tool-divided" />
+      <div class="inner-container">
+        <div class="dropdown">
+          <div class="line_img">
             <div class="dropdown-icon">
-              <hr
-                style="
+              <hr style="
                   width: 2rem;
                   height: 1px;
                   background-color: #000000;
                   margin: 1px;
-                "
-              />
-              <hr
-                style="
+                " />
+              <hr style="
                   width: 2rem;
                   height: 2px;
                   background-color: #000000;
                   margin: 1.5px;
-                "
-              />
-              <hr
-                style="
+                " />
+              <hr style="
                   width: 2rem;
                   height: 3px;
                   background-color: #000000;
                   margin: 1.5px;
-                "
-              />
-              <hr
-                style="
+                " />
+              <hr style="
                   width: 2rem;
                   height: 4px;
                   background-color: #000000;
                   margin: 1.5px;
-                "
-              />
+                " />
             </div>
           </div>
-            <div class="dropdown-content">
-              <a href="#" onclick="commonModules.pencilSize = 1"
-                ><hr
-                  style="width: 5rem; height: 1px; background-color: #000000"
-              /></a>
-              <a href="#" onclick="commonModules.pencilSize = 2"
-                ><hr
-                  style="width: 5rem; height: 2px; background-color: #000000"
-              /></a>
-              <a href="#" onclick="commonModules.pencilSize = 3"
-                ><hr
-                  style="width: 5rem; height: 3px; background-color: #000000"
-              /></a>
-              <a href="#" onclick="commonModules.pencilSize = 4"
-                ><hr
-                  style="width: 5rem; height: 4px; background-color: #000000"
-              /></a>
-            </div>
-          </div>
-          <div style="text-align: center">
-            <label for="size">Size</label>
+          <div class="dropdown-content">
+            <a href="#" onclick="commonModules.pencilSize = 1">
+              <hr style="width: 5rem; height: 1px; background-color: #000000" />
+            </a>
+            <a href="#" onclick="commonModules.pencilSize = 2">
+              <hr style="width: 5rem; height: 2px; background-color: #000000" />
+            </a>
+            <a href="#" onclick="commonModules.pencilSize = 3">
+              <hr style="width: 5rem; height: 3px; background-color: #000000" />
+            </a>
+            <a href="#" onclick="commonModules.pencilSize = 4">
+              <hr style="width: 5rem; height: 4px; background-color: #000000" />
+            </a>
           </div>
         </div>
-        <hr class="tool-divided" />
-        <div class="inner-container">
-          <div class="colors-selector">
-            <div
-            >
-              <a href="#" onclick="setColorPallet('color1')"
-                ><div
-                  id="color1"
-                  style="
+        <div style="text-align: center">
+          <label for="size">Size</label>
+        </div>
+      </div>
+      <hr class="tool-divided" />
+      <div class="inner-container">
+        <div class="colors-selector">
+          <div>
+            <a href="#" onclick="setColorPallet('color1')">
+              <div id="color1" style="
                     border: solid black thin;
                     width: 3rem;
                     height: 3rem;
@@ -181,17 +147,13 @@
                     margin-bottom: 0.3rem;
                     margin-top: 1rem;
                     background-color: black;
-                  "
-                ></div
-              ></a>
-              <label>Color 1</label>
-            </div>
-            <div
-            >
-              <a href="#" onclick="setColorPallet('color2')"
-                ><div
-                  id="color2"
-                  style="
+                  "></div>
+            </a>
+            <label>Color 1</label>
+          </div>
+          <div>
+            <a href="#" onclick="setColorPallet('color2')">
+              <div id="color2" style="
                     border: solid black thin;
                     background-color: #ffffff;
                     width: 3rem;
@@ -199,138 +161,135 @@
                     margin-right: 0.3rem;
                     margin-bottom: 0.3rem;
                     margin-top: 1rem;
-                  "
-                ></div
-              ></a>
-              <label>Color 2</label>
-            </div>
-
-            <div id="current">
-              <a href="#" onclick="commonModules.setColor('#000000')"
-                ><div class="color" style="background-color: #000000"></div
-              ></a>
-              <a href="#" onclick="commonModules.setColor('#8b8275')"
-                ><div class="color" style="background-color: #8b8275"></div
-              ></a>
-              <a href="#" onclick="commonModules.setColor('#8c040a')"
-                ><div class="color" style="background-color: #8c040a"></div
-              ></a>
-              <a href="#" onclick="commonModules.setColor('#8b8218')"
-                ><div class="color" style="background-color: #8b8218"></div
-              ></a>
-              <a href="#" onclick="commonModules.setColor('#108213')"
-                ><div class="color" style="background-color: #108213"></div
-              ></a>
-              <a href="#" onclick="commonModules.setColor('#118275')"
-                ><div class="color" style="background-color: #118275"></div
-              ></a>
-              <a href="#" onclick="commonModules.setColor('#020a75')"
-                ><div class="color" style="background-color: #020a75"></div
-              ></a>
-              <a href="#" onclick="commonModules.setColor('#8c0d75')"
-                ><div class="color" style="background-color: #8c0d75"></div
-              ></a>
-              <a href="#" onclick="commonModules.setColor('#8b8235')"
-                ><div class="color" style="background-color: #8b8235"></div
-              ></a>
-              <a href="#" onclick="commonModules.setColor('#044236')"
-                ><div class="color" style="background-color: #044236"></div
-              ></a>
-              <a href="#" onclick="commonModules.setColor('#1682fc')"
-                ><div class="color" style="background-color: #1682fc"></div
-              ></a>
-              <a href="#" onclick="commonModules.setColor('#064276')"
-                ><div class="color" style="background-color: #064276"></div
-              ></a>
-              <a href="#" onclick="commonModules.setColor('#8c25fc')"
-                ><div class="color" style="background-color: #8c25fc"></div
-              ></a>
-              <a href="#" onclick="commonModules.setColor('#8b420e')"
-                ><div class="color" style="background-color: #8b420e"></div
-              ></a>
-              <a href="#" onclick="commonModules.setColor('#ffffff')"
-                ><div class="color" style="background-color: #ffffff"></div
-              ></a>
-              <a href="#" onclick="commonModules.setColor('#c8c2ba')"
-                ><div class="color" style="background-color: #c8c2ba"></div
-              ></a>
-              <a href="#" onclick="commonModules.setColor('#fd0d1b')"
-                ><div class="color" style="background-color: #fd0d1b"></div
-              ></a>
-              <a href="#" onclick="commonModules.setColor('#fffe38')"
-                ><div class="color" style="background-color: #fffe38"></div
-              ></a>
-              <a href="#" onclick="commonModules.setColor('#29fe2f')"
-                ><div class="color" style="background-color: #29fe2f"></div
-              ></a>
-              <a href="#" onclick="commonModules.setColor('#2dffff')"
-                ><div class="color" style="background-color: #2dffff"></div
-              ></a>
-              <a href="#" onclick="commonModules.setColor('#0b24fc')"
-                ><div class="color" style="background-color: #0b24fc"></div
-              ></a>
-              <a href="#" onclick="commonModules.setColor('#fd29fd')"
-                ><div class="color" style="background-color: #fd29fd"></div
-              ></a>
-              <a href="#" onclick="commonModules.setColor('#fffe75')"
-                ><div class="color" style="background-color: #fffe75"></div
-              ></a>
-              <a href="#" onclick="commonModules.setColor('#2afe76')"
-                ><div class="color" style="background-color: #2afe76"></div
-              ></a>
-              <a href="#" onclick="commonModules.setColor('#8bffff')"
-                ><div class="color" style="background-color: #8bffff"></div
-              ></a>
-              <a href="#" onclick="commonModules.setColor('#8c83fd')"
-                ><div class="color" style="background-color: #8c83fd"></div
-              ></a>
-              <a href="#" onclick="commonModules.setColor('#fd1476')"
-                ><div class="color" style="background-color: #fd1476"></div
-              ></a>
-              <a href="#" onclick="commonModules.setColor('#fe8235')"
-                ><div class="color" style="background-color: #fe8235"></div
-              ></a>
-              <a href="#" onclick="commonModules.setColor('#ffffff')"
-                ><div class="color" style="background-color: #ffffff"></div
-              ></a>
-              <a href="#" onclick="commonModules.setColor('#ffffff')"
-                ><div class="color" style="background-color: #ffffff"></div
-              ></a>
-            </div>
-            <div class="stroke">
-              <input id="stroke" type="color" style="height: 2rem" onchange="commonModules.setColor(event.target.value)"/>
-              <label
-                for="stroke"
-                style="word-wrap: break-word; text-align: center"
-                >Edit colors</label
-              >
-            </div>
+                  "></div>
+            </a>
+            <label>Color 2</label>
           </div>
-          <div style="text-align: center">
-            <label for="color">Colors</label>
+
+          <div id="current">
+            <a href="#" onclick="commonModules.setColor('#000000')">
+              <div class="color" style="background-color: #000000"></div>
+            </a>
+            <a href="#" onclick="commonModules.setColor('#8b8275')">
+              <div class="color" style="background-color: #8b8275"></div>
+            </a>
+            <a href="#" onclick="commonModules.setColor('#8c040a')">
+              <div class="color" style="background-color: #8c040a"></div>
+            </a>
+            <a href="#" onclick="commonModules.setColor('#8b8218')">
+              <div class="color" style="background-color: #8b8218"></div>
+            </a>
+            <a href="#" onclick="commonModules.setColor('#108213')">
+              <div class="color" style="background-color: #108213"></div>
+            </a>
+            <a href="#" onclick="commonModules.setColor('#118275')">
+              <div class="color" style="background-color: #118275"></div>
+            </a>
+            <a href="#" onclick="commonModules.setColor('#020a75')">
+              <div class="color" style="background-color: #020a75"></div>
+            </a>
+            <a href="#" onclick="commonModules.setColor('#8c0d75')">
+              <div class="color" style="background-color: #8c0d75"></div>
+            </a>
+            <a href="#" onclick="commonModules.setColor('#8b8235')">
+              <div class="color" style="background-color: #8b8235"></div>
+            </a>
+            <a href="#" onclick="commonModules.setColor('#044236')">
+              <div class="color" style="background-color: #044236"></div>
+            </a>
+            <a href="#" onclick="commonModules.setColor('#1682fc')">
+              <div class="color" style="background-color: #1682fc"></div>
+            </a>
+            <a href="#" onclick="commonModules.setColor('#064276')">
+              <div class="color" style="background-color: #064276"></div>
+            </a>
+            <a href="#" onclick="commonModules.setColor('#8c25fc')">
+              <div class="color" style="background-color: #8c25fc"></div>
+            </a>
+            <a href="#" onclick="commonModules.setColor('#8b420e')">
+              <div class="color" style="background-color: #8b420e"></div>
+            </a>
+            <a href="#" onclick="commonModules.setColor('#ffffff')">
+              <div class="color" style="background-color: #ffffff"></div>
+            </a>
+            <a href="#" onclick="commonModules.setColor('#c8c2ba')">
+              <div class="color" style="background-color: #c8c2ba"></div>
+            </a>
+            <a href="#" onclick="commonModules.setColor('#fd0d1b')">
+              <div class="color" style="background-color: #fd0d1b"></div>
+            </a>
+            <a href="#" onclick="commonModules.setColor('#fffe38')">
+              <div class="color" style="background-color: #fffe38"></div>
+            </a>
+            <a href="#" onclick="commonModules.setColor('#29fe2f')">
+              <div class="color" style="background-color: #29fe2f"></div>
+            </a>
+            <a href="#" onclick="commonModules.setColor('#2dffff')">
+              <div class="color" style="background-color: #2dffff"></div>
+            </a>
+            <a href="#" onclick="commonModules.setColor('#0b24fc')">
+              <div class="color" style="background-color: #0b24fc"></div>
+            </a>
+            <a href="#" onclick="commonModules.setColor('#fd29fd')">
+              <div class="color" style="background-color: #fd29fd"></div>
+            </a>
+            <a href="#" onclick="commonModules.setColor('#fffe75')">
+              <div class="color" style="background-color: #fffe75"></div>
+            </a>
+            <a href="#" onclick="commonModules.setColor('#2afe76')">
+              <div class="color" style="background-color: #2afe76"></div>
+            </a>
+            <a href="#" onclick="commonModules.setColor('#8bffff')">
+              <div class="color" style="background-color: #8bffff"></div>
+            </a>
+            <a href="#" onclick="commonModules.setColor('#8c83fd')">
+              <div class="color" style="background-color: #8c83fd"></div>
+            </a>
+            <a href="#" onclick="commonModules.setColor('#fd1476')">
+              <div class="color" style="background-color: #fd1476"></div>
+            </a>
+            <a href="#" onclick="commonModules.setColor('#fe8235')">
+              <div class="color" style="background-color: #fe8235"></div>
+            </a>
+            <a href="#" onclick="commonModules.setColor('#ffffff')">
+              <div class="color" style="background-color: #ffffff"></div>
+            </a>
+            <a href="#" onclick="commonModules.setColor('#ffffff')">
+              <div class="color" style="background-color: #ffffff"></div>
+            </a>
+          </div>
+          <div class="stroke">
+            <input id="stroke" type="color" style="height: 2rem"
+              onchange="commonModules.setColor(event.target.value)" />
+            <label for="stroke" style="word-wrap: break-word; text-align: center">Edit colors</label>
           </div>
         </div>
-      </div>
-      <div>
-        <canvas id="drawing-board" height="648" width="1152"></canvas>
-        <!-- <canvas id="top-drawing-board"></canvas> -->
+        <div style="text-align: center">
+          <label for="color">Colors</label>
+        </div>
       </div>
     </div>
-    <script src="canvas-setting.js"></script>
-    <script src="shape.js"></script>
-    <script src="pencil.js"></script>
-    <script src="eraser.js"></script>
-    <script src="text.js"></script>
-    <script src="point.js"></script>
-    <script src="line.js"></script>
-    <script src="rectangle.js"></script>
-    <script src="circle.js"></script>
-    <script src="triangle.js"></script>
-    <script src="common.js"></script>
-    <script src="mouse-down-event.js"></script>
-    <script src="mouse-move-event.js"></script>
-    <script src="mouse-up-event.js"></script>
-    <script src="main.js"></script>
-    <!-- <script src="script.js"></script> -->
-  </body>
+    <div>
+      <canvas id="drawing-board" height="648" width="1152"></canvas>
+      <!-- <canvas id="top-drawing-board"></canvas> -->
+    </div>
+  </div>
+  <script src="canvas-setting.js"></script>
+  <script src="shape.js"></script>
+  <script src="pencil.js"></script>
+  <script src="eraser.js"></script>
+  <script src="text.js"></script>
+  <script src="point.js"></script>
+  <script src="line.js"></script>
+  <script src="rectangle.js"></script>
+  <script src="circle.js"></script>
+  <script src="triangle.js"></script>
+  <script src="common.js"></script>
+  <script src="mouse-down-event.js"></script>
+  <script src="mouse-move-event.js"></script>
+  <script src="mouse-up-event.js"></script>
+  <script src="main.js"></script>
+  <!-- <script src="script.js"></script> -->
+</body>
+
 </html>
