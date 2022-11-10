@@ -111,7 +111,7 @@ Shape.prototype.isPointOnShape = function(x,y) {
 
 Shape.prototype.isPointOnShapeRotationArea = function(x,y) {
   for(let i = 0;i<this.positionArr.length;i++){
-    if(this.positionArr[i].calcDistance(x,y) < 2) return true
+    if(this.positionArr[i].calcDistance(x,y) < 4) return true
   }
 
   return false
