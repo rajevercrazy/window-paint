@@ -2,16 +2,16 @@ const commonModules = (() => {
   const canvasObj = canvasSetting;
   const ctx = canvasObj.ctx;
 
-  let shapeLis = [];
+  let toolLis = [];
   let pencilSize = 1;
   let isDragging = false;
-  let currentShapeIndex = shapeLis.length - 1;
+  let currentShapeIndex = toolLis.length - 1;
   let startX = null;
   let startY = null;
   let tool = "";
   draw = () => {
 
-    shapeLis.forEach(shape => {
+    toolLis.forEach(shape => {
       if (shape.name == "Pencil" || shape.name == "Eraser") {
         drawLine(shape)
       }
@@ -52,7 +52,7 @@ const commonModules = (() => {
         ctx.textAlign = "left";
         ctx.font = "14px sans-serif";
         ctx.fillText(textarea.value, textX, textY);
-        shapeLis.push(new Text(ctx, new Point(textX, textY), textarea.value));
+        toolLis.push(new Text(ctx, new Point(textX, textY), textarea.value));
         document.body.removeChild(textarea);
       }
     };
@@ -99,8 +99,8 @@ const commonModules = (() => {
   rotation = (angle) => {
     ctx.clearRect(0, 0, canvasObj.canvas.width, canvasObj.canvas.height);
 
-    let index = commonModules.currentShapeIndex >= 0 ? commonModules.currentShapeIndex : shapeLis.length - 1;
-    let currentShape = shapeLis[index];
+    let index = commonModules.currentShapeIndex >= 0 ? commonModules.currentShapeIndex : toolLis.length - 1;
+    let currentShape = toolLis[index];
 
     for (let i = 0; i < currentShape.positionArr.length; i++) {
       currentShape.positionArr[i].rotate(currentShape.center, angle);
@@ -113,7 +113,7 @@ const commonModules = (() => {
   }
 
   return {
-    shapeLis,
+    toolLis: toolLis,
     pencilSize,
     isDragging,
     currentShapeIndex,

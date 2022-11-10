@@ -5,7 +5,7 @@ const mouseMove = (event) => {
   const canvasX = event.clientX - canvasObj.canvasOffsetX;
   const canvasY = event.clientY - canvasObj.canvasOffsetY;
 
-  if (app.shapeLis[app.currentShapeIndex]?.name == 'Shape' && app.shapeLis[app.currentShapeIndex]?.isPointOnShapeRotationArea(canvasX, canvasY)) {
+  if (app.toolLis[app.currentShapeIndex]?.name == 'Shape' && app.toolLis[app.currentShapeIndex]?.isPointOnShapeRotationArea(canvasX, canvasY)) {
     document.body.style.cursor = "grab";
     app.tool = 'rotation'
   }
@@ -47,14 +47,14 @@ const mouseMove = (event) => {
         let dx = mouseX - app.startX;
         let dy = mouseY - app.startY;
 
-        let currentShape = app.shapeLis[app.currentShapeIndex];
-        if (currentShape.name == "Text") {
-          currentShape.location.xCoordinate += dx;
-          currentShape.location.yCoordinate += dy;
+        let curShape = app.toolLis[app.currentShapeIndex];
+        if (curShape.name == "Text") {
+          curShape.location.xCoordinate += dx;
+          curShape.location.yCoordinate += dy;
         } else {
-          currentShape.positionArr = currentShape.positionArr.map((element) => new Point(element.xCoordinate + dx, element.yCoordinate + dy));
-          currentShape.center.xCoordinate += dx;
-          currentShape.center.yCoordinate += dy;
+          curShape.positionArr = curShape.positionArr.map((element) => new Point(element.xCoordinate + dx, element.yCoordinate + dy));
+          curShape.center.xCoordinate += dx;
+          curShape.center.yCoordinate += dy;
         }
         ctx.clearRect(0, 0, canvasObj.canvas.width, canvasObj.canvas.height);
         app.draw();
@@ -70,13 +70,13 @@ const mouseMove = (event) => {
         let mouseY = canvasY;
 
 
-        let currentShape = app.shapeLis[app.currentShapeIndex];
+        let curShape = app.toolLis[app.currentShapeIndex];
         let oppSide = (new Point(app.startX, app.startY)).calcDistance(mouseX, mouseY);
-        let adjSide = currentShape.width / 2;
+        let adjSide = curShape.width / 2;
         let angle = (Math.atan(oppSide / adjSide) * 180) / Math.PI;
 
         if (getRotationDirection(
-          getAreaOfPoint(new Point(mouseX, mouseY), currentShape.center),
+          getQuadrand(new Point(mouseX, mouseY), curShape.center),
           new Point(app.startX, app.startY),
           new Point(mouseX, mouseY)
         ) == -1) {
@@ -92,7 +92,7 @@ const mouseMove = (event) => {
       break;
   }
 
-  function getAreaOfPoint(point, center) {
+  function getQuadrand(point, center) {
     if (
       point.xCoordinate > center.xCoordinate
       && point.yCoordinate < center.yCoordinate) {
@@ -113,6 +113,10 @@ const mouseMove = (event) => {
 
   function getRotationDirection(quadrand, basePoint, currPoint) {
 
+    /** 
+     * 1: Clockwise Direction
+     * -1: Anti Clockwise Direction
+    */
     switch (quadrand) {
       case 1:
         return (basePoint.xCoordinate < currPoint.xCoordinate || basePoint.yCoordinate < currPoint.yCoordinate) ? 1 : -1;

@@ -37,8 +37,8 @@ const mouseDown = (event) => {
     case "Select":
       app.startX = canvasX;
       app.startY = canvasY;
-      for (let i = 0; i < app.shapeLis.length; i++) {
-        let shape = app.shapeLis[i];
+      for (let i = 0; i < app.toolLis.length; i++) {
+        let shape = app.toolLis[i];
 
         if ((shape.name == 'Shape' && app.isMouseInShape(shape)) || (shape.name == 'Text' && app.isMouseInText(shape))) {
           app.currentShapeIndex = i;
@@ -50,9 +50,9 @@ const mouseDown = (event) => {
       app.startX = canvasX;
       app.startY = canvasY;
 
-      for (let i = 0; i < app.shapeLis.length; i++) {
+      for (let i = 0; i < app.toolLis.length; i++) {
 
-        if (app.shapeLis[i].name == 'Shape' && app.shapeLis[i].isPointOnShapeRotationArea(canvasX, canvasY)) {
+        if (app.toolLis[i].name == 'Shape' && app.toolLis[i].isPointOnShapeRotationArea(canvasX, canvasY)) {
           app.currentShapeIndex = i;
           app.isRotated = true;
           app.startRotationPoint = new Point(canvasX,canvasY);
