@@ -9,7 +9,6 @@ const commonModules = (() => {
   let startX = null;
   let startY = null;
   let tool = "";
-
   draw = () => {
 
     shapeLis.forEach(shape => {
@@ -109,6 +108,8 @@ const commonModules = (() => {
 
     draw();
     currentShape.drawDashRect()
+
+    commonModules.tool = 'rotated';
   }
 
   return {

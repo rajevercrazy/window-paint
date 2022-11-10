@@ -1,7 +1,5 @@
-const mouseUp = (event) => {
-  const canvasObj = canvasSetting;
+const mouseUp = () => {
   const app = commonModules;
-  const ctx = canvasObj.ctx;
 
     switch (app.tool) {
       case "Pencil":
@@ -20,7 +18,8 @@ const mouseUp = (event) => {
       case "Select":
         app.isDragging = false;
         break;
-      default:
+        default:
+        app.isRotated = false;
         break;
     }
 }

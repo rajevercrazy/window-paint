@@ -13,3 +13,7 @@ Point.prototype.rotate = function(origin,angle){
     this.xCoordinate = Math.cos(tetha) * (dx) - Math.sin(tetha) * (dy) + origin.xCoordinate;
     this.yCoordinate = Math.sin(tetha) * (dx) + Math.cos(tetha) * (dy) + origin.yCoordinate;
 }
+
+Point.prototype.calcDistance = function(x,y) {
+    return Math.sqrt(Math.pow((this.xCoordinate - x), 2) + Math.pow((this.yCoordinate - y), 2));
+  }

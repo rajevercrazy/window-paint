@@ -21,11 +21,12 @@ function Line(positionArr,lineWidth,strokeStyle,ctx) {
 
   Line.prototype.isPointOnLine = function(x,y) {
     let point = new Point(x,y);
-    let lengthOfLine = this.calDistance(this.startPoint,this.endPoint);
-    let firstHalfLineLengthgthOfLine = this.calDistance(point,this.startPoint);
-    let secondHalfLineLength = this.calDistance(point,this.endPoint);
+    
+    let lenOfLine = this.startPoint.calcDistance(this.endPoint.xCoordinate,this.endPoint.yCoordinate);
+    let lenFirstnHalfOfLine = this.startPoint.calcDistance(point.xCoordinate,point.yCoordinate);
+    let lenSecondHalfOfLine= this.calDistance(point,this.endPoint);
 
-    return Math.round(firstHalfLineLengthgthOfLine + secondHalfLineLength) == Math.round(lengthOfLine)
+    return Math.round(lenFirstnHalfOfLine + lenSecondHalfOfLine) == Math.round(lenOfLine)
     
    }
 
