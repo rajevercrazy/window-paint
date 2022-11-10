@@ -11,7 +11,6 @@ const mouseMove = (event) => {
   }
   else {
     document.body.style.cursor = 'default';
-    //   tool = app.tool;
   }
 
 
