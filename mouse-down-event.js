@@ -40,11 +40,7 @@ const mouseDown = (event) => {
       for (let i = 0; i < app.shapeLis.length; i++) {
         let shape = app.shapeLis[i];
 
-        if (shape.name != 'Shape' || shape.name != 'Text') {
-          continue;
-        }
-
-        if (app.isMouseInShape(shape) || app.isMouseInText(shape)) {
+        if ((shape.name == 'Shape' && app.isMouseInShape(shape)) || (shape.name == 'Text' && app.isMouseInText(shape))) {
           app.currentShapeIndex = i;
           app.isDragging = true;
         }
