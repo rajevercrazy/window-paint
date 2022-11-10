@@ -13,13 +13,16 @@ const mouseUp = () => {
       case "Shape":
         app.shape.isDrawing = false;
         app.shapeLis.push(app.shape);
+        app.currentShapeIndex = app.shapeLis.length - 1;
         app.shape.drawDashRect();
         break;
       case "Select":
         app.isDragging = false;
+        app.shapeLis[app.currentShapeIndex].drawDashRect();
         break;
         default:
         app.isRotated = false;
+        app.tool = "Shape"
         break;
     }
 }
