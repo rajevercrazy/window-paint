@@ -20,9 +20,9 @@ const mouseDown = (event) => {
       app.eraser = new Eraser(true);
       app.eraser.addPointer(new Point(canvasX, canvasY,));
       canvasObj.ctx.beginPath();
-      ctx.strokeStyle = app.eraser.strokeStyle;
-      ctx.lineWidth = app.eraser.lineWidth;
-      ctx.lineCap = app.eraser.lineCap;
+      canvasObj.ctx.strokeStyle = app.eraser.strokeStyle;
+      canvasObj.ctx.lineWidth = app.eraser.lineWidth;
+      canvasObj.ctx.lineCap = app.eraser.lineCap;
       canvasObj.ctx.moveTo(canvasX, canvasY);
       break;
     case "Text":
