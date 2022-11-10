@@ -61,22 +61,59 @@ const mouseMove = (event) => {
 
         let currentShape = app.shapeLis[app.currentShapeIndex];
         let oppSide = (new Point(app.startX, app.startY)).calcDistance(mouseX, mouseY);
-        let adjSide = (new Point(mouseX, mouseY)).calcDistance(currentShape.center.xCoordinate, currentShape.center.yCoordinate);
+        // let oppSide = app.startY - mouseY;
+        let adjSide = currentShape.width/2;
         let angle = (Math.atan(oppSide / adjSide) * 180) / Math.PI;
+
+        if(getRotationDirection(
+          getAreaOfPoint(new Point(mouseX,mouseY), currentShape.center),
+          new Point(app.startX, app.startY),
+          new Point(mouseX,mouseY)
+          ) == -1){
+            angle = 360 - angle;
+          }
+
         if (angle) {
-
-          // let preAngle = (new Point(mouseX,mouseY)).calcDistance(app.startRotationPoint.xCoordinate, app.startRotationPoint.yCoordinate);
-
-          // if(preAngle > app.rotationAngle){
-          //   angle = 360 - angle;
-          // }
-          // app.rotationAngle  = preAngle;
           app.rotation(angle);
-          app.rotationAngle = angle;
           app.startX = mouseX;
           app.startY = mouseY;
         }
       }
       break;
+  }
+
+  function getAreaOfPoint(point,center){
+    if(
+      point.xCoordinate > center.xCoordinate
+      && point.yCoordinate < center.yCoordinate) {
+        return 1;
+      }
+    if(
+      point.xCoordinate < center.xCoordinate
+      && point.yCoordinate < center.yCoordinate) {
+        return 2;
+      }
+    if(
+      point.xCoordinate < center.xCoordinate
+      && point.yCoordinate > center.yCoordinate) {
+        return 3;
+      }
+    return 4
+  }
+
+  function getRotationDirection(areaOfPoint,basePoint,currPoint){
+
+    switch(areaOfPoint){
+      case 1:
+        return (basePoint.xCoordinate < currPoint.xCoordinate || basePoint.yCoordinate < currPoint.yCoordinate)? 1: -1;
+      case 2:
+        return (basePoint.xCoordinate < currPoint.xCoordinate || basePoint.yCoordinate > currPoint.yCoordinate)? 1: -1;
+      case 3:
+        return (basePoint.xCoordinate > currPoint.xCoordinate || basePoint.yCoordinate > currPoint.yCoordinate)? 1: -1;
+      default:
+        return (basePoint.xCoordinate > currPoint.xCoordinate || basePoint.yCoordinate < currPoint.yCoordinate)? 1: -1;
+
+    }
+
   }
 }

@@ -56,10 +56,16 @@ Shape.prototype.calc = function () {
 }
 
 Shape.prototype.widthCalc = function () {
+  if(this.shapeName == 'line'){
+    return this.startPoint.calcDistance(this.endPoint.xCoordinate,this.endPoint.yCoordinate);
+  }
   return Math.abs(this.endPoint.xCoordinate - this.startPoint.xCoordinate);
 };
 
 Shape.prototype.heightCalc = function () {
+  if(this.shapeName == 'line') {
+    return 0;
+  }
   return Math.abs(this.endPoint.yCoordinate - this.startPoint.yCoordinate);
 };
 
