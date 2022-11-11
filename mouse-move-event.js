@@ -9,7 +9,11 @@ const mouseMoveModule = (() => {
 
     if (app.toolLis[app.currentShapeIndex]?.name == 'Shape' && app.toolLis[app.currentShapeIndex]?.isPointOnShapeRotationArea(canvasX, canvasY)) {
       document.body.style.cursor = "grab";
-    app.tool = 'rotation'
+      
+      if(app.tool != 'rotated') {
+        app.preTool = app.tool;
+      }
+      app.tool = 'rotated'
     }
     else {
       document.body.style.cursor = 'default';

@@ -19,11 +19,11 @@ const mouseUp = () => {
         break;
       case "Select":
         app.isDragging = false;
-        app.toolLis[app.currentShapeIndex].drawDashRect();
+        if(app.toolLis[app.currentShapeIndex].name == "Shape") app.toolLis[app.currentShapeIndex].drawDashRect();
         break;
         default:
         app.isRotated = false;
-        app.tool = "Shape"
+        app.tool = app.preTool;
         break;
     }
 }

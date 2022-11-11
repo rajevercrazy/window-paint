@@ -9,6 +9,7 @@ const commonModules = (() => {
   let startX = null;
   let startY = null;
   let tool = "";
+  let preTool = "";
 
   const draw = () => {
 
@@ -109,9 +110,7 @@ const commonModules = (() => {
     }
 
     draw();
-    currentShape.drawDashRect()
-
-    commonModules.tool = 'rotated';
+    currentShape.drawDashRect();
   }
 
   return {
@@ -129,6 +128,7 @@ const commonModules = (() => {
     setColor,
     isMouseInShape,
     isMouseInText,
-    rotation
+    rotation,
+    preTool
   };
 })();
