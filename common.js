@@ -9,7 +9,8 @@ const commonModules = (() => {
   let startX = null;
   let startY = null;
   let tool = "";
-  draw = () => {
+
+  const draw = () => {
 
     toolLis.forEach(shape => {
       if (shape.name == "Pencil" || shape.name == "Eraser") {
@@ -24,7 +25,7 @@ const commonModules = (() => {
     });
   };
 
-  drawLine = (shape) => {
+  const drawLine = (shape) => {
     ctx.beginPath();
     ctx.moveTo(shape.arr[0].xCoordinate, shape.arr[0].yCoordinate);
     ctx.lineWidth = shape.lineWidth;
@@ -37,7 +38,7 @@ const commonModules = (() => {
     ctx.closePath();
   }
 
-  addInput = (x, y) => {
+  const addInput = (x, y) => {
     let textX = x - canvasObj.canvasOffsetX;
     let textY = y - canvasObj.canvasOffsetY;
 
@@ -60,26 +61,27 @@ const commonModules = (() => {
     document.body.appendChild(textarea);
   };
 
-  setShape = (shapeName) => {
+  const setShape = (shapeName) => {
     commonModules.tool = "Shape";
     commonModules.shape = new Shape(shapeName, ctx);
   };
 
   colorId = "color1";
-  setColorPallet = (colorId) => {
+  const setColorPallet = (colorId) => {
     let selectedColor = document.getElementById(colorId);
     commonModules.colorId = colorId;
     commonModules.color = selectedColor.style.backgroundColor;
     if (tool == "Shape") commonModules.shape.strokeStyle = selectedColor.style.backgroundColor;
   }
-  setColor = (color) => {
+
+  const setColor = (color) => {
     let selectedColor = document.getElementById(commonModules.colorId);
     selectedColor.style.backgroundColor = color;
     commonModules.color = color;
     if (tool == "Shape") commonModules.shape.strokeStyle = color;
   };
 
-  isMouseInShape = (shape) => {
+  const isMouseInShape = (shape) => {
 
     return (
       (shape.shapeName == 'line' && shape.createGivenNameObj().isPointOnLine(commonModules.startX, commonModules.startY))
@@ -87,16 +89,16 @@ const commonModules = (() => {
     )
   };
 
-  isMouseInText = (shape) => {
+  const isMouseInText = (shape) => {
     return (
       commonModules.startX > shape.location.xCoordinate
       && commonModules.startX < shape.location.xCoordinate + 400
       && commonModules.startY > shape.location.yCoordinate
-      && commonModules.startY < shape.location.yCoordinate + 14
+      && commonModules.startY < shape.location.yCoordinate + 20
     )
   };
 
-  rotation = (angle) => {
+  const rotation = (angle) => {
     ctx.clearRect(0, 0, canvasObj.canvas.width, canvasObj.canvas.height);
 
     let index = commonModules.currentShapeIndex >= 0 ? commonModules.currentShapeIndex : toolLis.length - 1;
@@ -113,7 +115,7 @@ const commonModules = (() => {
   }
 
   return {
-    toolLis: toolLis,
+    toolLis,
     pencilSize,
     isDragging,
     currentShapeIndex,
