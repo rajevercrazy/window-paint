@@ -1,3 +1,4 @@
+const mouseUpModule = (() => {
 const mouseUp = () => {
   const app = commonModules;
 
@@ -26,3 +27,7 @@ const mouseUp = () => {
         break;
     }
 }
+return {
+  mouseUp
+}
+})()
