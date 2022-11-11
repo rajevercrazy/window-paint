@@ -42,7 +42,6 @@ Rectangle.prototype.draw = function () {
   this.ctx.beginPath();
   this.ctx.lineWidth = this.lineWidth;
   this.ctx.strokeStyle = this.strokeStyle;
-  this.ctx.strokeStyle = 'black';
   this.ctx.setLineDash([])
   this.createRectSide()
 };
