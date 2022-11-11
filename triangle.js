@@ -1,5 +1,5 @@
 function Triangle(positionArr, lineWidth, strokeStyle, ctx, height,width,center) {
-  this.name = "triangle";
+  this.name = "TRIANGLE";
   Rectangle.call(this, positionArr, lineWidth, strokeStyle, ctx,height,width,center);
 }
 

@@ -1,73 +1,85 @@
 const mouseDownModule = (() => {
   const mouseDown = (event) => {
     const canvasObj = canvasSetting;
-    const app = commonModules;
     const canvasX = event.clientX - canvasObj.canvasOffsetX;
     const canvasY = event.clientY - canvasObj.canvasOffsetY;
-  
-    switch (app.tool) {
-      case "Pencil":
-        app.pencil = new Pencil(app.pencilSize, !app.color ? "black" : app.color, true);
-  
-        app.pencil.addPointer(new Point(canvasX, canvasY));
-  
-        canvasObj.ctx.beginPath();
-        canvasObj.ctx.lineWidth = app.pencil.lineWidth;
-        canvasObj.ctx.lineCap = app.pencil.lineCap;
-        canvasObj.ctx.strokeStyle = app.pencil.strokeStyle;
-        canvasObj.ctx.moveTo(canvasX, canvasY);
+
+    switch (commonModules.tool) {
+      case "PENCIL":
+        commonModules.pencil = new Pencil(commonModules.pencilSize, !commonModules.color ? "black" : commonModules.color, true);
+        createLinePath({
+          'tool': commonModules.pencil,
+          'canvasX': canvasX,
+          'canvasY': canvasY,
+          'ctx': canvasObj.ctx
+        });
         break;
-      case "Eraser":
-        app.eraser = new Eraser(true);
-        app.eraser.addPointer(new Point(canvasX, canvasY,));
-        canvasObj.ctx.beginPath();
-        canvasObj.ctx.strokeStyle = app.eraser.strokeStyle;
-        canvasObj.ctx.lineWidth = app.eraser.lineWidth;
-        canvasObj.ctx.lineCap = app.eraser.lineCap;
-        canvasObj.ctx.moveTo(canvasX, canvasY);
+      case "ERASER":
+        commonModules.eraser = new Eraser(true);
+        createLinePath({
+          'tool': commonModules.eraser,
+          'canvasX': canvasX,
+          'canvasY': canvasY,
+          'ctx': canvasObj.ctx
+        });
         break;
-      case "Text":
-        app.addInput(event.x, event.y);
+      case "TEXT":
+        commonModules.createTextAreaElement(event.x, event.y);
         break;
-      case "Shape":
-        app.shape = Object.assign(new Shape('', canvasObj.ctx), app.shape);
-        app.shape.isDrawing = true;
-        app.shape.startPoint = new Point(canvasX, canvasY)
-        app.shape.strokeStyle = !app.color ? "black" : app.color
+      case "SHAPE":
+        drawShape(canvasObj.ctx, canvasX, canvasY);
         break;
-      case "Select":
-        app.startX = canvasX;
-        app.startY = canvasY;
-        for (let i = 0; i < app.toolLis.length; i++) {
-          let shape = app.toolLis[i];
-  
-          if ((shape.name == 'Shape' && app.isMouseInShape(shape)) || (shape.name == 'Text' && app.isMouseInText(shape))) {
-            app.currentShapeIndex = i;
-            app.isDragging = true;
+      case "SELECT":
+        commonModules.startX = canvasX;
+        commonModules.startY = canvasY;
+        for (let i = 0; i < commonModules.tools.length; i++) {
+          let tool = commonModules.tools[i];
+
+          if ((tool.name == 'SHAPE' && commonModules.isMouseInShape(tool)) || (tool.name == 'TEXT' && commonModules.isMouseInText(tool))) {
+            commonModules.lastShapeIndex = i;
+            commonModules.isDragging = true;
           }
         }
         break;
       default:
-        app.startX = canvasX;
-        app.startY = canvasY;
-  
-        for (let i = 0; i < app.toolLis.length; i++) {
-  
-          if (app.toolLis[i].name == 'Shape' && app.toolLis[i].isPointOnShapeRotationArea(canvasX, canvasY)) {
-            app.currentShapeIndex = i;
-            app.isRotated = true;
-            app.startRotationPoint = new Point(canvasX,canvasY);
-            app.rotationAngle = 0;
+        commonModules.startX = canvasX;
+        commonModules.startY = canvasY;
+        for (let i = 0; i < commonModules.tools.length; i++) {
+          if (commonModules.tools[i].name == 'SHAPE' && commonModules.tools[i].isPointOnShapeRotationArea(canvasX, canvasY)) {
+            commonModules.lastShapeIndex = i;
+            commonModules.isRotated = true;
             break;
           }
         }
+
+        if (!commonModules.isRotated) {
+          drawShape(canvasObj.ctx, canvasX, canvasY);
+        }
+
         break;
     }
-  
+
+  }
+
+  const drawShape = (ctx, canvasX, canvasY) => {
+    commonModules.shape = Object.assign(new Shape('', ctx), commonModules.shape);
+    commonModules.shape.startPoint = new Point(canvasX, canvasY);
+    commonModules.shape.isDrawing = true;
+    commonModules.shape.strokeStyle = !commonModules.color ? "black" : commonModules.color
+  }
+  const createLinePath = ({ tool, canvasX, canvasY, ctx }) => {
+
+    tool.addPointer(new Point(canvasX, canvasY));
+
+    ctx.beginPath();
+    ctx.lineWidth = tool.lineWidth;
+    ctx.lineCap = tool.lineCap;
+    ctx.strokeStyle = tool.strokeStyle;
+    ctx.moveTo(canvasX, canvasY);
   }
 
   return {
     mouseDown
   }
 }
-  )();
+)();

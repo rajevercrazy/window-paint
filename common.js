@@ -2,10 +2,10 @@ const commonModules = (() => {
   const canvasObj = canvasSetting;
   const ctx = canvasObj.ctx;
 
-  let toolLis = [];
+  let tools = [];
   let pencilSize = 1;
   let isDragging = false;
-  let currentShapeIndex = toolLis.length - 1;
+  let lastShapeIndex;
   let startX = null;
   let startY = null;
   let tool = "";
@@ -13,58 +13,63 @@ const commonModules = (() => {
 
   const draw = () => {
 
-    toolLis.forEach(shape => {
-      if (shape.name == "Pencil" || shape.name == "Eraser") {
-        drawLine(shape)
+    tools.forEach(tool => {
+      if (tool.name == "PENCIL" || tool.name == "ERASER") {
+        drawLine(tool)
       }
-      else if (shape.name == "Text") {
-        shape.draw();
+      else if (tool.name == "TEXT") {
+        tool.draw();
       }
       else {
-        shape.draw();
+        tool.draw();
       }
     });
   };
 
-  const drawLine = (shape) => {
+  const drawLine = (tool) => {
     ctx.beginPath();
-    ctx.moveTo(shape.arr[0].xCoordinate, shape.arr[0].yCoordinate);
-    ctx.lineWidth = shape.lineWidth;
-    ctx.strokeStyle = shape.strokeStyle;
-    ctx.lineCap = shape.lineCap;
-    shape.arr.forEach(element => {
-      ctx.lineTo(element.xCoordinate, element.yCoordinate);
-      ctx.stroke();
+    ctx.moveTo(tool.arr[0].xCoordinate, tool.arr[0].yCoordinate);
+    ctx.lineWidth = tool.lineWidth;
+    ctx.strokeStyle = tool.strokeStyle;
+    ctx.lineCap = tool.lineCap;
+    tool.arr.forEach(point => {
+      ctx.lineTo(point.xCoordinate, point.yCoordinate);
     });
+    ctx.stroke();
     ctx.closePath();
   }
 
-  const addInput = (x, y) => {
+  const createTextAreaElement = (x, y) => {
     let textX = x - canvasObj.canvasOffsetX;
     let textY = y - canvasObj.canvasOffsetY;
 
     let textarea = document.createElement("textarea");
+    textarea.setAttribute('id','textArea');
     textarea.style.position = "fixed";
     textarea.style.left = x + "px";
     textarea.style.top = y + "px";
 
     textarea.onkeydown = (event) => {
       if (event.key === "Enter") {
-        ctx.textBaseline = "top";
-        ctx.textAlign = "left";
-        ctx.font = "14px sans-serif";
-        ctx.fillText(textarea.value, textX, textY);
-        toolLis.push(new Text(ctx, new Point(textX, textY), textarea.value));
-        document.body.removeChild(textarea);
+        drawTextValueOnCanvas(textX,textY);
       }
     };
-
     document.body.appendChild(textarea);
   };
 
+  const drawTextValueOnCanvas = (textX,textY) => {
+      let textarea = document.getElementById("textArea");
+      ctx.textBaseline = "top";
+      ctx.textAlign = "left";
+      ctx.font = "14px sans-serif";
+      ctx.fillText(textarea.value, textX, textY);
+      tools.push(new Text(ctx, new Point(textX, textY), textarea.value));
+      document.body.removeChild(textarea);
+  }
   const setShape = (shapeName) => {
-    commonModules.tool = "Shape";
+    commonModules.tool = "SHAPE";
     commonModules.shape = new Shape(shapeName, ctx);
+    commonModules.lastShapeIndex = commonModules.tools.length;
   };
 
   colorId = "color1";
@@ -72,20 +77,20 @@ const commonModules = (() => {
     let selectedColor = document.getElementById(colorId);
     commonModules.colorId = colorId;
     commonModules.color = selectedColor.style.backgroundColor;
-    if (tool == "Shape") commonModules.shape.strokeStyle = selectedColor.style.backgroundColor;
+    if (commonModules.shape) commonModules.shape.strokeStyle = selectedColor.style.backgroundColor;
   }
 
   const setColor = (color) => {
     let selectedColor = document.getElementById(commonModules.colorId);
     selectedColor.style.backgroundColor = color;
     commonModules.color = color;
-    if (tool == "Shape") commonModules.shape.strokeStyle = color;
+    if (commonModules.tool == "SHAPE") commonModules.shape.strokeStyle = color;
   };
 
   const isMouseInShape = (shape) => {
 
     return (
-      (shape.shapeName == 'line' && shape.createGivenNameObj().isPointOnLine(commonModules.startX, commonModules.startY))
+      (shape.shapeName == 'LINE' && shape.createGivenNameObj().isPointOnLine(commonModules.startX, commonModules.startY))
       || shape.isPointOnShape(commonModules.startX, commonModules.startY)
     )
   };
@@ -102,8 +107,8 @@ const commonModules = (() => {
   const rotation = (angle) => {
     ctx.clearRect(0, 0, canvasObj.canvas.width, canvasObj.canvas.height);
 
-    let index = commonModules.currentShapeIndex >= 0 ? commonModules.currentShapeIndex : toolLis.length - 1;
-    let currentShape = toolLis[index];
+    let index = commonModules.lastShapeIndex >= 0 ? commonModules.lastShapeIndex : tools.length - 1;
+    let currentShape = tools[index];
 
     for (let i = 0; i < currentShape.positionArr.length; i++) {
       currentShape.positionArr[i].rotate(currentShape.center, angle);
@@ -114,21 +119,22 @@ const commonModules = (() => {
   }
 
   return {
-    toolLis,
+    tools,
     pencilSize,
     isDragging,
-    currentShapeIndex,
+    lastShapeIndex,
     startX,
     startY,
     tool,
     draw,
-    addInput,
+    createTextAreaElement,
     setShape,
     colorId,
     setColor,
     isMouseInShape,
     isMouseInText,
     rotation,
-    preTool
+    preTool,
+    setColorPallet
   };
 })();

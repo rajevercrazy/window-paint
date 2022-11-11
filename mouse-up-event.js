@@ -1,29 +1,27 @@
 const mouseUpModule = (() => {
 const mouseUp = () => {
-  const app = commonModules;
-
-    switch (app.tool) {
-      case "Pencil":
-        app.pencil.isDrawing = false;
-        app.toolLis.push(app.pencil);
+  switch (commonModules.tool) {
+      case "PENCIL":
+        commonModules.pencil.isDrawing = false;
+        commonModules.tools.push(commonModules.pencil);
         break;
-      case "Eraser":
-        app.eraser.isEraser = false;
-        app.toolLis.push(app.eraser);
+      case "ERASER":
+        commonModules.eraser.isEraser = false;
+        commonModules.tools.push(commonModules.eraser);
         break;
-      case "Shape":
-        app.shape.isDrawing = false;
-        app.toolLis.push(app.shape);
-        app.currentShapeIndex = app.toolLis.length - 1;
-        app.shape.drawDashRect();
+      case "SHAPE":
+        commonModules.shape.isDrawing = false;
+        commonModules.tools.push(commonModules.shape);
+        commonModules.lastShapeIndex = commonModules.tools.length - 1;
+        commonModules.shape.drawDashRect();
         break;
-      case "Select":
-        app.isDragging = false;
-        if(app.toolLis[app.currentShapeIndex].name == "Shape") app.toolLis[app.currentShapeIndex].drawDashRect();
+      case "SELECT":
+        commonModules.isDragging = false;
+        if(commonModules.tools[commonModules.lastShapeIndex].name == "SHAPE") commonModules.tools[commonModules.lastShapeIndex].drawDashRect();
         break;
         default:
-        app.isRotated = false;
-        app.tool = app.preTool;
+        commonModules.isRotated = false;
+        commonModules.tool = commonModules.preTool;
         break;
     }
 }

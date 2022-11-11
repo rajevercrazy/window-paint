@@ -1,5 +1,5 @@
 function Circle(positionArr, lineWidth, strokeStyle, ctx, height, width, center) {
-  this.name = "circle";
+  this.name = "CIRCLE";
   Rectangle.call(this, positionArr, lineWidth, strokeStyle, ctx, height, width, center);
 }
 

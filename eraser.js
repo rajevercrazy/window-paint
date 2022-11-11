@@ -1,5 +1,5 @@
 function Eraser(isEraser) {
-  this.name = "Eraser";
+  this.name = "ERASER";
   this.isEraser = isEraser;
   this.lineWidth = 10;
   this.arr = [];

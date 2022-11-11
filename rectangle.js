@@ -1,5 +1,5 @@
 function Rectangle(positionArr, lineWidth, strokeStyle, ctx, height,width,center) {
-  this.name = "rectangle";
+  this.name = "RECTANGLE";
 
   this.diagonal1 = new Line([positionArr[0],positionArr[3]],lineWidth, strokeStyle, ctx);
   this.diagonal2 = new Line([positionArr[1],positionArr[2]],lineWidth, strokeStyle, ctx);

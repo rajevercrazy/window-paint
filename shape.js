@@ -1,5 +1,5 @@
 function Shape(shapeName, ctx) {
-  this.name = 'Shape';
+  this.name = 'SHAPE';
   this.shapeName = shapeName;
   this.startPoint = {};
   this.endPoint = {};
@@ -7,7 +7,6 @@ function Shape(shapeName, ctx) {
   this.strokeStyle = 'black';
   this.ctx = ctx;
   this.isDrawing = false;
-  this.currentRotation = 0;
   this.center;
   this.width;
   this.height;
@@ -24,46 +23,44 @@ Shape.prototype.draw = function () {
 
 Shape.prototype.drawDashRect = function () {
   let shape = this.createGivenNameObj();
-  if (this.shapeName != 'line' && this.shapeName != 'Pencil' && this.shapeName != 'Text' && this.shapeName != 'Eraser') {
+  if (this.shapeName != 'LINE') {
     shape.drawDashPatten();
   }
 }
 
 Shape.prototype.createGivenNameObj = function () {
   switch (this.shapeName) {
-    case 'circle':
+    case 'CIRCLE':
       return new Circle(this.positionArr, this.lineWidth, this.strokeStyle, this.ctx, this.height, this.width, this.center);
 
-    case 'rectangle':
+    case 'RECTANGLE':
       return new Rectangle(this.positionArr, this.lineWidth, this.strokeStyle, this.ctx, this.height, this.width, this.center);
 
-    case 'triangle':
+    case 'TRIANGLE':
       return new Triangle(this.positionArr, this.lineWidth, this.strokeStyle, this.ctx, this.height, this.width, this.center);
 
-    case 'line':
+    case 'LINE':
       return new Line(this.positionArr, this.lineWidth, this.strokeStyle, this.ctx);
 
     default:
   }
 }
 
-Shape.prototype.calc = function () {
+Shape.prototype.setMeasurement = function () {
   this.height = this.heightCalc();
   this.width = this.widthCalc();
   this.center = this.getCenter();
-
-  this.positionArr = this.shapeName == 'line'? [this.startPoint,this.endPoint]: this.calcAllPoint();
 }
 
 Shape.prototype.widthCalc = function () {
-  if(this.shapeName == 'line'){
+  if(this.shapeName == 'LINE'){
     return this.startPoint.calcDistance(this.endPoint.xCoordinate,this.endPoint.yCoordinate);
   }
   return Math.abs(this.endPoint.xCoordinate - this.startPoint.xCoordinate);
 };
 
 Shape.prototype.heightCalc = function () {
-  if(this.shapeName == 'line') {
+  if(this.shapeName == 'LINE') {
     return 0;
   }
   return Math.abs(this.endPoint.yCoordinate - this.startPoint.yCoordinate);
@@ -77,11 +74,11 @@ Shape.prototype.getCenter = function () {
 }
 
 Shape.prototype.calcAllPoint = function() {
-  if(this.shapeName == 'line'){
-    return [this.startPoint,this.endPoint];
+  if(this.shapeName == 'LINE'){
+    this.positionArr =  [this.startPoint,this.endPoint];
   }
   else{
-    return [
+    this.positionArr =  [
       new Point(this.center.xCoordinate - (this.width/2),this.center.yCoordinate - (this.height/2)),
       new Point(this.center.xCoordinate + (this.width/2),this.center.yCoordinate - (this.height/2)),
       new Point(this.center.xCoordinate - (this.width/2),this.center.yCoordinate + (this.height/2)),

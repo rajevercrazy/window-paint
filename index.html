@@ -15,7 +15,7 @@
     <div id="toolbar">
       <div class="inner-container">
         <div class="imageTool">
-          <a href="#" onclick="commonModules.tool = 'Select'">
+          <a href="#" onclick="commonModules.tool = 'SELECT'">
             <div class="select_btn">
               <div class="dash_box"></div>
               <span>Select</span>
@@ -48,13 +48,13 @@
       <div class="inner-container">
         <div class="tools">
           <div class="tool">
-            <i id="pencil" class="fa fa-pencil" onclick="commonModules.tool = 'Pencil'"></i>
+            <i id="pencil" class="fa fa-pencil" onclick="commonModules.tool = 'PENCIL'"></i>
           </div>
           <div class="tool">
-            <i id="eraser" class="fa fa-eraser" onclick="commonModules.tool = 'Eraser'"></i>
+            <i id="eraser" class="fa fa-eraser" onclick="commonModules.tool = 'ERASER'"></i>
           </div>
           <div class="tool">
-            <i id="text" class="fa fa-font" onclick="commonModules.tool = 'Text'"></i>
+            <i id="text" class="fa fa-font" onclick="commonModules.tool = 'TEXT'"></i>
           </div>
           <div class="tool">
             <!-- <i id="fill-drip" class="fa fa-paint-brush" onclick="commonModules.tool = 'Fill'"></i> -->
@@ -67,13 +67,13 @@
       <hr class="tool-divided" />
       <div class="inner-container">
         <div class="tool-container">
-          <a href="#" onclick="commonModules.setShape('line')"><img src="./assets/diagonal-line.png" width="15"
+          <a href="#" onclick="commonModules.setShape('LINE')"><img src="./assets/diagonal-line.png" width="15"
               height="15" class="shape_image" /></a>
-          <a href="#" onclick="commonModules.setShape('circle')"><img src="./assets/ellipse-outline-shape-variant.png"
+          <a href="#" onclick="commonModules.setShape('CIRCLE')"><img src="./assets/ellipse-outline-shape-variant.png"
               width="15" height="15" class="shape_image" /></a>
-          <a href="#" onclick="commonModules.setShape('rectangle')"><img src="./assets/rectangular-shape-outline.png"
+          <a href="#" onclick="commonModules.setShape('RECTANGLE')"><img src="./assets/rectangular-shape-outline.png"
               width="15" height="15" class="shape_image" /></a>
-          <a href="#" onclick="commonModules.setShape('triangle')"><img src="./assets/triangle.png" width="15"
+          <a href="#" onclick="commonModules.setShape('TRIANGLE')"><img src="./assets/triangle.png" width="15"
               height="15" class="shape_image" /></a>
         </div>
         <div style="text-align: center">
@@ -134,7 +134,7 @@
       <div class="inner-container">
         <div class="colors-selector">
           <div>
-            <a href="#" onclick="setColorPallet('color1')">
+            <a href="#" onclick="commonModules.setColorPallet('color1')">
               <div id="color1" style="
                     border: solid black thin;
                     width: 3rem;
@@ -148,7 +148,7 @@
             <label>Color 1</label>
           </div>
           <div>
-            <a href="#" onclick="setColorPallet('color2')">
+            <a href="#" onclick="commonModules.setColorPallet('color2')">
               <div id="color2" style="
                     border: solid black thin;
                     background-color: #ffffff;

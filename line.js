@@ -1,6 +1,6 @@
 function Line(positionArr,lineWidth,strokeStyle,ctx) {
 
-    this.name = "line"
+    this.name = "LINE"
     this.startPoint = positionArr[0]; 
     this.endPoint = positionArr[1]; 
     this.lineWidth = lineWidth; 

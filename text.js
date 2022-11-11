@@ -1,5 +1,5 @@
 function Text(ctx,location,value) {
-    this.name = "Text";
+    this.name = "TEXT";
     this.location = location;
     this.value = value;
     this.width = 400;
