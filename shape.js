@@ -66,7 +66,8 @@ Shape.prototype.createGivenNameObj = function () {
         this.positionArr,
         this.lineWidth,
         this.strokeStyle,
-        this.ctx
+        this.ctx,
+        this.center
       );
 
     default:

@@ -13,13 +13,15 @@ function Rectangle(
     [positionArr[0], positionArr[3]],
     lineWidth,
     strokeStyle,
-    ctx
+    ctx,
+    center
   );
   this.diagonal2 = new Line(
     [positionArr[1], positionArr[2]],
     lineWidth,
     strokeStyle,
-    ctx
+    ctx,
+    center
   );
 
   this.width = width;
@@ -45,25 +47,29 @@ Rectangle.prototype.getCenterOfSide = function () {
     [corners.TOP_LEFT, corners.TOP_RIGHT],
     this.lineWidth,
     this.strokeStyle,
-    this.ctx
+    this.ctx,
+    this.center
   );
   let rightSide = new Line(
     [corners.TOP_RIGHT, corners.BOTTOM_RIGHT],
     this.lineWidth,
     this.strokeStyle,
-    this.ctx
+    this.ctx,
+    this.center
   );
   let bottomSide = new Line(
     [corners.BOTTOM_RIGHT, corners.BOTTOM_LEFT],
     this.lineWidth,
     this.strokeStyle,
-    this.ctx
+    this.ctx,
+    this.center
   );
   let leftSide = new Line(
     [corners.BOTTOM_LEFT, corners.TOP_LEFT],
     this.lineWidth,
     this.strokeStyle,
-    this.ctx
+    this.ctx,
+    this.center
   );
 
   return {
