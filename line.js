@@ -36,31 +36,6 @@ Line.prototype.isPointOnLine = function (x, y) {
   );
 };
 
-Line.prototype.getCenter = function () {
-  const xPointCloseToAxis = Math.min(
-    this.startPoint.xCoordinate,
-    this.endPoint.xCoordinate
-  );
-
-  const yPointCloseToAxis = Math.min(
-    this.startPoint.yCoordinate,
-    this.endPoint.yCoordinate
-  );
-
-  const xDistanceBtwLine = Math.abs(
-    this.startPoint.xCoordinate - this.endPoint.xCoordinate
-  );
-
-  const yDistanceBtwLine = Math.abs(
-    this.startPoint.yCoordinate - this.endPoint.yCoordinate
-  );
-
-  let xCenterOfLine = xPointCloseToAxis + xDistanceBtwLine / 2;
-  let yCenterOfLine = yPointCloseToAxis + yDistanceBtwLine / 2;
-
-  return new Point(xCenterOfLine, yCenterOfLine);
-};
-
 Line.prototype.calDistance = function (p1, p2) {
   return Math.sqrt(
     Math.pow(p2.xCoordinate - p1.xCoordinate, 2) +

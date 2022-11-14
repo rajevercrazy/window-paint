@@ -97,10 +97,35 @@ Shape.prototype.heightCalc = function () {
 };
 
 Shape.prototype.getCenter = function () {
-  let xAxisCenter = this.startPoint.xCoordinate + this.width / 2;
-  let yAxisCenter = this.startPoint.yCoordinate + this.height / 2;
+  let xCenterOfLine;
+  let yCenterOfLine;
+  if (this.shapeName == "LINE") {
+    const xPointCloseToAxis = Math.min(
+      this.startPoint.xCoordinate,
+      this.endPoint.xCoordinate
+    );
 
-  return new Point(xAxisCenter, yAxisCenter);
+    const yPointCloseToAxis = Math.min(
+      this.startPoint.yCoordinate,
+      this.endPoint.yCoordinate
+    );
+
+    const xDistanceBtwLine = Math.abs(
+      this.startPoint.xCoordinate - this.endPoint.xCoordinate
+    );
+
+    const yDistanceBtwLine = Math.abs(
+      this.startPoint.yCoordinate - this.endPoint.yCoordinate
+    );
+
+    xCenterOfLine = xPointCloseToAxis + xDistanceBtwLine / 2;
+    yCenterOfLine = yPointCloseToAxis + yDistanceBtwLine / 2;
+  } else {
+    xCenterOfLine = this.startPoint.xCoordinate + this.width / 2;
+    yCenterOfLine = this.startPoint.yCoordinate + this.height / 2;
+  }
+
+  return new Point(xCenterOfLine, yCenterOfLine);
 };
 
 Shape.prototype.calcAllPoint = function () {
