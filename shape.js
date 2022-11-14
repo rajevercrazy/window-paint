@@ -34,8 +34,6 @@ Shape.prototype.createGivenNameObj = function () {
         this.lineWidth,
         this.strokeStyle,
         this.ctx,
-        this.height,
-        this.width,
         this.center
       );
 
@@ -45,8 +43,6 @@ Shape.prototype.createGivenNameObj = function () {
         this.lineWidth,
         this.strokeStyle,
         this.ctx,
-        this.height,
-        this.width,
         this.center
       );
 
@@ -56,8 +52,6 @@ Shape.prototype.createGivenNameObj = function () {
         this.lineWidth,
         this.strokeStyle,
         this.ctx,
-        this.height,
-        this.width,
         this.center
       );
 

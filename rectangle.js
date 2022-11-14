@@ -1,12 +1,4 @@
-function Rectangle(
-  positionArr,
-  lineWidth,
-  strokeStyle,
-  ctx,
-  height,
-  width,
-  center
-) {
+function Rectangle(positionArr, lineWidth, strokeStyle, ctx, center) {
   this.name = "RECTANGLE";
 
   this.diagonal1 = new Line(
@@ -24,8 +16,6 @@ function Rectangle(
     center
   );
 
-  this.width = width;
-  this.height = height;
   this.ctx = ctx;
   this.lineWidth = lineWidth;
   this.strokeStyle = strokeStyle;

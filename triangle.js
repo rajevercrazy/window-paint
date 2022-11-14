@@ -1,23 +1,6 @@
-function Triangle(
-  positionArr,
-  lineWidth,
-  strokeStyle,
-  ctx,
-  height,
-  width,
-  center
-) {
+function Triangle(positionArr, lineWidth, strokeStyle, ctx, center) {
   this.name = "TRIANGLE";
-  Rectangle.call(
-    this,
-    positionArr,
-    lineWidth,
-    strokeStyle,
-    ctx,
-    height,
-    width,
-    center
-  );
+  Rectangle.call(this, positionArr, lineWidth, strokeStyle, ctx, center);
 }
 
 Object.setPrototypeOf(Triangle.prototype, Rectangle.prototype);
