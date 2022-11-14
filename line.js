@@ -37,14 +37,28 @@ Line.prototype.isPointOnLine = function (x, y) {
 };
 
 Line.prototype.getCenter = function () {
-  let cx =
-    Math.min(this.startPoint.xCoordinate, this.endPoint.xCoordinate) +
-    Math.abs(this.startPoint.xCoordinate - this.endPoint.xCoordinate) / 2;
-  let cy =
-    Math.min(this.startPoint.yCoordinate, this.endPoint.yCoordinate) +
-    Math.abs(this.startPoint.yCoordinate - this.endPoint.yCoordinate) / 2;
+  const xPointCloseToAxis = Math.min(
+    this.startPoint.xCoordinate,
+    this.endPoint.xCoordinate
+  );
 
-  return new Point(cx, cy);
+  const yPointCloseToAxis = Math.min(
+    this.startPoint.yCoordinate,
+    this.endPoint.yCoordinate
+  );
+
+  const xDistanceBtwLine = Math.abs(
+    this.startPoint.xCoordinate - this.endPoint.xCoordinate
+  );
+
+  const yDistanceBtwLine = Math.abs(
+    this.startPoint.yCoordinate - this.endPoint.yCoordinate
+  );
+
+  let xCenterOfLine = xPointCloseToAxis + xDistanceBtwLine / 2;
+  let yCenterOfLine = yPointCloseToAxis + yDistanceBtwLine / 2;
+
+  return new Point(xCenterOfLine, yCenterOfLine);
 };
 
 Line.prototype.calDistance = function (p1, p2) {
