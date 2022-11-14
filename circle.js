@@ -1,6 +1,23 @@
-function Circle(positionArr, lineWidth, strokeStyle, ctx, height, width, center) {
+function Circle(
+  positionArr,
+  lineWidth,
+  strokeStyle,
+  ctx,
+  height,
+  width,
+  center
+) {
   this.name = "CIRCLE";
-  Rectangle.call(this, positionArr, lineWidth, strokeStyle, ctx, height, width, center);
+  Rectangle.call(
+    this,
+    positionArr,
+    lineWidth,
+    strokeStyle,
+    ctx,
+    height,
+    width,
+    center
+  );
 }
 
 Object.setPrototypeOf(Circle.prototype, Rectangle.prototype);

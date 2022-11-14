@@ -63,7 +63,7 @@ const mouseDownModule = (() => {
         }
 
         if (!commonModules.isRotated) {
-          commonModules.tool = "SHAPE"
+          commonModules.tool = "SHAPE";
           drawShape(canvasObj.ctx, canvasX, canvasY);
         }
 
