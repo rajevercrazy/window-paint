@@ -10,8 +10,8 @@ function Shape(shapeName, ctx) {
   this.center;
   this.width;
   this.height;
-  this.angle = 0;
   this.positionArr = [];
+  this.distanceBtwPointAndCenter = 0;
 }
 
 Shape.prototype.draw = function () {
@@ -72,6 +72,7 @@ Shape.prototype.setMeasurement = function () {
   this.height = this.heightCalc();
   this.width = this.widthCalc();
   this.center = this.getCenter();
+  this.distanceBtwPointAndCenter = this.getDistanceBtwPointAndCenter();
 };
 
 Shape.prototype.widthCalc = function () {
@@ -121,6 +122,13 @@ Shape.prototype.getCenter = function () {
   }
 
   return new Point(xCenterOfLine, yCenterOfLine);
+};
+
+Shape.prototype.getDistanceBtwPointAndCenter = function () {
+  return this.startPoint.calcDistance(
+    this.center.xCoordinate,
+    this.center.yCoordinate
+  );
 };
 
 Shape.prototype.calcAllPoint = function () {

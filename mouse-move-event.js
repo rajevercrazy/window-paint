@@ -1,10 +1,13 @@
 const mouseMoveModule = (() => {
+  const canvasObj = canvasSetting;
+  const ctx = canvasObj.ctx;
+  const STRAIGHT_ANGLES = 180;
+  const CLOCK_WISE = 1;
+  const ANTI_CLOCK_WISE = -1;
+  const FULL_ANGLE = 360;
   const mouseMove = (event) => {
-    const canvasObj = canvasSetting;
-    const ctx = canvasObj.ctx;
     const canvasX = event.clientX - canvasObj.canvasOffsetX;
     const canvasY = event.clientY - canvasObj.canvasOffsetY;
-
     if (
       commonModules.tools[commonModules.lastShapeIndex]?.name == "SHAPE" &&
       commonModules.tools[
@@ -16,6 +19,7 @@ const mouseMoveModule = (() => {
       if (commonModules.tool != "ROTATED") {
         commonModules.preTool = commonModules.tool;
       }
+
       commonModules.tool = "ROTATED";
     } else {
       document.body.style.cursor = "default";
@@ -79,10 +83,10 @@ const mouseMoveModule = (() => {
             commonModules.startX,
             commonModules.startY
           ).calcDistance(mouseX, mouseY);
-          let adjSide = curShape.width / 2;
-          let angle = (Math.atan(oppSide / adjSide) * 180) / Math.PI;
+          let hypSide = curShape.distanceBtwPointAndCenter;
 
-          const ANTI_CLOCK_WISE = -1;
+          let angle =
+            (Math.asin(oppSide / hypSide) * STRAIGHT_ANGLES) / Math.PI;
 
           if (
             getRotationDirection({
@@ -91,7 +95,7 @@ const mouseMoveModule = (() => {
               currPoint: new Point(mouseX, mouseY),
             }) == ANTI_CLOCK_WISE
           ) {
-            angle = 360 - angle;
+            angle = FULL_ANGLE - angle;
           }
 
           if (angle) {
@@ -133,8 +137,6 @@ const mouseMoveModule = (() => {
   };
 
   const getRotationDirection = ({ quadrand, basePoint, currPoint }) => {
-    const CLOCK_WISE = 1;
-    const ANTI_CLOCK_WISE = -1;
     switch (quadrand) {
       case 1:
         return basePoint.xCoordinate < currPoint.xCoordinate ||
