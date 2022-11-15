@@ -3,5 +3,5 @@ const mainModules = (() => {
 
   canvasObj.canvas.addEventListener("mousedown", mouseDownModule.mouseDown);
   canvasObj.canvas.addEventListener("mousemove", mouseMoveModule.mouseMove);
-  canvasObj.canvas.addEventListener("mouseup",  mouseUpModule.mouseUp);
+  canvasObj.canvas.addEventListener("mouseup", mouseUpModule.mouseUp);
 })();

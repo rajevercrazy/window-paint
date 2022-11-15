@@ -1,6 +1,6 @@
 const mouseUpModule = (() => {
-const mouseUp = () => {
-  switch (commonModules.tool) {
+  const mouseUp = () => {
+    switch (commonModules.tool) {
       case "PENCIL":
         commonModules.pencil.isDrawing = false;
         commonModules.tools.push(commonModules.pencil);
@@ -17,15 +17,16 @@ const mouseUp = () => {
         break;
       case "SELECT":
         commonModules.isDragging = false;
-        if(commonModules.tools[commonModules.lastShapeIndex].name == "SHAPE") commonModules.tools[commonModules.lastShapeIndex].drawDashRect();
+        if (commonModules.tools[commonModules.lastShapeIndex].name == "SHAPE")
+          commonModules.tools[commonModules.lastShapeIndex].drawDashRect();
         break;
-        default:
+      default:
         commonModules.isRotated = false;
         commonModules.tool = commonModules.preTool;
         break;
     }
-}
-return {
-  mouseUp
-}
-})()
+  };
+  return {
+    mouseUp,
+  };
+})();

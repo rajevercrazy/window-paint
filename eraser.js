@@ -5,9 +5,8 @@ function Eraser(isEraser) {
   this.arr = [];
   this.strokeStyle = "white";
   this.lineCap = "square";
-
 }
 
-Eraser.prototype.addPointer = function(x, y) {
-  this.arr.push(new Point(x,y));
+Eraser.prototype.addPointer = function (x, y) {
+  this.arr.push(new Point(x, y));
 };

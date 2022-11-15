@@ -87,6 +87,7 @@ i:hover {
   border-style: solid;
   opacity: 0.5;
 }
+
 .colors-selector {
   display: flex;
   flex-direction: row;
@@ -97,6 +98,7 @@ i:hover {
   flex-direction: column;
   align-items: center;
 }
+
 #current {
   /* position: relative; */
   margin-top: 1rem;
@@ -186,6 +188,7 @@ i:hover {
   border: solid black thin;
   padding: 0.3rem;
 }
+
 .select_btn:hover {
   opacity: 0.3;
 }
