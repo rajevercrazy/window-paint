@@ -1,6 +1,6 @@
 const mouseMoveModule = (() => {
   const _ = canvasSetting;
-  const CTX = _.ctx;
+  const CTX = _.CTX;
   const STRAIGHT_ANGLES = 180;
   const CLOCK_WISE = 1;
   const ANTI_CLOCK_WISE = -1;
