@@ -1,18 +1,18 @@
 const mouseMoveModule = (() => {
-  const canvasObj = canvasSetting;
-  const ctx = canvasObj.ctx;
+  const _ = canvasSetting;
+  const CTX = _.ctx;
   const STRAIGHT_ANGLES = 180;
   const CLOCK_WISE = 1;
   const ANTI_CLOCK_WISE = -1;
   const FULL_ANGLE = 360;
   const mouseMove = (event) => {
-    const canvasX = event.clientX - canvasObj.canvasOffsetX;
-    const canvasY = event.clientY - canvasObj.canvasOffsetY;
+    const CANVAS_X = event.clientX - _.CANVAS_OFF_SET_X;
+    const CANVAS_Y = event.clientY - _.CANVAS_OFF_SET_Y;
     if (
       commonModules.tools[commonModules.lastShapeIndex]?.name == "SHAPE" &&
       commonModules.tools[
         commonModules.lastShapeIndex
-      ]?.isPointOnShapeRotationArea(canvasX, canvasY)
+      ]?.isPointOnShapeRotationArea(CANVAS_X, CANVAS_Y)
     ) {
       document.body.style.cursor = "grab";
 
@@ -28,19 +28,19 @@ const mouseMoveModule = (() => {
     switch (commonModules.tool) {
       case "PENCIL":
         if (commonModules.pencil?.isDrawing) {
-          drawLine(commonModules.pencil, ctx, canvasX, canvasY);
+          drawLine(commonModules.pencil, CTX, CANVAS_X, CANVAS_Y);
         }
 
         break;
       case "ERASER":
         if (commonModules.eraser?.isEraser) {
-          drawLine(commonModules.eraser, ctx, canvasX, canvasY);
+          drawLine(commonModules.eraser, CTX, CANVAS_X, CANVAS_Y);
         }
         break;
       case "SHAPE":
         if (commonModules.shape?.isDrawing) {
-          ctx.clearRect(0, 0, canvasObj.canvas.width, canvasObj.canvas.height);
-          commonModules.shape.endPoint = new Point(canvasX, canvasY);
+          CTX.clearRect(0, 0, _.CANVAS.width, _.CANVAS.height);
+          commonModules.shape.endPoint = new Point(CANVAS_X, CANVAS_Y);
           commonModules.shape.setMeasurement();
           commonModules.shape.calcAllPoint();
           commonModules.shape.draw();
@@ -49,8 +49,8 @@ const mouseMoveModule = (() => {
         break;
       case "SELECT":
         if (commonModules.isDragging) {
-          let mouseX = canvasX;
-          let mouseY = canvasY;
+          let mouseX = CANVAS_X;
+          let mouseY = CANVAS_Y;
           let dx = mouseX - commonModules.startX;
           let dy = mouseY - commonModules.startY;
 
@@ -66,7 +66,7 @@ const mouseMoveModule = (() => {
             tool.center.xCoordinate += dx;
             tool.center.yCoordinate += dy;
           }
-          ctx.clearRect(0, 0, canvasObj.canvas.width, canvasObj.canvas.height);
+          CTX.clearRect(0, 0, _.CANVAS.width, _.CANVAS.height);
           commonModules.draw();
 
           commonModules.startX = mouseX;
@@ -75,8 +75,8 @@ const mouseMoveModule = (() => {
         break;
       default:
         if (commonModules.isRotated) {
-          let mouseX = canvasX;
-          let mouseY = canvasY;
+          let mouseX = CANVAS_X;
+          let mouseY = CANVAS_Y;
 
           let curShape = commonModules.tools[commonModules.lastShapeIndex];
           let oppSide = new Point(
@@ -90,7 +90,7 @@ const mouseMoveModule = (() => {
 
           if (
             getRotationDirection({
-              quadrand: getQuadrand(new Point(mouseX, mouseY), curShape.center),
+              quadrant: getQuadrant(new Point(mouseX, mouseY), curShape.center),
               basePoint: new Point(commonModules.startX, commonModules.startY),
               currPoint: new Point(mouseX, mouseY),
             }) == ANTI_CLOCK_WISE
@@ -114,7 +114,7 @@ const mouseMoveModule = (() => {
     ctx.stroke();
   };
 
-  const getQuadrand = (point, center) => {
+  const getQuadrant = (point, center) => {
     if (
       point.xCoordinate > center.xCoordinate &&
       point.yCoordinate < center.yCoordinate
@@ -136,8 +136,8 @@ const mouseMoveModule = (() => {
     return 4;
   };
 
-  const getRotationDirection = ({ quadrand, basePoint, currPoint }) => {
-    switch (quadrand) {
+  const getRotationDirection = ({ quadrant, basePoint, currPoint }) => {
+    switch (quadrant) {
       case 1:
         return basePoint.xCoordinate < currPoint.xCoordinate ||
           basePoint.yCoordinate < currPoint.yCoordinate

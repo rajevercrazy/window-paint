@@ -4,15 +4,15 @@ function Point(x, y) {
 }
 
 Point.prototype.rotate = function (origin, angle) {
-  let tetha = (angle * Math.PI) / 180;
+  let tetra = (angle * Math.PI) / 180;
 
   let dx = this.xCoordinate - origin.xCoordinate;
   let dy = this.yCoordinate - origin.yCoordinate;
 
   this.xCoordinate =
-    Math.cos(tetha) * dx - Math.sin(tetha) * dy + origin.xCoordinate;
+    Math.cos(tetra) * dx - Math.sin(tetra) * dy + origin.xCoordinate;
   this.yCoordinate =
-    Math.sin(tetha) * dx + Math.cos(tetha) * dy + origin.yCoordinate;
+    Math.sin(tetra) * dx + Math.cos(tetra) * dy + origin.yCoordinate;
 };
 
 Point.prototype.calcDistance = function (x, y) {

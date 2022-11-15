@@ -1,8 +1,8 @@
 const mouseDownModule = (() => {
   const mouseDown = (event) => {
-    const canvasObj = canvasSetting;
-    const canvasX = event.clientX - canvasObj.canvasOffsetX;
-    const canvasY = event.clientY - canvasObj.canvasOffsetY;
+    const _ = canvasSetting;
+    const CANVAS_X = event.clientX - _.CANVAS_OFF_SET_X;
+    const CANVAS_Y = event.clientY - _.CANVAS_OFF_SET_Y;
 
     switch (commonModules.tool) {
       case "PENCIL":
@@ -13,29 +13,29 @@ const mouseDownModule = (() => {
         );
         createLinePath({
           tool: commonModules.pencil,
-          canvasX: canvasX,
-          canvasY: canvasY,
-          ctx: canvasObj.ctx,
+          canvasX: CANVAS_X,
+          canvasY: CANVAS_Y,
+          ctx: _.CTX,
         });
         break;
       case "ERASER":
         commonModules.eraser = new Eraser(true);
         createLinePath({
           tool: commonModules.eraser,
-          canvasX: canvasX,
-          canvasY: canvasY,
-          ctx: canvasObj.ctx,
+          canvasX: CANVAS_X,
+          canvasY: CANVAS_Y,
+          ctx: _.CTX,
         });
         break;
       case "TEXT":
         commonModules.createTextAreaElement(event.x, event.y);
         break;
       case "SHAPE":
-        drawShape(canvasObj.ctx, canvasX, canvasY);
+        drawShape(_.CTX, CANVAS_X, CANVAS_Y);
         break;
       case "SELECT":
-        commonModules.startX = canvasX;
-        commonModules.startY = canvasY;
+        commonModules.startX = CANVAS_X;
+        commonModules.startY = CANVAS_Y;
         for (let i = 0; i < commonModules.tools.length; i++) {
           let tool = commonModules.tools[i];
 
@@ -49,12 +49,12 @@ const mouseDownModule = (() => {
         }
         break;
       default:
-        commonModules.startX = canvasX;
-        commonModules.startY = canvasY;
+        commonModules.startX = CANVAS_X;
+        commonModules.startY = CANVAS_Y;
         for (let i = 0; i < commonModules.tools.length; i++) {
           if (
             commonModules.tools[i].name == "SHAPE" &&
-            commonModules.tools[i].isPointOnShapeRotationArea(canvasX, canvasY)
+            commonModules.tools[i].isPointOnShapeRotationArea(CANVAS_X, CANVAS_Y)
           ) {
             commonModules.lastShapeIndex = i;
             commonModules.isRotated = true;
@@ -64,7 +64,7 @@ const mouseDownModule = (() => {
 
         if (!commonModules.isRotated) {
           commonModules.tool = "SHAPE";
-          drawShape(canvasObj.ctx, canvasX, canvasY);
+          drawShape(_.CTX, CANVAS_X, CANVAS_Y);
         }
 
         break;

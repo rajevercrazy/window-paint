@@ -1,8 +1,9 @@
 const canvasSetting = (() => {
+  const canvas = document.getElementById("drawing-board");
   return {
-    canvas: document.getElementById("drawing-board"),
-    ctx: canvas.getContext("2d"),
-    canvasOffsetX: canvas.offsetLeft,
-    canvasOffsetY: canvas.offsetTop,
+    CANVAS: canvas,
+    CTX: canvas.getContext("2d"),
+    CANVAS_OFF_SET_X: canvas.offsetLeft,
+    CANVAS_OFF_SET_Y: canvas.offsetTop,
   };
 })();

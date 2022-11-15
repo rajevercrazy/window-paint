@@ -1,7 +1,7 @@
 const mainModules = (() => {
-  const canvasObj = canvasSetting;
+  const _ = canvasSetting;
 
-  canvasObj.canvas.addEventListener("mousedown", mouseDownModule.mouseDown);
-  canvasObj.canvas.addEventListener("mousemove", mouseMoveModule.mouseMove);
-  canvasObj.canvas.addEventListener("mouseup", mouseUpModule.mouseUp);
+  _.CANVAS.addEventListener("mousedown", mouseDownModule.mouseDown);
+  _.CANVAS.addEventListener("mousemove", mouseMoveModule.mouseMove);
+  _.CANVAS.addEventListener("mouseup", mouseUpModule.mouseUp);
 })();

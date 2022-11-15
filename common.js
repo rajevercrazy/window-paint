@@ -1,6 +1,5 @@
 const commonModules = (() => {
-  const canvasObj = canvasSetting;
-  const ctx = canvasObj.ctx;
+  const _ = canvasSetting;
 
   let tools = [];
   let pencilSize = 1;
@@ -24,21 +23,21 @@ const commonModules = (() => {
   };
 
   const drawLine = (tool) => {
-    ctx.beginPath();
-    ctx.moveTo(tool.arr[0].xCoordinate, tool.arr[0].yCoordinate);
-    ctx.lineWidth = tool.lineWidth;
-    ctx.strokeStyle = tool.strokeStyle;
-    ctx.lineCap = tool.lineCap;
+    _.CTX.beginPath();
+    _.CTX.moveTo(tool.arr[0].xCoordinate, tool.arr[0].yCoordinate);
+    _.CTX.lineWidth = tool.lineWidth;
+    _.CTX.strokeStyle = tool.strokeStyle;
+    _.CTX.lineCap = tool.lineCap;
     tool.arr.forEach((point) => {
-      ctx.lineTo(point.xCoordinate, point.yCoordinate);
+      _.CTX.lineTo(point.xCoordinate, point.yCoordinate);
     });
-    ctx.stroke();
-    ctx.closePath();
+    _.CTX.stroke();
+    _.CTX.closePath();
   };
 
   const createTextAreaElement = (x, y) => {
-    let textX = x - canvasObj.canvasOffsetX;
-    let textY = y - canvasObj.canvasOffsetY;
+    let textX = x - _.CANVAS_OFF_SET_X;
+    let textY = y - _.CANVAS_OFF_SET_X;
 
     let textarea = document.createElement("textarea");
     textarea.setAttribute("id", "textArea");
@@ -56,16 +55,16 @@ const commonModules = (() => {
 
   const drawTextValueOnCanvas = (textX, textY) => {
     let textarea = document.getElementById("textArea");
-    ctx.textBaseline = "top";
-    ctx.textAlign = "left";
-    ctx.font = "14px sans-serif";
-    ctx.fillText(textarea.value, textX, textY);
-    tools.push(new Text(ctx, new Point(textX, textY), textarea.value));
+    _.CTX.textBaseline = "top";
+    _.CTX.textAlign = "left";
+    _.CTX.font = "14px sans-serif";
+    _.CTX.fillText(textarea.value, textX, textY);
+    tools.push(new Text(_.CTX, new Point(textX, textY), textarea.value));
     document.body.removeChild(textarea);
   };
   const setShape = (shapeName) => {
     commonModules.tool = "SHAPE";
-    commonModules.shape = new Shape(shapeName, ctx);
+    commonModules.shape = new Shape(shapeName, _.CTX);
     commonModules.lastShapeIndex = commonModules.tools.length;
   };
 
@@ -105,7 +104,7 @@ const commonModules = (() => {
   };
 
   const rotation = (angle) => {
-    ctx.clearRect(0, 0, canvasObj.canvas.width, canvasObj.canvas.height);
+    _.CTX.clearRect(0, 0, _.CANVAS.width, _.CANVAS.height);
 
     let index =
       commonModules.lastShapeIndex >= 0
